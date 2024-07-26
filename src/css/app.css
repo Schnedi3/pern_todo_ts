@@ -142,6 +142,10 @@ DARK THEME
     background-color: var(--light-main-bg);
   }
 
+  .empty {
+    color: var(--light-black-text);
+  }
+
   .check {
     border: 2px solid var(--light-black-text);
   }
@@ -190,6 +194,10 @@ DARK THEME
 
   .task__container {
     background-color: var(--dark-main-bg);
+  }
+
+  .empty {
+    color: var(--dark-white-text);
   }
 
   .check {
