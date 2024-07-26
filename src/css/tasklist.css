@@ -27,6 +27,7 @@ TASK LIST
 }
 
 .checkbox {
+  position: relative;
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -57,6 +58,7 @@ TASK LIST
 
 .check:after {
   content: "";
+  position: absolute;
   display: none;
 }
 
@@ -65,12 +67,11 @@ TASK LIST
 }
 
 .checkbox .check:after {
-  position: relative;
   width: 5px;
   height: 10px;
-  top: 4px;
-  left: 8px;
-  border-width: 0 3px 3px 0;
+  position: absolute;
+  top: 6px;
+  left: 9.5px;
   transform: rotate(45deg);
 }
 
@@ -94,4 +95,64 @@ TASK LIST
 .task__delete:hover {
   opacity: .5;
   transform: scale(1.3) rotate(45deg);
+}
+
+/*
+==========
+LIGHT
+=========
+*/
+@media (prefers-color-scheme: light) {
+  .task__container {
+    background-color: var(--light-main-bg);
+  }
+
+  .empty {
+    color: var(--light-black-text);
+  }
+
+  .check {
+    border: 2px solid var(--light-black-text);
+  }
+
+  .checkbox .check:after {
+    border: solid var(--light-white-text);
+    border-width: 0 3px 3px 0;
+  }
+
+  .task__container > p {
+    color: var(--light-black-text);
+  }
+}
+
+/*
+==========
+DARK
+=========
+*/
+@media (prefers-color-scheme: dark) {
+  .task__container {
+    background-color: var(--dark-main-bg);
+  }
+
+  .empty {
+    color: var(--dark-white-text);
+  }
+
+  .check {
+    border: 2px solid var(--dark-white-text);
+  }
+
+  .checkbox .check:after {
+    border: solid var(--dark-white-text);
+    border-width: 0 3px 3px 0;
+  }
+
+  .task__container > p {
+    color: var(--dark-white-text);
+  }
+
+  .task__delete {
+    filter: invert(1);
+  }
 }

@@ -58,3 +58,59 @@ FORM
   width: 1.8rem;
   transition: filter .3s;
 }
+
+/*
+==========
+LIGHT
+=========
+*/
+@media (prefers-color-scheme: light) {
+  .form > h1 {
+    color: var(--light-white-text);
+  }
+
+  .input__container > input {
+    color: var(--light-black-text);
+    background-color: var(--light-main-bg);
+  }
+
+  .input__container > input::placeholder {
+    color: var(--light-black-text);
+  }
+
+  .input__container > span {
+    border: 2px solid var(--light-black-text);
+  }
+
+  .input__container > span > img:hover {
+    filter: brightness(90%);
+  }
+}
+
+/*
+==========
+DARK
+=========
+*/
+@media (prefers-color-scheme: dark) {
+  .form > h1 {
+    color: var(--dark-black-text);
+  }
+  
+  .input__container > input {
+    color: var(--dark-white-text);
+    background-color: var(--dark-main-bg);
+  }
+
+  .input__container > input::placeholder {
+    color: var(--dark-white-text);
+  }
+
+  .input__container > span {
+    border: 2px solid var(--dark-white-text);
+  }
+
+  .input__container > span > img {
+    filter: invert(1);
+  }
+}

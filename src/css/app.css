@@ -102,7 +102,7 @@ TABLET AND MOBILE DESIGN
 
 /*
 ==========
-DARK THEME
+LIGHT
 =========
 */
 @media (prefers-color-scheme: light) {
@@ -116,49 +116,13 @@ DARK THEME
   .app {
     background-color: var(--light-bg);
   }
-
-  .form > h1 {
-    color: var(--light-white-text);
-  }
-
-  .input__container > input {
-    color: var(--light-black-text);
-    background-color: var(--light-main-bg);
-  }
-
-  .input__container > input::placeholder {
-    color: var(--light-black-text);
-  }
-
-  .input__container > span {
-    border: 2px solid var(--light-black-text);
-  }
-
-  .input__container > span > img:hover {
-    filter: brightness(90%);
-  }
-
-  .task__container {
-    background-color: var(--light-main-bg);
-  }
-
-  .empty {
-    color: var(--light-black-text);
-  }
-
-  .check {
-    border: 2px solid var(--light-black-text);
-  }
-
-  .checkbox .check:after {
-    border: solid var(--light-white-text);
-  }
-
-  .task__container > p {
-    color: var(--light-black-text);
-  }
 }
 
+/*
+==========
+DARK
+=========
+*/
 @media (prefers-color-scheme: dark) {
   :root {
     --dark-bg: #222433;
@@ -169,50 +133,5 @@ DARK THEME
 
   .app {
     background-color: var(--dark-bg);
-  }
-
-  .form > h1 {
-    color: var(--dark-black-text);
-  }
-  
-  .input__container > input {
-    color: var(--dark-white-text);
-    background-color: var(--dark-main-bg);
-  }
-
-  .input__container > input::placeholder {
-    color: var(--dark-white-text);
-  }
-
-  .input__container > span {
-    border: 2px solid var(--dark-white-text);
-  }
-
-  .input__container > span > img {
-    filter: invert(1);
-  }
-
-  .task__container {
-    background-color: var(--dark-main-bg);
-  }
-
-  .empty {
-    color: var(--dark-white-text);
-  }
-
-  .check {
-    border: 2px solid var(--dark-white-text);
-  }
-
-  .checkbox .check:after {
-    border: solid var(--dark-white-text);
-  }
-
-  .task__container > p {
-    color: var(--dark-white-text);
-  }
-
-  .task__delete {
-    filter: invert(1);
   }
 }
