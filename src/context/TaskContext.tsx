@@ -26,13 +26,9 @@ export const TaskProvider = ({ children }: PropsWithChildren) => {
 
   const completedTask = (id: number) => {
     setTodoList(
-      todoList.map((task) => {
-        if (task.id === id) {
-          return { ...task, completed: true };
-        } else {
-          return task;
-        }
-      })
+      todoList.map((task) =>
+        task.id === id ? { ...task, completed: !task.completed } : task
+      )
     );
   };
 

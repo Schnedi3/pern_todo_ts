@@ -51,9 +51,17 @@ TASK LIST
   transition: .3s;
 }
 
+.check:hover {
+  opacity: .5;
+}
+
 .checkbox > input:checked ~ .check {
   background-color: var(--accent-bg);
   opacity: .6;
+}
+
+.checkbox > input:checked ~ .check:hover {
+  opacity: .9;
 }
 
 .check:after {
@@ -79,7 +87,7 @@ TASK LIST
   font-size: 1.2rem;
 }
 
- #task__completed {
+.task__completed {
   text-decoration: line-through;
   opacity: .4;
 }
