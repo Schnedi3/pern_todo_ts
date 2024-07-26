@@ -1,0 +1,88 @@
+/*
+==========
+TASK LIST
+=========
+*/
+.task__list {
+  position: absolute;
+  top: 19rem;
+}
+
+.task__container {
+  margin-bottom: 0.3rem;
+  padding: 1.3rem;
+  display: grid;
+  grid-template-columns: 1fr 15fr 1fr;
+  gap: 1rem;
+  border-radius: 6px;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 1px;
+  user-select: none;
+}
+
+.checkbox > input {
+  opacity: 0;
+  cursor: pointer;
+  width: 1px;
+  position: absolute;
+}
+
+.check {
+  height: 1.7rem;
+  width: 1.7rem;
+  background-color: transparent;
+  opacity: .2;
+  border-radius: 50%;
+  transition: .3s;
+}
+
+.checkbox > input:checked ~ .check {
+  background-color: var(--accent-bg);
+  opacity: .6;
+}
+
+.check:after {
+  content: "";
+  display: none;
+}
+
+.checkbox > input:checked ~ .check:after {
+  display: block;
+}
+
+.checkbox .check:after {
+  position: relative;
+  width: 5px;
+  height: 10px;
+  top: 4px;
+  left: 8px;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}
+
+.task__container > p {
+  font-size: 1.2rem;
+}
+
+ #task__completed {
+  text-decoration: line-through;
+  opacity: .4;
+}
+
+.task__delete {
+  width: 1.7rem;
+  transform: rotate(45deg);
+  opacity: .2;
+  cursor: pointer;
+  transition: all .3s linear;
+}
+
+.task__delete:hover {
+  opacity: .5;
+  transform: scale(1.3) rotate(45deg);
+}

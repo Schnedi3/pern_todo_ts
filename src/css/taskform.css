@@ -1,0 +1,60 @@
+/*
+==========
+FORM
+=========
+*/
+.form > h1 {
+  margin-bottom: 1rem;
+  font-family: Raleway;
+  font-weight: 900;
+  font-size: 2.8rem;
+  text-transform: uppercase;
+  letter-spacing: 2rem;
+}
+
+.input__container {
+  display: flex;
+  gap: 1rem;
+}
+
+.input__container > input {
+  padding: 1.3rem;
+  flex-grow: 1;
+  font-family: Poppins;
+  font-weight: 300;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 6px;
+}
+
+.input__container > input::placeholder {
+  opacity: .35;
+}
+
+.input__container > input:focus-visible {
+  outline: none;
+}
+
+.input__container > span {
+  position: absolute;
+  bottom: 1.2rem;
+  right: 1.5rem;
+  display: flex;
+  justify-content: center;
+  width: 1rem;
+  padding: .2rem .9rem;
+  background-color: transparent;
+  border-radius: 50%;
+  opacity: .2;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.input__container > span:hover {
+  opacity: .5;
+}
+
+.input__container > span > img {
+  width: 1.8rem;
+  transition: filter .3s;
+}
