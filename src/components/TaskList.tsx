@@ -1,18 +1,10 @@
-import "../css/tasklist.css";
+import "../css/list.css";
 
+import { TaskFooter } from "./TaskFooter";
 import { useTaskContext } from "../context/useTaskContext";
 
 export const TaskList = () => {
-  const {
-    filteredTodoList,
-    completedTask,
-    deleteTask,
-    category,
-    setCategory,
-    deleteCompleted,
-    noActiveTasks,
-    noCompletedTasks,
-  } = useTaskContext();
+  const { filteredTodoList, completedTask, deleteTask } = useTaskContext();
 
   return (
     <section className="task__list container">
@@ -38,37 +30,7 @@ export const TaskList = () => {
               </p>
             </div>
           ))}
-          <footer className="footer">
-            <ul className="footer__cat">
-              <li
-                onClick={() => setCategory("all")}
-                className={category === "all" ? "active" : ""}
-              >
-                All
-              </li>
-              <li
-                onClick={() => setCategory("active")}
-                className={category === "active" ? "active" : ""}
-                id={!noActiveTasks ? "disable" : ""}
-              >
-                Active
-              </li>
-              <li
-                onClick={() => setCategory("completed")}
-                className={category === "completed" ? "active" : ""}
-                id={!noCompletedTasks ? "disable" : ""}
-              >
-                Completed
-              </li>
-            </ul>
-            <p
-              className="footer__clear"
-              onClick={deleteCompleted}
-              id={!noCompletedTasks ? "disable" : ""}
-            >
-              Clear Completed
-            </p>
-          </footer>
+          <TaskFooter />
         </>
       )}
     </section>

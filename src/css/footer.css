@@ -1,0 +1,71 @@
+/*
+==========
+FOOTER
+=========
+*/
+.footer {
+  display: flex;
+  padding: .8rem;
+  font-size: 1em;
+  justify-content: space-between;
+  border-radius: 0 0 6px 6px;
+  font-family: Josefin;
+  font-weight: 400;
+}
+
+.footer__cat {
+  display: flex;
+  gap: .7rem;
+}
+
+.footer__cat > li {
+  list-style-type: none;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.footer__cat > li:hover {
+  color: var(--accent-bg);
+}
+
+.footer__cat > li.active {
+  color: var(--accent-bg);
+}
+
+.footer__clear {
+  cursor: pointer;
+  transition: .3s;
+}
+
+.footer__clear:hover {
+  color: var(--accent-bg);
+  cursor: pointer;
+}
+
+#disable {
+  pointer-events: none;
+}
+
+/*
+==========
+LIGHT
+=========
+*/
+@media (prefers-color-scheme: light) {
+  .footer {
+    background-color: var(--light-main-bg);
+    color: var(--light-gray-text);
+  }
+}
+
+/*
+==========
+DARK
+=========
+*/
+@media (prefers-color-scheme: dark) {
+  .footer {
+    background-color: var(--dark-main-bg);
+    color: var(--dark-gray-text);
+  }
+}
