@@ -1,5 +1,4 @@
 import "../css/taskform.css";
-import addPath from "../assets/add.svg";
 
 import { useTaskContext } from "../context/useTaskContext";
 
@@ -16,9 +15,7 @@ export const TaskForm = () => {
           value={newTask}
           autoFocus={true}
         />
-        <span onClick={addTask}>
-          <img src={addPath} alt="add task" />
-        </span>
+        <p onClick={addTask}>🡒</p>
       </div>
     </form>
   );

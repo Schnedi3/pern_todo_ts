@@ -1,5 +1,4 @@
 import "../css/tasklist.css";
-import deletePath from "../assets/add.svg";
 
 import { useTaskContext } from "../context/useTaskContext";
 
@@ -25,11 +24,9 @@ export const TaskList = () => {
               <p className={task.completed ? "task__completed" : ""}>
                 {task.text}
               </p>
-              <img
-                src={deletePath}
-                onClick={() => deleteTask(task.id)}
-                className="task__delete"
-              />
+              <p className="task__delete" onClick={() => deleteTask(task.id)}>
+                ✖
+              </p>
             </div>
           ))}
         </>
