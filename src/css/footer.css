@@ -30,6 +30,7 @@ FOOTER
 
 .footer__cat > li.active {
   color: var(--accent-bg);
+  font-weight: 900;
 }
 
 .footer__clear {

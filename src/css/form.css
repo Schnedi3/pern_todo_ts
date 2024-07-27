@@ -13,13 +13,12 @@ FORM
 }
 
 .input__container {
-  display: flex;
-  gap: 1rem;
+  position: relative;
 }
 
 .input__container > input {
+  width: 100%;
   padding: 1.3rem;
-  flex-grow: 1;
   font-family: Poppins;
   font-weight: 300;
   font-size: 1.1rem;
@@ -28,7 +27,7 @@ FORM
 }
 
 .input__container > input::placeholder {
-  opacity: .35;
+  opacity: .3;
 }
 
 .input__container > input:focus-visible {
@@ -36,8 +35,9 @@ FORM
 }
 
 .input__container > p {
+  width: max-content;
   position: absolute;
-  bottom: .8rem;
+  top: .8rem;
   right: 1.5rem;
   font-size: 1.8rem;
   opacity: .2;
@@ -65,10 +65,7 @@ LIGHT
     background-color: var(--light-main-bg);
   }
 
-  .input__container > input::placeholder {
-    color: var(--light-black-text);
-  }
-
+  .input__container > input::placeholder,
   .input__container > p {
     color: var(--light-black-text);
   }
@@ -89,10 +86,7 @@ DARK
     background-color: var(--dark-main-bg);
   }
 
-  .input__container > input::placeholder {
-    color: var(--dark-white-text);
-  }
-
+  .input__container > input::placeholder,
   .input__container > p {
     color: var(--dark-white-text);
   }

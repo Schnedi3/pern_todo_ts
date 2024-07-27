@@ -6,7 +6,7 @@ export const TaskForm = () => {
   const { newTask, handleOnSubmit, handleChange, addTask } = useTaskContext();
 
   return (
-    <form className="form container" onSubmit={handleOnSubmit}>
+    <form className="form" onSubmit={handleOnSubmit}>
       <h1>todo</h1>
       <div className="input__container">
         <input

@@ -7,7 +7,7 @@ export const TaskList = () => {
   const { filteredTodoList, completedTask, deleteTask } = useTaskContext();
 
   return (
-    <section className="task__list container">
+    <section className="list">
       {filteredTodoList.length === 0 ? (
         <p className="empty">Nothing to do...</p>
       ) : (

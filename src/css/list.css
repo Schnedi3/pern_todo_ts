@@ -3,27 +3,28 @@
 TASK LIST
 =========
 */
-.task__list {
-  position: absolute;
-  top: 19rem;
+.list {
+  position: relative;
+  margin-bottom: 3rem;
 }
 
 .task__container {
-  margin-bottom: 0.3rem;
   padding: 1.3rem;
   display: grid;
   grid-template-columns: 1fr 15fr 1fr;
   gap: 1rem;
-  border-radius: 6px;
+}
+
+.task__container:first-child {
+  border-radius: 6px 6px 0 0;
 }
 
 .empty {
-  width: 100%;
   position: absolute;
-  top: 3.5rem;
+  inset: 3rem;
   text-align: center;
   font-size: 1.3rem;
-  font-weight: 500;
+  font-weight: 300;
 }
 
 .checkbox {
@@ -43,8 +44,8 @@ TASK LIST
 }
 
 .check {
-  height: 1.7rem;
-  width: 1.7rem;
+  height: 1.5rem;
+  width: 1.5rem;
   background-color: transparent;
   opacity: .2;
   border-radius: 50%;
@@ -57,15 +58,15 @@ TASK LIST
 
 .checkbox > input:checked ~ .check {
   background-color: var(--accent-bg);
-  opacity: .6;
+  opacity: .7;
 }
 
 .checkbox > input:checked ~ .check:hover {
-  opacity: .9;
+  opacity: 1;
 }
 
 .check:after {
-  content: "";
+  content: "✓";
   position: absolute;
   display: none;
 }
@@ -75,16 +76,13 @@ TASK LIST
 }
 
 .checkbox .check:after {
-  width: 5px;
-  height: 10px;
-  position: absolute;
-  top: 6px;
-  left: 9.5px;
-  transform: rotate(45deg);
+  font-size: 1.6rem;
+  left: 4.5px;
+  bottom: -1px;
 }
 
 .task__container > p {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 }
 
 .task__completed {
@@ -112,28 +110,18 @@ LIGHT
 @media (prefers-color-scheme: light) {
   .task__container {
     background-color: var(--light-main-bg);
+    border-bottom: 2px solid var(--light-bg);
   }
 
-  .empty {
+  .empty,
+  .checkbox .check:after,
+  .task__container > p,
+  .task__delete {
     color: var(--light-black-text);
   }
 
   .check {
-    border: 2px solid var(--light-black-text);
-  }
-
-  .checkbox .check:after {
-    border: solid var(--light-white-text);
-    border-width: 0 3px 3px 0;
-  }
-
-  .task__container > p {
-    color: var(--light-black-text);
-  }
-}
-
-  .task__delete {
-    color: var(--light-black-text);
+    border: 3px solid var(--light-black-text);
   }
 }
 
@@ -145,26 +133,17 @@ DARK
 @media (prefers-color-scheme: dark) {
   .task__container {
     background-color: var(--dark-main-bg);
+    border-bottom: 2px solid var(--dark-bg);
   }
 
-  .empty {
+  .empty,
+  .checkbox .check:after,
+  .task__container > p,
+  .task__delete {
     color: var(--dark-white-text);
   }
 
   .check {
     border: 2px solid var(--dark-white-text);
-  }
-
-  .checkbox .check:after {
-    border: solid var(--dark-white-text);
-    border-width: 0 3px 3px 0;
-  }
-
-  .task__container > p {
-    color: var(--dark-white-text);
-  }
-
-  .task__delete {
-    color: var(--dark-white-text);
   }
 }
