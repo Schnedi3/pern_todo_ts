@@ -10,6 +10,7 @@ export const TaskProvider = ({ children }: PropsWithChildren) => {
   const [newTask, setNewTask] = useState<string>("");
   const [category, setCategory] = useState<string>("all");
 
+  // prevent default form submit
   const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (newTask) {
@@ -18,10 +19,12 @@ export const TaskProvider = ({ children }: PropsWithChildren) => {
     }
   };
 
+  // capture the input value
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewTask(e.target.value);
   };
 
+  // add the new task to the list
   const addTask = () => {
     const task: Task = {
       id: todoList.length + 1,
@@ -33,6 +36,7 @@ export const TaskProvider = ({ children }: PropsWithChildren) => {
     setNewTask("");
   };
 
+  // mark a task as completed
   const completedTask = (id: number) => {
     setTodoList(
       todoList.map((task) =>
@@ -41,10 +45,12 @@ export const TaskProvider = ({ children }: PropsWithChildren) => {
     );
   };
 
+  // delete any task
   const deleteTask = (id: number) => {
     setTodoList(todoList.filter((task) => task.id !== id));
   };
 
+  // Filter tasks by category
   const filteredTodoList = todoList.filter((task) => {
     if (category === "active") {
       return !task.completed;
@@ -55,9 +61,11 @@ export const TaskProvider = ({ children }: PropsWithChildren) => {
     return task;
   });
 
+  // disable category button if there's no any task in that category
   const noActiveTasks = todoList.some((task) => !task.completed);
   const noCompletedTasks = todoList.some((task) => task.completed);
 
+  // clear all the completed tasks
   const deleteCompleted = () => {
     setTodoList(filteredTodoList.filter((task) => !task.completed));
   };
