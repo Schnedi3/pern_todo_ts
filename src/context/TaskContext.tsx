@@ -9,6 +9,14 @@ export const TaskProvider = ({ children }: PropsWithChildren) => {
   const [todoList, setTodoList] = useState<Task[]>([]);
   const [newTask, setNewTask] = useState<string>("");
 
+  const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (newTask) {
+      addTask();
+      setNewTask("");
+    }
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewTask(e.target.value);
   };
@@ -41,6 +49,7 @@ export const TaskProvider = ({ children }: PropsWithChildren) => {
       value={{
         todoList,
         newTask,
+        handleOnSubmit,
         handleChange,
         addTask,
         completedTask,

@@ -3,10 +3,10 @@ import "../css/taskform.css";
 import { useTaskContext } from "../context/useTaskContext";
 
 export const TaskForm = () => {
-  const { newTask, handleChange, addTask } = useTaskContext();
+  const { newTask, handleOnSubmit, handleChange, addTask } = useTaskContext();
 
   return (
-    <form className="form container">
+    <form className="form container" onSubmit={handleOnSubmit}>
       <h1>todo</h1>
       <div className="input__container">
         <input
