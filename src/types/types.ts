@@ -16,4 +16,10 @@ export interface TaskContextType {
   addTask: () => void;
   completedTask: (id: number) => void;
   deleteTask: (id: number) => void;
+  category: string;
+  setCategory: (category: string) => void;
+  filteredTodoList: Task[];
+  deleteCompleted: () => void;
+  noActiveTasks: boolean;
+  noCompletedTasks: boolean;
 }

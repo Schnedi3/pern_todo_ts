@@ -8,6 +8,7 @@ export const TaskContext = createContext<TaskContextType | undefined>(
 export const TaskProvider = ({ children }: PropsWithChildren) => {
   const [todoList, setTodoList] = useState<Task[]>([]);
   const [newTask, setNewTask] = useState<string>("");
+  const [category, setCategory] = useState<string>("all");
 
   const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -44,6 +45,23 @@ export const TaskProvider = ({ children }: PropsWithChildren) => {
     setTodoList(todoList.filter((task) => task.id !== id));
   };
 
+  const filteredTodoList = todoList.filter((task) => {
+    if (category === "active") {
+      return !task.completed;
+    }
+    if (category === "completed") {
+      return task.completed;
+    }
+    return task;
+  });
+
+  const noActiveTasks = todoList.some((task) => !task.completed);
+  const noCompletedTasks = todoList.some((task) => task.completed);
+
+  const deleteCompleted = () => {
+    setTodoList(filteredTodoList.filter((task) => !task.completed));
+  };
+
   return (
     <TaskContext.Provider
       value={{
@@ -54,6 +72,12 @@ export const TaskProvider = ({ children }: PropsWithChildren) => {
         addTask,
         completedTask,
         deleteTask,
+        category,
+        setCategory,
+        filteredTodoList,
+        deleteCompleted,
+        noActiveTasks,
+        noCompletedTasks,
       }}
     >
       {children}
