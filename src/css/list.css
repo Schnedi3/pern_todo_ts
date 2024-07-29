@@ -81,6 +81,19 @@ TASK LIST
   bottom: -1px;
 }
 
+.task__container > input {
+  font-family: Poppins;
+  font-weight: 300;
+  font-size: 1.1rem;
+  border: none;
+  background-color: transparent;
+}
+
+.task__container > input:focus-visible {
+  outline: none;
+  opacity: .6;
+}
+
 .task__container > p {
   font-size: 1.1rem;
 }
@@ -115,6 +128,7 @@ LIGHT
 
   .empty,
   .checkbox .check:after,
+  .task__container > input,
   .task__container > p,
   .task__delete {
     color: var(--light-black-text);
@@ -138,6 +152,7 @@ DARK
 
   .empty,
   .checkbox .check:after,
+  .task__container > input,
   .task__container > p,
   .task__delete {
     color: var(--dark-white-text);

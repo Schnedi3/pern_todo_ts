@@ -4,7 +4,15 @@ import { TaskFooter } from "./TaskFooter";
 import { useTaskContext } from "../context/useTaskContext";
 
 export const TaskList = () => {
-  const { filteredTodoList, completedTask, deleteTask } = useTaskContext();
+  const {
+    filteredTodoList,
+    completedTask,
+    deleteTask,
+    newText,
+    setNewText,
+    handleEditTask,
+    handleUpdate,
+  } = useTaskContext();
 
   return (
     <section className="list">
@@ -22,9 +30,22 @@ export const TaskList = () => {
                 />
                 <span className="check"></span>
               </label>
-              <p className={task.completed ? "task__completed" : ""}>
-                {task.text}
-              </p>
+              {task.isEditing ? (
+                <input
+                  type="text"
+                  value={newText}
+                  onChange={(e) => setNewText(e.target.value)}
+                  onBlur={() => handleUpdate(task.id)}
+                  autoFocus
+                />
+              ) : (
+                <p
+                  className={task.completed ? "task__completed" : ""}
+                  onDoubleClick={() => handleEditTask(task.id, task.text)}
+                >
+                  {task.text}
+                </p>
+              )}
               <p className="task__delete" onClick={() => deleteTask(task.id)}>
                 ✖
               </p>

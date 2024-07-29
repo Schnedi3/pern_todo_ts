@@ -30,6 +30,7 @@ export const TaskProvider = ({ children }: PropsWithChildren) => {
       id: todoList.length + 1,
       text: newTask,
       completed: false,
+      isEditing: false,
     };
     if (!newTask) return;
     setTodoList([...todoList, task]);
@@ -42,6 +43,34 @@ export const TaskProvider = ({ children }: PropsWithChildren) => {
       todoList.map((task) =>
         task.id === id ? { ...task, completed: !task.completed } : task
       )
+    );
+  };
+
+  // edit/update task
+  const [newText, setNewText] = useState<string>("");
+
+  const handleEditTask = (id: number, text: string) => {
+    setNewText(text);
+
+    setTodoList(
+      todoList.map((task) =>
+        task.id === id ? { ...task, isEditing: true } : task
+      )
+    );
+  };
+
+  const handleUpdate = (id: number) => {
+    setTodoList(
+      todoList.map((task) => {
+        if (task.id === id) {
+          return {
+            ...task,
+            text: newText ? newText : task.text,
+            isEditing: false,
+          };
+        }
+        return task;
+      })
     );
   };
 
@@ -79,6 +108,10 @@ export const TaskProvider = ({ children }: PropsWithChildren) => {
         handleChange,
         addTask,
         completedTask,
+        newText,
+        setNewText,
+        handleEditTask,
+        handleUpdate,
         deleteTask,
         category,
         setCategory,
