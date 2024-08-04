@@ -1,6 +1,6 @@
 /*
 ==========
-TASK LIST
+LIST
 =========
 */
 .list {
@@ -117,7 +117,7 @@ TASK LIST
 
 /*
 ==========
-LIGHT
+THEME
 =========
 */
 @media (prefers-color-scheme: light) {
@@ -139,11 +139,6 @@ LIGHT
   }
 }
 
-/*
-==========
-DARK
-=========
-*/
 @media (prefers-color-scheme: dark) {
   .task__container {
     background-color: var(--dark-main-bg);

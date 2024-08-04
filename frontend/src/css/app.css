@@ -76,7 +76,7 @@ HEADER IMAGE
 
 /*
 ==========
-TABLET AND MOBILE DESIGN
+TABLET & MOBILE
 =========
 */
 @media (max-width: 1100px) {
@@ -99,7 +99,7 @@ TABLET AND MOBILE DESIGN
 
 /*
 ==========
-LIGHT
+THEME
 =========
 */
 @media (prefers-color-scheme: light) {
@@ -116,11 +116,6 @@ LIGHT
   }
 }
 
-/*
-==========
-DARK
-=========
-*/
 @media (prefers-color-scheme: dark) {
   :root {
     --dark-bg: #222433;

@@ -52,7 +52,7 @@ FORM
 
 /*
 ==========
-LIGHT
+THEME
 =========
 */
 @media (prefers-color-scheme: light) {
@@ -71,11 +71,6 @@ LIGHT
   }
 }
 
-/*
-==========
-DARK
-=========
-*/
 @media (prefers-color-scheme: dark) {
   .form > h1 {
     color: var(--dark-black-text);

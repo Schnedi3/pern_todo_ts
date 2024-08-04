@@ -13,7 +13,7 @@ export const TaskForm = () => {
           placeholder="Add a new task"
           onChange={handleChange}
           value={newTask}
-          autoFocus={true}
+          autoFocus
         />
         <p onClick={addTask}>🡒</p>
       </div>

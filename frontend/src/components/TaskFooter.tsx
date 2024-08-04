@@ -13,7 +13,7 @@ export const TaskFooter = () => {
 
   return (
     <footer className="footer">
-      <ul className="footer__cat">
+      <ul className="categories">
         <li
           onClick={() => setCategory("all")}
           className={category === "all" ? "active" : ""}
@@ -30,15 +30,15 @@ export const TaskFooter = () => {
         <li
           onClick={() => setCategory("completed")}
           className={category === "completed" ? "active" : ""}
-          id={!noCompletedTasks ? "disable" : ""}
+          id={!noCompletedTasks ? "disabled" : ""}
         >
           Completed
         </li>
       </ul>
       <p
-        className="footer__clear"
+        className="clear"
         onClick={deleteCompleted}
-        id={!noCompletedTasks ? "disable" : ""}
+        id={!noCompletedTasks ? "disabled" : ""}
       >
         Clear Completed
       </p>

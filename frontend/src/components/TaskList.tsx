@@ -7,11 +7,11 @@ export const TaskList = () => {
   const {
     filteredTodoList,
     completedTask,
-    deleteTask,
     newText,
     setNewText,
     handleEditTask,
     handleUpdate,
+    deleteTask,
   } = useTaskContext();
 
   return (
@@ -21,12 +21,12 @@ export const TaskList = () => {
       ) : (
         <>
           {filteredTodoList.map((task) => (
-            <div className="task__container" key={task.id}>
+            <div className="task__container" key={task._id}>
               <label className="checkbox">
                 <input
                   type="checkbox"
                   checked={task.completed}
-                  onChange={() => completedTask(task.id)}
+                  onChange={() => completedTask(task._id)}
                 />
                 <span className="check"></span>
               </label>
@@ -35,18 +35,18 @@ export const TaskList = () => {
                   type="text"
                   value={newText}
                   onChange={(e) => setNewText(e.target.value)}
-                  onBlur={() => handleUpdate(task.id)}
+                  onBlur={() => handleUpdate(task._id)}
                   autoFocus
                 />
               ) : (
                 <p
                   className={task.completed ? "task__completed" : ""}
-                  onDoubleClick={() => handleEditTask(task.id, task.text)}
+                  onDoubleClick={() => handleEditTask(task._id, task.text)}
                 >
                   {task.text}
                 </p>
               )}
-              <p className="task__delete" onClick={() => deleteTask(task.id)}>
+              <p className="task__delete" onClick={() => deleteTask(task._id)}>
                 ✖
               </p>
             </div>
