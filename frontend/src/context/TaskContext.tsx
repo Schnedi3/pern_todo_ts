@@ -67,31 +67,20 @@ export const TaskProvider = ({ children }: PropsWithChildren) => {
     }
   };
 
-  // edit task
-  const [newText, setNewText] = useState<string>("");
-
-  const handleEditTask = async (id: string, text: string) => {
-    setNewText(text);
-
-    try {
-      const response = await axios.put(`${API_URL}/tasks/${id}/edited`);
-      setTodoList(
-        todoList.map((task) => (task._id === id ? response.data : task))
-      );
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   // update task
+  const [editMode, setEditMode] = useState<boolean>(false);
+  const [editId, setEditId] = useState<string>("");
+  const [updatedText, setUpdatedText] = useState<string>("");
+
   const handleUpdate = async (id: string) => {
     try {
       const response = await axios.put(`${API_URL}/tasks/${id}/updated`, {
-        text: newText,
+        text: updatedText,
       });
       setTodoList(
         todoList.map((task) => (task._id === id ? response.data : task))
       );
+      setEditMode(false);
     } catch (error) {
       console.error(error);
     }
@@ -141,9 +130,12 @@ export const TaskProvider = ({ children }: PropsWithChildren) => {
         handleChange,
         addTask,
         completedTask,
-        newText,
-        setNewText,
-        handleEditTask,
+        editMode,
+        setEditMode,
+        editId,
+        setEditId,
+        updatedText,
+        setUpdatedText,
         handleUpdate,
         deleteTask,
         category,

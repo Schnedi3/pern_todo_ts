@@ -44,25 +44,6 @@ export const completedTask = async (req: Request, res: Response) => {
 };
 
 // put
-export const editTask = async (req: Request, res: Response) => {
-  const { id } = req.params;
-
-  try {
-    const editTask = await Task.findById(id);
-
-    if (!editTask) {
-      return res.json({ message: "Task not found" });
-    }
-
-    editTask.isEditing = !editTask.isEditing;
-    await editTask.save();
-    res.json(editTask);
-  } catch (error: any) {
-    res.json({ message: "Failed to edit task", error });
-  }
-};
-
-// put
 export const updateTask = async (req: Request, res: Response) => {
   const { id } = req.params;
 
@@ -76,7 +57,6 @@ export const updateTask = async (req: Request, res: Response) => {
     const newText = req.body.text;
     taskToUpdate.text = newText.trim() ? newText : taskToUpdate.text;
 
-    taskToUpdate.isEditing = !taskToUpdate.isEditing;
     await taskToUpdate.save();
     res.json(taskToUpdate);
   } catch (error: any) {

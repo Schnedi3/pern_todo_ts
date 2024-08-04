@@ -7,9 +7,12 @@ export const TaskList = () => {
   const {
     filteredTodoList,
     completedTask,
-    newText,
-    setNewText,
-    handleEditTask,
+    editMode,
+    setEditMode,
+    editId,
+    setEditId,
+    updatedText,
+    setUpdatedText,
     handleUpdate,
     deleteTask,
   } = useTaskContext();
@@ -30,18 +33,22 @@ export const TaskList = () => {
                 />
                 <span className="check"></span>
               </label>
-              {task.isEditing ? (
+              {editMode && editId === task._id ? (
                 <input
                   type="text"
-                  value={newText}
-                  onChange={(e) => setNewText(e.target.value)}
+                  value={updatedText}
+                  onChange={(e) => setUpdatedText(e.target.value)}
                   onBlur={() => handleUpdate(task._id)}
                   autoFocus
                 />
               ) : (
                 <p
                   className={task.completed ? "task__completed" : ""}
-                  onDoubleClick={() => handleEditTask(task._id, task.text)}
+                  onDoubleClick={() => {
+                    setEditMode(true),
+                      setEditId(task._id),
+                      setUpdatedText(task.text);
+                  }}
                 >
                   {task.text}
                 </p>

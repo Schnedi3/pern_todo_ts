@@ -3,7 +3,7 @@ import express from "express";
 import cors from "cors";
 
 // activity router
-import { router as taskRoutes } from "./routes/todo_route";
+import todoRouter from "./routes/todo_route";
 
 // init Express
 export const app = express();
@@ -11,7 +11,7 @@ export const app = express();
 // middleware
 app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended: true }));
 
 // router for the requests
-app.use("/api", taskRoutes);
+app.use("/api", todoRouter);
