@@ -75,13 +75,3 @@ export const deleteTask = async (req: Request, res: Response) => {
     res.json({ message: "Failed to delete task", error });
   }
 };
-
-// delete all
-export const deleteCompletedTask = async (req: Request, res: Response) => {
-  try {
-    await Task.deleteMany({ completed: true });
-    res.json({ message: "All completed tasks deleted" });
-  } catch (error: any) {
-    res.json({ message: "Failed to delete tasks", error });
-  }
-};

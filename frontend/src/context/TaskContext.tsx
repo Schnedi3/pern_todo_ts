@@ -10,7 +10,6 @@ export const TaskContext = createContext<TaskContextType | undefined>(
 export const TaskProvider = ({ children }: PropsWithChildren) => {
   const [todoList, setTodoList] = useState<TaskType[]>([]);
   const [newTask, setNewTask] = useState<string>("");
-  const [category, setCategory] = useState<string>("all");
 
   // prevent default form submit
   const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -97,29 +96,19 @@ export const TaskProvider = ({ children }: PropsWithChildren) => {
   };
 
   // Filter tasks by category
+  const [category, setCategory] = useState<string>("all");
+
   const filteredTodoList = todoList.filter((task) => {
-    if (category === "active") {
-      return !task.completed;
-    }
-    if (category === "completed") {
-      return task.completed;
-    }
+    if (category === "active") return !task.completed;
+    if (category === "completed") return task.completed;
     return task;
   });
+
+  if (category === "completed" && filteredTodoList.length === 0) setCategory("all")
 
   // disable category button if there's no any task in that category
   const noActiveTasks = todoList.some((task) => !task.completed);
   const noCompletedTasks = todoList.some((task) => task.completed);
-
-  // clear all the completed tasks
-  const deleteCompleted = async () => {
-    try {
-      await axios.delete(`${API_URL}/tasks`);
-      setTodoList(filteredTodoList.filter((task) => !task.completed));
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   return (
     <TaskContext.Provider
@@ -141,7 +130,6 @@ export const TaskProvider = ({ children }: PropsWithChildren) => {
         category,
         setCategory,
         filteredTodoList,
-        deleteCompleted,
         noActiveTasks,
         noCompletedTasks,
       }}

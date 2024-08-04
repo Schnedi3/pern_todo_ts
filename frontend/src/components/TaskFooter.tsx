@@ -6,7 +6,6 @@ export const TaskFooter = () => {
   const {
     category,
     setCategory,
-    deleteCompleted,
     noActiveTasks,
     noCompletedTasks,
   } = useTaskContext();
@@ -23,7 +22,7 @@ export const TaskFooter = () => {
         <li
           onClick={() => setCategory("active")}
           className={category === "active" ? "active" : ""}
-          id={!noActiveTasks ? "disable" : ""}
+          id={!noActiveTasks ? "disabled" : ""}
         >
           Active
         </li>
@@ -35,13 +34,6 @@ export const TaskFooter = () => {
           Completed
         </li>
       </ul>
-      <p
-        className="clear"
-        onClick={deleteCompleted}
-        id={!noCompletedTasks ? "disabled" : ""}
-      >
-        Clear Completed
-      </p>
     </footer>
   );
 };

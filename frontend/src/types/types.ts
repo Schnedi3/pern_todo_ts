@@ -26,7 +26,6 @@ export interface TaskContextType {
   category: string;
   setCategory: (category: string) => void;
   filteredTodoList: TaskType[];
-  deleteCompleted: () => void;
   noActiveTasks: boolean;
   noCompletedTasks: boolean;
 }

@@ -4,10 +4,8 @@ FOOTER
 =========
 */
 .footer {
-  display: flex;
-  padding: .8rem;
+  padding: .9rem;
   font-size: 1em;
-  justify-content: space-between;
   border-radius: 0 0 6px 6px;
   font-family: Josefin;
   font-weight: 400;
@@ -15,7 +13,7 @@ FOOTER
 
 .categories {
   display: flex;
-  gap: .7rem;
+  justify-content: space-evenly;
 }
 
 .categories > li {
@@ -31,16 +29,6 @@ FOOTER
 .categories > li.active {
   color: var(--accent-bg);
   font-weight: 900;
-}
-
-.clear {
-  cursor: pointer;
-  transition: .3s;
-}
-
-.clear:hover {
-  color: var(--accent-bg);
-  cursor: pointer;
 }
 
 #disabled {
