@@ -43,7 +43,7 @@ body {
   font-weight: 300;
 }
 
-.todo__container {
+.main__container {
   width: 100%;
   position: absolute;
   top: 10rem;
@@ -51,11 +51,6 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-}
-
-.form,
-.list {
-  width: 40%;
 }
 
 /*
@@ -76,24 +71,12 @@ HEADER IMAGE
 
 /*
 ==========
-TABLET & MOBILE
+MOBILE
 =========
 */
-@media (max-width: 1100px) {
-  .form,
-  .list {
-    width: 55%;
-  }
-}
-
 @media (max-width: 650px) {
   .header__image {
     background-position: center;
-  }
-
-  .form,
-  .list {
-    width: 80%;
   }
 }
 

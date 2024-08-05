@@ -1,6 +1,7 @@
 import { createContext, PropsWithChildren, useEffect, useState } from "react";
-import { TaskType, TaskContextType } from "../types/types";
 import axios from "axios";
+
+import { TaskType, TaskContextType } from "../types/types";
 import { API_URL } from "../api/api";
 
 export const TaskContext = createContext<TaskContextType | undefined>(

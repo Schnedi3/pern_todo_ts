@@ -2,6 +2,13 @@
 - Mongo, Express, React, Node
 - TypeScript
 
+## Also
+- jsonwebtoken
+- bcrypt
+- dotenv
+- cors
+- nodemon
+
 ## Features
 - Add new tasks
 - Edit existing tasks (double click) (click outside to save)

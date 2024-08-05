@@ -18,13 +18,13 @@ export const TaskList = () => {
   } = useTaskContext();
 
   return (
-    <section className="list">
+    <ul className="list">
       {filteredTodoList.length === 0 ? (
         <p className="empty">Nothing to do...</p>
       ) : (
         <>
           {filteredTodoList.map((task) => (
-            <div className="task__container" key={task._id}>
+            <li className="task__container" key={task._id}>
               <label className="checkbox">
                 <input
                   type="checkbox"
@@ -56,11 +56,11 @@ export const TaskList = () => {
               <p className="task__delete" onClick={() => deleteTask(task._id)}>
                 ✖
               </p>
-            </div>
+            </li>
           ))}
           <TaskFooter />
         </>
       )}
-    </section>
+    </ul>
   );
 };

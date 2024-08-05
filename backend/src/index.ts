@@ -1,7 +1,8 @@
 // required packages
-import { app } from "./app";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+
+import { app } from "./app";
 
 // call .env
 dotenv.config();
@@ -18,10 +19,5 @@ mongoose
     });
   })
   .catch((err) => {
-    console.error("Error connecting to MongoDB Atlas", err);
+    console.error("Error connecting to MongoDB", err);
   });
-
-// define a simple test route
-app.get("/", (req, res) => {
-  res.send("Hello there");
-});
