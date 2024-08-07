@@ -1,6 +1,6 @@
 import "./css/app.css";
 
-import { useAuth } from "./hooks/useAuth";
+import { useAuthContext } from "./context/useAuthContext";
 
 import { TaskForm } from "./components/TaskForm";
 import { TaskList } from "./components/TaskList";
@@ -8,7 +8,7 @@ import { AuthForm } from "./components/AuthForm";
 import { Logout } from "./components/Logout";
 
 export const App = () => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated } = useAuthContext();
 
   return (
     <main className="app">

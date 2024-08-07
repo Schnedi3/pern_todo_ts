@@ -1,8 +1,8 @@
 import { Document, Schema, model } from "mongoose";
+import { Request } from "express"
 
 // user interface
-interface IUser extends Document {
-  _id: string;
+export interface IUser extends Document {
   username: string;
   email: string;
   password: string;

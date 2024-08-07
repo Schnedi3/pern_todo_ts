@@ -1,7 +1,3 @@
-export interface ThemeContextType {
-  theme: string;
-}
-
 export interface TaskType {
   _id: string;
   text: string;
@@ -28,4 +24,23 @@ export interface TaskContextType {
   filteredTodoList: TaskType[];
   noActiveTasks: boolean;
   noCompletedTasks: boolean;
+}
+
+export interface AuthType {
+  username: string;
+  email: string;
+  password: string;
+}
+
+export interface AuthContextType {
+  setUsername: (username: string) => void ;
+  setEmail: (email: string) => void ;
+  setPassword: (password: string) => void ;
+  error: {message: string} |null;
+  setError: (error: {message: string} |null) => void ;
+  hasAccount: boolean ;
+  setHasAccount: (hasAccount: boolean ) => void ;
+  isAuthenticated: boolean ;
+  setIsAuthenticated: (isAuthenticated: boolean) => void ;
+  handleOnSubmit: (e: React.FormEvent<HTMLFormElement>) => void ;
 }

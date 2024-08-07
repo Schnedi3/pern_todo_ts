@@ -1,19 +1,8 @@
 import { Request, Response } from "express";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
-import dotenv from "dotenv";
 
 import { User } from "../models/auth_model";
-
-// call .env
-dotenv.config();
-
-//create token
-const createToken = (id: string) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET!, {
-    expiresIn: "1h",
-  });
-};
+import { createToken } from "../helpers/createToken";
 
 export const registerUser = async (req: Request, res: Response) => {
   const { username, email, password } = req.body;
@@ -36,8 +25,9 @@ export const registerUser = async (req: Request, res: Response) => {
     await newUser.save();
 
     // Create a token for the user
-    const token = createToken(newUser._id);
-    res.status(200).json({ newUser, token });
+    const token = createToken(newUser.id);
+    res.cookie("token", token);
+    res.status(200).json({ newUser });
   } catch (error: any) {
     res.status(500).json({ message: error.message });
   }
@@ -65,9 +55,34 @@ export const loginUser = async (req: Request, res: Response) => {
     }
 
     // Create a token for the user
-    const token = createToken(user._id);
-    res.status(200).json({ user, token });
+    const token = createToken(user.id);
+    res.cookie("token", token);
+    res.status(200).json({ user });
   } catch (error: any) {
     res.status(500).json({ message: error.message });
+  }
+};
+
+export const logoutUser = (req: Request, res: Response) => {
+  // Clear the token
+  res.clearCookie("token", { expires: new Date(0) });
+  res.sendStatus(200);
+};
+
+export const profileUser = async (req: Request, res: Response) => {
+  const { id } = req.user;
+
+  try {
+    // Find the user by id
+    const userFound = await User.findById(id);
+    if (!userFound) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.json(userFound);
+  } catch (error: any) {
+    return res
+      .status(500)
+      .json({ message: "Server error", error: error.message });
   }
 };

@@ -1,5 +1,5 @@
 import "../css/authform.css";
-import { useAuth } from "../hooks/useAuth";
+import { useAuthContext } from "../context/useAuthContext";
 
 export const AuthForm = () => {
   const {
@@ -10,7 +10,7 @@ export const AuthForm = () => {
     hasAccount,
     setHasAccount,
     handleOnSubmit,
-  } = useAuth();
+  } = useAuthContext();
 
   return (
     <form className="auth__form" onSubmit={handleOnSubmit}>

@@ -1,11 +1,14 @@
-import { useAuth } from "../hooks/useAuth";
+import axios from "axios";
+
+import { useAuthContext } from "../context/useAuthContext";
+import { API_URL } from "../api/api";
 import "../css/logout.css";
 
 export const Logout = () => {
-  const { setIsAuthenticated } = useAuth();
+  const { setIsAuthenticated } = useAuthContext();
 
   const handleLogOut = () => {
-    localStorage.removeItem("token");
+    axios.post(`${API_URL}/auth/logout`);
     setIsAuthenticated(false);
   };
 
