@@ -26,8 +26,8 @@ export const registerUser = async (req: Request, res: Response) => {
 
     // Create a token for the user
     const token = createToken(newUser.id);
-    res.cookie("token", token);
-    res.status(200).json({ newUser });
+    res.cookie("token", token, { httpOnly: true });
+    res.status(200).json({ newUser, token });
   } catch (error: any) {
     res.status(500).json({ message: error.message });
   }
@@ -56,8 +56,8 @@ export const loginUser = async (req: Request, res: Response) => {
 
     // Create a token for the user
     const token = createToken(user.id);
-    res.cookie("token", token);
-    res.status(200).json({ user });
+    res.cookie("token", token, { httpOnly: true });
+    res.status(200).json({ user, token });
   } catch (error: any) {
     res.status(500).json({ message: error.message });
   }
@@ -65,7 +65,7 @@ export const loginUser = async (req: Request, res: Response) => {
 
 export const logoutUser = (req: Request, res: Response) => {
   // Clear the token
-  res.clearCookie("token", { expires: new Date(0) });
+  res.clearCookie("token");
   res.sendStatus(200);
 };
 

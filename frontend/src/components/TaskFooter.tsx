@@ -3,12 +3,8 @@ import "../css/footer.css";
 import { useTaskContext } from "../context/useTaskContext";
 
 export const TaskFooter = () => {
-  const {
-    category,
-    setCategory,
-    noActiveTasks,
-    noCompletedTasks,
-  } = useTaskContext();
+  const { category, setCategory, noActiveTasks, noCompletedTasks } =
+    useTaskContext();
 
   return (
     <footer className="footer">

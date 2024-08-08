@@ -1,5 +1,4 @@
 import { Document, Schema, model } from "mongoose";
-import { Request } from "express"
 
 // user interface
 export interface IUser extends Document {

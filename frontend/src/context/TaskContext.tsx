@@ -102,8 +102,9 @@ export const TaskProvider = ({ children }: PropsWithChildren) => {
     return task;
   });
 
-  if (category === "completed" && filteredTodoList.length === 0)
+  if (category === "completed" && filteredTodoList.length === 0) {
     setCategory("all");
+  }
 
   // disable category button if's empty
   const noActiveTasks = todoList.some((task) => !task.completed);

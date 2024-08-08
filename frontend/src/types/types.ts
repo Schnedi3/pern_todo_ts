@@ -26,21 +26,23 @@ export interface TaskContextType {
   noCompletedTasks: boolean;
 }
 
-export interface AuthType {
+export interface RegisterType {
   username: string;
   email: string;
   password: string;
 }
 
+export interface LoginType {
+  email: string;
+  password: string;
+}
+
 export interface AuthContextType {
-  setUsername: (username: string) => void ;
-  setEmail: (email: string) => void ;
-  setPassword: (password: string) => void ;
-  error: {message: string} |null;
-  setError: (error: {message: string} |null) => void ;
-  hasAccount: boolean ;
-  setHasAccount: (hasAccount: boolean ) => void ;
+  user: RegisterType | LoginType | null;
+  signup: (user: RegisterType) => Promise<void>;
+  login: (user: LoginType) => Promise<void>;
   isAuthenticated: boolean ;
   setIsAuthenticated: (isAuthenticated: boolean) => void ;
-  handleOnSubmit: (e: React.FormEvent<HTMLFormElement>) => void ;
+  error: string | null;
 }
+

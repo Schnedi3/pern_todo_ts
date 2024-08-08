@@ -6,14 +6,14 @@ import { useTaskContext } from "../context/useTaskContext";
 export const TaskList = () => {
   const {
     filteredTodoList,
-    completedTask,
+    completeTask,
     editMode,
     setEditMode,
     editId,
     setEditId,
     updatedText,
     setUpdatedText,
-    handleUpdate,
+    updateTask,
     deleteTask,
   } = useTaskContext();
 
@@ -29,7 +29,7 @@ export const TaskList = () => {
                 <input
                   type="checkbox"
                   checked={task.completed}
-                  onChange={() => completedTask(task._id)}
+                  onChange={() => completeTask(task._id)}
                 />
                 <span className="check"></span>
               </label>
@@ -38,7 +38,7 @@ export const TaskList = () => {
                   type="text"
                   value={updatedText}
                   onChange={(e) => setUpdatedText(e.target.value)}
-                  onBlur={() => handleUpdate(task._id)}
+                  onBlur={() => updateTask(task._id)}
                   autoFocus
                 />
               ) : (

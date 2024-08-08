@@ -1,6 +1,6 @@
 /* 
 ==============
-MODAL
+REGISTER & LOGIN
 ==============
 */
 .auth__form {
@@ -24,7 +24,7 @@ MODAL
   border: 0;
   border-radius: 6px;
   cursor: pointer;
-  transition: .3s
+  transition: 0.3s;
 }
 
 .title > button:hover {
@@ -35,7 +35,7 @@ MODAL
   margin-top: 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: .15rem;
+  gap: 0.15rem;
 }
 
 .form__content > input {
@@ -56,35 +56,35 @@ MODAL
 }
 
 .error {
-  margin-top: 1rem;
-  font-family: Raleway;
-  align-self: center;
-  font-weight: 400;
-  font-size: 1.2rem;
+  margin-left: 1rem;
+  font-family: Poppins;
+  font-size: 1rem;
   color: #dd1a1a;
 }
 
-.form__content > p {
+.form__content > a {
   margin-top: 1rem;
   position: relative;
   font-family: Josefin;
+  font-size: 1.1rem;
   align-self: center;
+  text-decoration: none;
   cursor: pointer;
 }
 
-.form__content > p:after {
+.form__content > a:after {
   content: "";
   position: absolute;
   bottom: -20%;
   left: 0;
   width: 100%;
-  height: .5px;
+  height: 0.5px;
   transform: scaleX(0);
   transform-origin: center;
-  transition: .4s;
+  transition: 0.4s;
 }
 
-.form__content > p:hover:after {
+.form__content > a:hover:after {
   transform: scaleX(1);
 }
 
@@ -108,12 +108,16 @@ THEME
     background-color: var(--light-main-bg);
   }
 
-  .form__content > p {
+  .error {
+    font-weight: 400;
+  }
+
+  .form__content > a {
     color: var(--light-black-text);
     font-weight: 500;
   }
 
-  .form__content > p:after {
+  .form__content > a:after {
     background-color: var(--light-black-text);
   }
 }
@@ -133,11 +137,15 @@ THEME
     background-color: var(--dark-main-bg);
   }
 
-  .form__content > p {
+  .error {
+    color: #ff3636;
+  }
+
+  .form__content > a {
     color: var(--dark-white-text);
   }
 
-  .form__content > p:after {
+  .form__content > a:after {
     background-color: var(--dark-white-text);
   }
 }

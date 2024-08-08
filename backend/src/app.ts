@@ -4,9 +4,9 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 
 // activity router
-import todoRouter from "./routes/todo_route";
+import todoRoutes from "./routes/todo_route";
 // user router
-import authRouter from "./routes/auth_route";
+import authRoutes from "./routes/auth_route";
 
 // init Express
 export const app = express();
@@ -18,6 +18,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // router for the requests
-app.use("/api", todoRouter);
+app.use("/api", todoRoutes);
 // user router for the requests
-app.use("/api/auth", authRouter);
+app.use("/api/auth", authRoutes);
