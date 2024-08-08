@@ -1,8 +1,13 @@
 import { createContext, PropsWithChildren, useEffect, useState } from "react";
-import axios from "axios";
 
 import { TaskType, TaskContextType } from "../types/types";
-import { API_URL } from "../api/api";
+import {
+  addTaskRequest,
+  getTasksRequest,
+  completeTaskRequest,
+  updateTaskRequest,
+  deleteTaskRequest,
+} from "../api/tasks";
 
 export const TaskContext = createContext<TaskContextType | undefined>(
   undefined
@@ -26,12 +31,12 @@ export const TaskProvider = ({ children }: PropsWithChildren) => {
     setNewTask(e.target.value);
   };
 
-  // async function to get all tasks
+  // get tasks
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const response = await axios.get(`${API_URL}/tasks`);
-        setTodoList(response.data);
+        const res = await getTasksRequest();
+        setTodoList(res.data);
       } catch (error) {
         console.error(error);
       }
@@ -40,14 +45,12 @@ export const TaskProvider = ({ children }: PropsWithChildren) => {
     fetchTasks();
   }, []);
 
-  // add the new task to the list
+  // add task
   const addTask = async () => {
     if (newTask.trim()) {
       try {
-        const response = await axios.post(`${API_URL}/tasks`, {
-          text: newTask,
-        });
-        setTodoList([...todoList, response.data]);
+        const res = await addTaskRequest(newTask);
+        setTodoList([...todoList, res.data]);
         setNewTask("");
       } catch (error) {
         console.error(error);
@@ -55,13 +58,11 @@ export const TaskProvider = ({ children }: PropsWithChildren) => {
     }
   };
 
-  // mark a task as completed
-  const completedTask = async (id: string) => {
+  // complete task
+  const completeTask = async (id: string) => {
     try {
-      const response = await axios.put(`${API_URL}/tasks/${id}`);
-      setTodoList(
-        todoList.map((task) => (task._id === id ? response.data : task))
-      );
+      const res = await completeTaskRequest(id);
+      setTodoList(todoList.map((task) => (task._id === id ? res.data : task)));
     } catch (error) {
       console.error(error);
     }
@@ -72,31 +73,27 @@ export const TaskProvider = ({ children }: PropsWithChildren) => {
   const [editId, setEditId] = useState<string>("");
   const [updatedText, setUpdatedText] = useState<string>("");
 
-  const handleUpdate = async (id: string) => {
+  const updateTask = async (id: string) => {
     try {
-      const response = await axios.put(`${API_URL}/tasks/${id}/updated`, {
-        text: updatedText,
-      });
-      setTodoList(
-        todoList.map((task) => (task._id === id ? response.data : task))
-      );
+      const res = await updateTaskRequest(id, updatedText);
+      setTodoList(todoList.map((task) => (task._id === id ? res.data : task)));
       setEditMode(false);
     } catch (error) {
       console.error(error);
     }
   };
 
-  // delete any task
+  // delete task
   const deleteTask = async (id: string) => {
     try {
-      await axios.delete(`${API_URL}/tasks/${id}`);
+      await deleteTaskRequest(id);
       setTodoList(todoList.filter((task) => task._id !== id));
     } catch (error) {
       console.error(error);
     }
   };
 
-  // Filter tasks by category
+  // Filter tasks
   const [category, setCategory] = useState<string>("all");
 
   const filteredTodoList = todoList.filter((task) => {
@@ -105,9 +102,10 @@ export const TaskProvider = ({ children }: PropsWithChildren) => {
     return task;
   });
 
-  if (category === "completed" && filteredTodoList.length === 0) setCategory("all")
+  if (category === "completed" && filteredTodoList.length === 0)
+    setCategory("all");
 
-  // disable category button if there's no any task in that category
+  // disable category button if's empty
   const noActiveTasks = todoList.some((task) => !task.completed);
   const noCompletedTasks = todoList.some((task) => task.completed);
 
@@ -119,14 +117,14 @@ export const TaskProvider = ({ children }: PropsWithChildren) => {
         handleOnSubmit,
         handleChange,
         addTask,
-        completedTask,
+        completeTask,
         editMode,
         setEditMode,
         editId,
         setEditId,
         updatedText,
         setUpdatedText,
-        handleUpdate,
+        updateTask,
         deleteTask,
         category,
         setCategory,

@@ -10,14 +10,14 @@ export interface TaskContextType {
   handleOnSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   addTask: () => void;
-  completedTask: (id: string) => void;
+  completeTask: (id: string) => void;
   editMode: boolean;
   setEditMode: (editMode: boolean) => void;
   editId: string;
   setEditId: (editId: string) => void;
   updatedText: string;
   setUpdatedText: (updatedText: string) => void;
-  handleUpdate: (id: string) => void;
+  updateTask: (id: string) => void;
   deleteTask: (id: string) => void;
   category: string;
   setCategory: (category: string) => void;
