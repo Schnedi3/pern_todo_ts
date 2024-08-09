@@ -4,7 +4,7 @@ import { LoginType, RegisterType } from "../types/types";
 
 // register request
 export const registerRequest = (user: RegisterType) => {
-  return axios.post("auth/register", user);
+  return axios.post("/auth/register", user);
 };
 
 // login request

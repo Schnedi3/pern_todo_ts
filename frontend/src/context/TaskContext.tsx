@@ -32,17 +32,17 @@ export const TaskProvider = ({ children }: PropsWithChildren) => {
   };
 
   // get tasks
-  useEffect(() => {
-    const fetchTasks = async () => {
-      try {
-        const res = await getTasksRequest();
-        setTodoList(res.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+  const getTasks = async () => {
+    try {
+      const res = await getTasksRequest();
+      setTodoList(res.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-    fetchTasks();
+  useEffect(() => {
+    getTasks();
   }, []);
 
   // add task
@@ -52,6 +52,7 @@ export const TaskProvider = ({ children }: PropsWithChildren) => {
         const res = await addTaskRequest(newTask);
         setTodoList([...todoList, res.data]);
         setNewTask("");
+        console.log(res);
       } catch (error) {
         console.error(error);
       }
@@ -117,6 +118,7 @@ export const TaskProvider = ({ children }: PropsWithChildren) => {
         newTask,
         handleOnSubmit,
         handleChange,
+        getTasks,
         addTask,
         completeTask,
         editMode,

@@ -26,7 +26,7 @@ export const registerUser = async (req: Request, res: Response) => {
 
     // Create a token for the user
     const token = createToken(newUser.id);
-    res.cookie("token", token, { httpOnly: true });
+    res.cookie("token", token);
     res.status(200).json({ newUser, token });
   } catch (error: any) {
     res.status(500).json({ message: error.message });
@@ -56,7 +56,7 @@ export const loginUser = async (req: Request, res: Response) => {
 
     // Create a token for the user
     const token = createToken(user.id);
-    res.cookie("token", token, { httpOnly: true });
+    res.cookie("token", token);
     res.status(200).json({ user, token });
   } catch (error: any) {
     res.status(500).json({ message: error.message });

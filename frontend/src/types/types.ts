@@ -9,6 +9,7 @@ export interface TaskContextType {
   newTask: string;
   handleOnSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  getTasks: () => void;
   addTask: () => void;
   completeTask: (id: string) => void;
   editMode: boolean;
@@ -41,6 +42,7 @@ export interface AuthContextType {
   user: RegisterType | LoginType | null;
   signup: (user: RegisterType) => Promise<void>;
   login: (user: LoginType) => Promise<void>;
+  logout: () => void;
   isAuthenticated: boolean ;
   setIsAuthenticated: (isAuthenticated: boolean) => void ;
   error: string | null;

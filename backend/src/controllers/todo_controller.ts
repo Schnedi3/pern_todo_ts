@@ -2,19 +2,19 @@ import { Task } from "../models/todo_model";
 
 import { Request, Response } from "express";
 
-// get
+// get tasks
 export const getTasks = async (req: Request, res: Response) => {
   try {
-    const tasks = await Task.find();
+    const tasks = await Task.find({ user: req.user.id }).populate("user");
     res.json(tasks);
   } catch (error: any) {
     res.json({ message: "Failed to get tasks", error });
   }
 };
 
-// post
+// add task
 export const addTask = async (req: Request, res: Response) => {
-  const newTask = new Task({ text: req.body.text });
+    const newTask = new Task({ text: req.body.text, user: req.user.id });
 
   try {
     await newTask.save();
@@ -24,13 +24,12 @@ export const addTask = async (req: Request, res: Response) => {
   }
 };
 
-// put
-export const completedTask = async (req: Request, res: Response) => {
+// complete task
+export const completeTask = async (req: Request, res: Response) => {
   const { id } = req.params;
 
   try {
     const task = await Task.findById(id);
-
     if (!task) {
       return res.json({ message: "Task not found" });
     }
@@ -43,7 +42,7 @@ export const completedTask = async (req: Request, res: Response) => {
   }
 };
 
-// put
+// update task
 export const updateTask = async (req: Request, res: Response) => {
   const { id } = req.params;
 
@@ -64,13 +63,13 @@ export const updateTask = async (req: Request, res: Response) => {
   }
 };
 
-// delete
+// delete task
 export const deleteTask = async (req: Request, res: Response) => {
   const { id } = req.params;
 
   try {
     await Task.findByIdAndDelete(id);
-    res.send();
+    res.sendStatus(204);
   } catch (error: any) {
     res.json({ message: "Failed to delete task", error });
   }

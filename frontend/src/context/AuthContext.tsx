@@ -41,6 +41,13 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     }
   };
 
+  const logout = () => {
+    Cookies.remove("token");
+    localStorage.removeItem("user");
+    setIsAuthenticated(false);
+    setUser(null);
+  };
+
   const checkAuth = () => {
     const token = Cookies.get("token");
     const savedUser = localStorage.getItem("user");
@@ -64,6 +71,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
         user,
         signup,
         login,
+        logout,
         isAuthenticated,
         setIsAuthenticated,
         error,

@@ -1,6 +1,7 @@
 import "../css/home.css";
 
 import { Link } from "react-router-dom";
+
 import { useAuthContext } from "../context/useAuthContext";
 
 export const Home = () => {
