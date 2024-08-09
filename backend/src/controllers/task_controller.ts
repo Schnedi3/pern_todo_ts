@@ -1,8 +1,7 @@
-import { Task } from "../models/todo_model";
-
 import { Request, Response } from "express";
 
-// get tasks
+import { Task } from "../models/task_model";
+
 export const getTasks = async (req: Request, res: Response) => {
   try {
     const tasks = await Task.find({ user: req.user.id }).populate("user");
@@ -12,9 +11,8 @@ export const getTasks = async (req: Request, res: Response) => {
   }
 };
 
-// add task
 export const addTask = async (req: Request, res: Response) => {
-    const newTask = new Task({ text: req.body.text, user: req.user.id });
+  const newTask = new Task({ text: req.body.text, user: req.user.id });
 
   try {
     await newTask.save();
@@ -24,7 +22,6 @@ export const addTask = async (req: Request, res: Response) => {
   }
 };
 
-// complete task
 export const completeTask = async (req: Request, res: Response) => {
   const { id } = req.params;
 
@@ -42,13 +39,11 @@ export const completeTask = async (req: Request, res: Response) => {
   }
 };
 
-// update task
 export const updateTask = async (req: Request, res: Response) => {
   const { id } = req.params;
 
   try {
     const taskToUpdate = await Task.findById(id);
-
     if (!taskToUpdate) {
       return res.json({ message: "Task not found" });
     }
@@ -63,7 +58,6 @@ export const updateTask = async (req: Request, res: Response) => {
   }
 };
 
-// delete task
 export const deleteTask = async (req: Request, res: Response) => {
   const { id } = req.params;
 

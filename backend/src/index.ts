@@ -1,18 +1,10 @@
-// required packages
 import mongoose from "mongoose";
-import dotenv from "dotenv";
 
 import { app } from "./app";
-
-// call .env
-dotenv.config();
-
-// connect to Mongo
-const PORT = process.env.PORT;
-const MONGODB_URI = process.env.MONGODB_URI;
+import { PORT, MONGODB_URI } from "./config/config";
 
 mongoose
-  .connect(MONGODB_URI as string)
+  .connect(MONGODB_URI)
   .then(() => {
     app.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`);

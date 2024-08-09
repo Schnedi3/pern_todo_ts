@@ -41,9 +41,9 @@ TASK FORM
 .input__container > p {
   width: max-content;
   position: absolute;
-  top: .8rem;
+  top: 1rem;
   right: 1.5rem;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   opacity: .2;
   cursor: pointer;
   transition: .3s linear;

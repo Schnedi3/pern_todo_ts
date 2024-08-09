@@ -6,12 +6,11 @@ import {
   completeTask,
   updateTask,
   deleteTask,
-} from "../controllers/todo_controller";
+} from "../controllers/task_controller";
 import { validateToken } from "../middleware/validateToken";
 
 const router = Router();
 
-// Create routes for the requests
 router.get("/tasks", validateToken, getTasks);
 router.post("/tasks", validateToken, addTask);
 router.put("/tasks/:id", validateToken, completeTask);

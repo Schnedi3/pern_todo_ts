@@ -1,10 +1,9 @@
-import "../css/auth.css";
-
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { useLogin } from "../hooks/useValidateForm";
 import { useAuthContext } from "../context/useAuthContext";
+import "../css/auth.css";
 
 export const Login = () => {
   const { register, handleSubmit, errors } = useLogin();
@@ -12,7 +11,7 @@ export const Login = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (isAuthenticated) navigate("/tasks");
+    if (isAuthenticated) return navigate("/tasks");
   }, [isAuthenticated]);
 
   const submitForm = handleSubmit((values) => {

@@ -1,20 +1,17 @@
-// required packages
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 
-// activity router
-import todoRoutes from "./routes/todo_route";
-// user router
-import authRoutes from "./routes/auth_route";
+import { COOKIE_URL } from "./config/config";
 
-// init Express
+import authRoutes from "./routes/auth_route";
+import taskRoutes from "./routes/task_route";
+
 export const app = express();
 
-// middleware
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: COOKIE_URL,
     credentials: true,
   })
 );
@@ -22,7 +19,5 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-// router for the requests
-app.use("/api", todoRoutes);
-// user router for the requests
 app.use("/api/auth", authRoutes);
+app.use("/api", taskRoutes);

@@ -1,10 +1,9 @@
-import "../css/auth.css";
-
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { useRegister } from "../hooks/useValidateForm";
 import { useAuthContext } from "../context/useAuthContext";
+import "../css/auth.css";
 
 export const Register = () => {
   const { register, handleSubmit, errors } = useRegister();
@@ -12,7 +11,7 @@ export const Register = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (isAuthenticated) navigate("/tasks");
+    if (isAuthenticated) return navigate("/tasks");
   }, [isAuthenticated]);
 
   const submitForm = handleSubmit((values) => {
@@ -50,7 +49,7 @@ export const Register = () => {
             <p className="error">{errors.password.message}</p>
           )}
           {error && <p className="error">{error}</p>}
-          <Link to="/login">Already have an account</Link>
+          <Link to="/">Already have an account</Link>
         </div>
       </form>
     </section>

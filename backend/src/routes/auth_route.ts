@@ -8,14 +8,11 @@ import {
   logoutUser,
   profileUser,
 } from "../controllers/auth_controller";
-import { validateToken } from "../middleware/validateToken";
 
 const router = Router();
 
-// Create routes for the requests
 router.post("/register", validateSchema(registerSchema), registerUser);
 router.post("/login", validateSchema(loginSchema), loginUser);
 router.post("/logout", logoutUser);
-router.get("/profile", validateToken, profileUser);
 
 export default router;

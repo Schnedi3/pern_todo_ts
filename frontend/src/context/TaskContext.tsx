@@ -8,6 +8,7 @@ import {
   updateTaskRequest,
   deleteTaskRequest,
 } from "../api/tasks";
+import { useAuthContext } from "./useAuthContext";
 
 export const TaskContext = createContext<TaskContextType | undefined>(
   undefined
@@ -16,8 +17,8 @@ export const TaskContext = createContext<TaskContextType | undefined>(
 export const TaskProvider = ({ children }: PropsWithChildren) => {
   const [todoList, setTodoList] = useState<TaskType[]>([]);
   const [newTask, setNewTask] = useState<string>("");
+  const { isAuthenticated } = useAuthContext();
 
-  // prevent default form submit
   const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (newTask) {
@@ -26,12 +27,10 @@ export const TaskProvider = ({ children }: PropsWithChildren) => {
     }
   };
 
-  // capture the input value
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewTask(e.target.value);
   };
 
-  // get tasks
   const getTasks = async () => {
     try {
       const res = await getTasksRequest();
@@ -42,10 +41,11 @@ export const TaskProvider = ({ children }: PropsWithChildren) => {
   };
 
   useEffect(() => {
-    getTasks();
-  }, []);
+    if (isAuthenticated) {
+      getTasks();
+    }
+  }, [isAuthenticated]);
 
-  // add task
   const addTask = async () => {
     if (newTask.trim()) {
       try {
@@ -59,7 +59,6 @@ export const TaskProvider = ({ children }: PropsWithChildren) => {
     }
   };
 
-  // complete task
   const completeTask = async (id: string) => {
     try {
       const res = await completeTaskRequest(id);
@@ -69,7 +68,6 @@ export const TaskProvider = ({ children }: PropsWithChildren) => {
     }
   };
 
-  // update task
   const [editMode, setEditMode] = useState<boolean>(false);
   const [editId, setEditId] = useState<string>("");
   const [updatedText, setUpdatedText] = useState<string>("");
@@ -84,7 +82,6 @@ export const TaskProvider = ({ children }: PropsWithChildren) => {
     }
   };
 
-  // delete task
   const deleteTask = async (id: string) => {
     try {
       await deleteTaskRequest(id);
@@ -107,7 +104,7 @@ export const TaskProvider = ({ children }: PropsWithChildren) => {
     setCategory("all");
   }
 
-  // disable category button if's empty
+  // disable category button if it's empty
   const noActiveTasks = todoList.some((task) => !task.completed);
   const noCompletedTasks = todoList.some((task) => task.completed);
 
