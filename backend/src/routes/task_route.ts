@@ -13,8 +13,8 @@ const router = Router();
 
 router.get("/tasks", validateToken, getTasks);
 router.post("/tasks", validateToken, addTask);
-router.put("/tasks/:id", validateToken, completeTask);
-router.put("/tasks/:id", validateToken, updateTask);
+router.put("/tasks/:id/complete", validateToken, completeTask);
+router.put("/tasks/:id/update", validateToken, updateTask);
 router.delete("/tasks/:id", validateToken, deleteTask);
 
 export default router;

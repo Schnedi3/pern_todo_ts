@@ -52,7 +52,6 @@ export const TaskProvider = ({ children }: PropsWithChildren) => {
         const res = await addTaskRequest(newTask);
         setTodoList([...todoList, res.data]);
         setNewTask("");
-        console.log(res);
       } catch (error) {
         console.error(error);
       }

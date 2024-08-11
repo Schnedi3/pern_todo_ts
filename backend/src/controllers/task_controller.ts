@@ -12,7 +12,9 @@ export const getTasks = async (req: Request, res: Response) => {
 };
 
 export const addTask = async (req: Request, res: Response) => {
-  const newTask = new Task({ text: req.body.text, user: req.user.id });
+  const { text, completed } = req.body
+
+  const newTask = new Task({ text, completed, user: req.user.id });
 
   try {
     await newTask.save();
@@ -41,6 +43,7 @@ export const completeTask = async (req: Request, res: Response) => {
 
 export const updateTask = async (req: Request, res: Response) => {
   const { id } = req.params;
+  const { text } = req.body
 
   try {
     const taskToUpdate = await Task.findById(id);
@@ -48,8 +51,8 @@ export const updateTask = async (req: Request, res: Response) => {
       return res.json({ message: "Task not found" });
     }
 
-    const newText = req.body.text;
-    taskToUpdate.text = newText.trim() ? newText : taskToUpdate.text;
+    const newText = text;
+    taskToUpdate.text = newText.trim() ? newText : text;
 
     await taskToUpdate.save();
     res.json(taskToUpdate);
