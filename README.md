@@ -12,12 +12,14 @@
 
 # Screenshots
 ### desktop
-<img src="./screenshots/dark_desktop.jpg">
 <img src="./screenshots/light_desktop.jpg">
+<img src="./screenshots/dark_desktop.jpg">
 
 ### mobile
-<img src="./screenshots/dark_mobile.jpg">
 <img src="./screenshots/light_mobile.jpg">
+<img src="./screenshots/light_mobile_register.jpg">
+<img src="./screenshots/dark_mobile.jpg">
+<img src="./screenshots/dark_mobile_login.jpg">
 
 ### Thanks
 - Design from: [Frontend Mentor](https://www.frontendmentor.io/challenges/todo-app-Su1_KokOW)
