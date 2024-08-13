@@ -23,22 +23,22 @@ export const TaskList = () => {
         <p className="empty">Nothing to do...</p>
       ) : (
         <>
-          {filteredTodoList.map((task) => (
-            <li className="task__container" key={task._id}>
+          {filteredTodoList.map((task, index) => (
+            <li className="task__container" key={task.id || index}>
               <label className="checkbox">
                 <input
                   type="checkbox"
                   checked={task.completed}
-                  onChange={() => completeTask(task._id)}
+                  onChange={() => completeTask(task.id, task.completed)}
                 />
                 <span className="check"></span>
               </label>
-              {editMode && editId === task._id ? (
+              {editMode && editId === task.id ? (
                 <input
                   type="text"
                   value={updatedText}
                   onChange={(e) => setUpdatedText(e.target.value)}
-                  onBlur={() => updateTask(task._id)}
+                  onBlur={() => updateTask(task.id)}
                   autoFocus
                 />
               ) : (
@@ -46,14 +46,14 @@ export const TaskList = () => {
                   className={task.completed ? "task__completed" : ""}
                   onDoubleClick={() => {
                     setEditMode(true),
-                      setEditId(task._id),
+                      setEditId(task.id),
                       setUpdatedText(task.text);
                   }}
                 >
                   {task.text}
                 </p>
               )}
-              <p className="task__delete" onClick={() => deleteTask(task._id)}>
+              <p className="task__delete" onClick={() => deleteTask(task.id)}>
                 ✖
               </p>
             </li>

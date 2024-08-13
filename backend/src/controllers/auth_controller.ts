@@ -1,32 +1,35 @@
 import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 
-import { User } from "../models/auth_model";
-import { createToken } from "../helpers/createToken";
+import { generateToken } from "../libs/generateToken";
+import { pool } from "../database/db";
 
 export const registerUser = async (req: Request, res: Response) => {
   const { username, email, password } = req.body;
 
+  // encrypt password
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  const queryString =
+    "INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING *";
+
   try {
-    if (!username || !email || !password) {
-      return res.status(400).json({ message: "All the fields are required" });
-    }
+    const { rows } = await pool.query(queryString, [
+      username,
+      email,
+      hashedPassword,
+    ]);
 
-    const userExist = await User.findOne({ email });
-    if (userExist) {
-      return res.status(400).json({ message: "Email is already in use" });
-    }
-
-    // encrypt password
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = new User({ username, email, password: hashedPassword });
-    await newUser.save();
-
-    // Create a token for the user
-    const token = createToken(newUser.id);
+    // generate token
+    const token = generateToken(rows[0].user_id);
+    // Set token as a cookie
     res.cookie("token", token);
-    res.status(200).json({ newUser, token });
+
+    res.status(200).json({ user: rows[0], token: token });
   } catch (error: any) {
+    if (error.code === "23505") {
+      res.status(403).json({ message: "Email already exist" });
+    }
     res.status(500).json({ message: error.message });
   }
 };
@@ -35,47 +38,21 @@ export const loginUser = async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
   try {
-    if (!email || !password) {
-      return res.status(400).json({ message: "All the fields are required" });
-    }
+    const queryString = "SELECT * FROM users WHERE email = $1";
+    const { rows } = await pool.query(queryString, [email]);
 
-    const user = await User.findOne({ email });
-    if (!user) {
-      return res.status(400).json({ message: "User does not exist" });
-    }
-
-    const isMatch = await bcrypt.compare(password, user.password);
+    const isMatch = await bcrypt.compare(password, rows[0].password);
     if (!isMatch) {
       return res.status(400).json({ message: "Invalid password" });
     }
 
-    // Create a token for the user
-    const token = createToken(user.id);
+    // generate token
+    const token = generateToken(rows[0].user_id);
+    // Set token as a cookie
     res.cookie("token", token);
-    res.status(200).json({ user, token });
+
+    res.status(200).json({ user: rows[0], token: token });
   } catch (error: any) {
     res.status(500).json({ message: error.message });
-  }
-};
-
-export const logoutUser = (req: Request, res: Response) => {
-  res.clearCookie("token");
-  res.sendStatus(200);
-};
-
-export const profileUser = async (req: Request, res: Response) => {
-  const { id } = req.user;
-
-  try {
-    const userFound = await User.findById(id);
-    if (!userFound) {
-      return res.status(404).json({ message: "User not found" });
-    }
-
-    res.json(userFound);
-  } catch (error: any) {
-    return res
-      .status(500)
-      .json({ message: "Server error", error: error.message });
   }
 };

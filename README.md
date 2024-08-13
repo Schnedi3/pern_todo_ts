@@ -1,5 +1,5 @@
 # Simple To-Do app
-- Mongo, Express, React, Node
+- PostgreSQL, Express, React, Node
 - TypeScript
 
 ## Features
@@ -21,3 +21,5 @@
 
 ### Thanks
 - Design from: [Frontend Mentor](https://www.frontendmentor.io/challenges/todo-app-Su1_KokOW)
+
+*NOTE:* apart from design idea, nothing else, from the challenge, have been used.

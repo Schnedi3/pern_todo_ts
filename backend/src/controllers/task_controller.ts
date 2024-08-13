@@ -1,63 +1,61 @@
 import { Request, Response } from "express";
 
-import { Task } from "../models/task_model";
+import { pool } from "../database/db";
 
 export const getTasks = async (req: Request, res: Response) => {
+  const user_id = req.user.user_id;
+
   try {
-    const tasks = await Task.find({ user: req.user.id }).populate("user");
-    res.json(tasks);
+    const queryString = "SELECT * FROM tasks WHERE user_id = $1";
+    const { rows } = await pool.query(queryString, [user_id]);
+
+    res.status(200).json(rows);
   } catch (error: any) {
-    res.json({ message: "Failed to get tasks", error });
+    res.status(500).json({ message: error.message });
   }
 };
 
 export const addTask = async (req: Request, res: Response) => {
-  const { text, completed } = req.body
-
-  const newTask = new Task({ text, completed, user: req.user.id });
+  const { text } = req.body;
+  const user_id = req.user.user_id;
 
   try {
-    await newTask.save();
-    res.json(newTask);
+    const queryString =
+      "INSERT INTO tasks (text, user_id) VALUES ($1, $2) RETURNING *";
+    const { rows } = await pool.query(queryString, [text, user_id]);
+
+    res.status(201).json(rows[0]);
   } catch (error: any) {
-    res.status(400).json({ message: "Failed to add task", error });
+    res.status(500).json({ message: error.message });
   }
 };
 
 export const completeTask = async (req: Request, res: Response) => {
   const { id } = req.params;
+  const { completed } = req.body;
 
   try {
-    const task = await Task.findById(id);
-    if (!task) {
-      return res.json({ message: "Task not found" });
-    }
+    const queryString =
+      "UPDATE tasks SET completed = $1 WHERE id = $2 RETURNING *";
+    const { rows } = await pool.query(queryString, [completed, id]);
 
-    task.completed = !task.completed;
-    await task.save();
-    res.json(task);
+    res.status(200).json(rows[0]);
   } catch (error: any) {
-    res.json({ message: "Failed to complete task", error });
+    res.status(500).json({ message: error.message });
   }
 };
 
 export const updateTask = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const { text } = req.body
+  const { text } = req.body;
 
   try {
-    const taskToUpdate = await Task.findById(id);
-    if (!taskToUpdate) {
-      return res.json({ message: "Task not found" });
-    }
+    const queryString = "UPDATE tasks SET text = $1 WHERE id = $2 RETURNING *";
+    const { rows } = await pool.query(queryString, [text, id]);
 
-    const newText = text;
-    taskToUpdate.text = newText.trim() ? newText : text;
-
-    await taskToUpdate.save();
-    res.json(taskToUpdate);
+    res.status(200).json(rows[0]);
   } catch (error: any) {
-    res.json({ message: "Failed to update task", error });
+    res.status(500).json({ message: error.message });
   }
 };
 
@@ -65,9 +63,11 @@ export const deleteTask = async (req: Request, res: Response) => {
   const { id } = req.params;
 
   try {
-    await Task.findByIdAndDelete(id);
+    const queryString = "DELETE FROM tasks WHERE id = $1";
+    await pool.query(queryString, [id]);
+
     res.sendStatus(204);
   } catch (error: any) {
-    res.json({ message: "Failed to delete task", error });
+    res.status(500).json({ message: error.message });
   }
 };

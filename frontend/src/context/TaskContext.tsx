@@ -58,33 +58,37 @@ export const TaskProvider = ({ children }: PropsWithChildren) => {
     }
   };
 
-  const completeTask = async (id: string) => {
+  const completeTask = async (id: number, completed: boolean) => {
+    completed = !completed;
+
     try {
-      const res = await completeTaskRequest(id);
-      setTodoList(todoList.map((task) => (task._id === id ? res.data : task)));
+      const res = await completeTaskRequest(id, completed);
+      setTodoList(todoList.map((task) => (task.id === id ? res.data : task)));
     } catch (error) {
       console.error(error);
     }
   };
 
   const [editMode, setEditMode] = useState<boolean>(false);
-  const [editId, setEditId] = useState<string>("");
+  const [editId, setEditId] = useState<number | undefined>();
   const [updatedText, setUpdatedText] = useState<string>("");
 
-  const updateTask = async (id: string) => {
+  const updateTask = async (id: number) => {
     try {
-      const res = await updateTaskRequest(id, updatedText);
-      setTodoList(todoList.map((task) => (task._id === id ? res.data : task)));
+      if (updatedText.trim() !== "") {
+        const res = await updateTaskRequest(id, updatedText);
+        setTodoList(todoList.map((task) => (task.id === id ? res.data : task)));
+      }
       setEditMode(false);
     } catch (error) {
       console.error(error);
     }
   };
 
-  const deleteTask = async (id: string) => {
+  const deleteTask = async (id: number) => {
     try {
       await deleteTaskRequest(id);
-      setTodoList(todoList.filter((task) => task._id !== id));
+      setTodoList(todoList.filter((task) => task.id !== id));
     } catch (error) {
       console.error(error);
     }

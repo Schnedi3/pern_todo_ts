@@ -3,9 +3,9 @@ import axios from "./axios";
 import { LoginType, RegisterType } from "../types/types";
 
 export const registerRequest = (user: RegisterType) => {
-  return axios.post("/auth/register", user);
+  return axios.post("/register", user);
 };
 
 export const loginRequest = (user: LoginType) => {
-  return axios.post("/auth/login", user);
+  return axios.post("/login", user);
 };

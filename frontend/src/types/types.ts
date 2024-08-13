@@ -1,5 +1,5 @@
 export interface TaskType {
-  _id: string;
+  id: number;
   text: string;
   completed: boolean;
 }
@@ -11,15 +11,15 @@ export interface TaskContextType {
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   getTasks: () => void;
   addTask: () => void;
-  completeTask: (id: string) => void;
+  completeTask: (id: number, completed: boolean) => void;
   editMode: boolean;
   setEditMode: (editMode: boolean) => void;
-  editId: string;
-  setEditId: (editId: string) => void;
+  editId: number | undefined;
+  setEditId: (editId: number | undefined) => void;
   updatedText: string;
   setUpdatedText: (updatedText: string) => void;
-  updateTask: (id: string) => void;
-  deleteTask: (id: string) => void;
+  updateTask: (id: number) => void;
+  deleteTask: (id: number) => void;
   category: string;
   setCategory: (category: string) => void;
   filteredTodoList: TaskType[];

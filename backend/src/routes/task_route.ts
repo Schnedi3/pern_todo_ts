@@ -1,4 +1,3 @@
-// required packages
 import { Router } from "express";
 import {
   getTasks,
