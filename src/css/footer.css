@@ -1,0 +1,58 @@
+/*
+==========
+FOOTER
+=========
+*/
+.footer {
+  padding: 0.8rem;
+  font-family: Josefin;
+  font-weight: 400;
+  font-size: 1em;
+  color: var(--light-gray-text);
+  border-radius: 0 0 6px 6px;
+  background-color: var(--light-main-bg);
+}
+
+.footer__cat {
+  display: flex;
+  justify-content: center;
+  gap: 1.2rem;
+}
+
+.footer__cat > li {
+  list-style-type: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.footer__cat > li.active {
+  color: var(--accent-bg);
+  font-weight: 900;
+}
+
+#disable {
+  pointer-events: none;
+}
+
+/*
+==========
+THEME
+=========
+*/
+@media (hover: hover) {
+  .footer__cat > li:hover {
+    color: var(--accent-bg);
+  }
+}
+
+/*
+==========
+THEME
+=========
+*/
+@media (prefers-color-scheme: dark) {
+  .footer {
+    color: var(--dark-gray-text);
+    background-color: var(--dark-main-bg);
+  }
+}

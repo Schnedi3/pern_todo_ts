@@ -1,0 +1,166 @@
+/*
+==========
+TASK LIST
+=========
+*/
+.list {
+  position: relative;
+  margin-bottom: 3rem;
+}
+
+.task__container {
+  padding: 1.2rem;
+  display: grid;
+  grid-template-columns: 1fr 15fr 1fr;
+  gap: 1rem;
+  align-items: center;
+  background-color: var(--light-main-bg);
+  border-bottom: 2px solid var(--light-bg);
+}
+
+.task__container:first-child {
+  border-radius: 6px 6px 0 0;
+}
+
+.empty {
+  position: absolute;
+  inset: 3rem;
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: 300;
+  color: var(--light-black-text);
+}
+
+.checkbox {
+  position: relative;
+  display: flex;
+  align-items: center;
+  font-size: 1px;
+  user-select: none;
+}
+
+.checkbox > input {
+  opacity: 0;
+  width: 1px;
+  position: absolute;
+}
+
+.check {
+  height: 1.5rem;
+  width: 1.5rem;
+  background-color: transparent;
+  opacity: 0.2;
+  border-radius: 50%;
+  transition: 0.3s;
+  border: 3px solid var(--light-black-text);
+}
+
+.checkbox > input:checked ~ .check {
+  background-color: var(--accent-bg);
+  opacity: 0.7;
+}
+
+.check:after {
+  content: "✓";
+  position: absolute;
+  top: -0.8rem;
+  display: none;
+}
+
+.checkbox > input:checked ~ .check:after {
+  display: block;
+}
+
+.checkbox .check:after {
+  font-size: 1.6rem;
+  left: 4.5px;
+  bottom: -1px;
+  color: var(--light-black-text);
+}
+
+.task__container > input {
+  font-family: Poppins;
+  font-weight: 300;
+  font-size: 1.1rem;
+  color: var(--light-black-text);
+  border: none;
+  background-color: transparent;
+}
+
+.task__container > input:focus-visible {
+  outline: none;
+  opacity: 0.6;
+}
+
+.task__container > p {
+  font-size: 1.1rem;
+  color: var(--light-black-text);
+}
+
+.task__completed {
+  text-decoration: line-through;
+  opacity: 0.4;
+}
+
+.task__container > img {
+  width: 2.5rem;
+  opacity: 0.2;
+  transition: 0.3s;
+}
+
+/*
+==========
+HOVER
+=========
+*/
+@media (hover: hover) {
+  .checkbox:hover {
+    cursor: pointer;
+  }
+
+  .checkbox > input:hover {
+    cursor: pointer;
+  }
+
+  .check:hover {
+    opacity: 0.5;
+  }
+
+  .checkbox > input:checked ~ .check:hover {
+    opacity: 1;
+  }
+
+  .task__container > img:hover {
+    filter: invert(77%) sepia(57%) saturate(2505%) hue-rotate(210deg)
+      brightness(91%) contrast(91%);
+    opacity: 1;
+    cursor: pointer;
+  }
+}
+
+/*
+==========
+THEME
+=========
+*/
+@media (prefers-color-scheme: dark) {
+  .task__container {
+    background-color: var(--dark-main-bg);
+    border-bottom: 2px solid var(--dark-bg);
+  }
+
+  .empty,
+  .checkbox .check:after,
+  .task__container > input,
+  .task__container > p {
+    color: var(--dark-white-text);
+  }
+
+  .check {
+    border: 2px solid var(--dark-white-text);
+  }
+
+  .task__container > img {
+    filter: invert(1);
+  }
+}
