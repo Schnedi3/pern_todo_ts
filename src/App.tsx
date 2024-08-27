@@ -1,7 +1,7 @@
 import "./css/app.css";
 
 import { TaskForm } from "./components/TaskForm";
-import { TaskList } from "./components/TaskList";
+import { TaskItem } from "./components/TaskItem";
 
 export const App = () => {
   return (
@@ -9,7 +9,7 @@ export const App = () => {
       <div className="header__image"></div>
       <div className="todo__container">
         <TaskForm />
-        <TaskList />
+        <TaskItem />
       </div>
     </main>
   );

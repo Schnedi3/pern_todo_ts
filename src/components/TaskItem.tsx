@@ -1,10 +1,10 @@
 import { TaskFooter } from "./TaskFooter";
 import { useTaskContext } from "../context/useTaskContext";
 
-import iconDelete from "../assets/icon_delete.svg";
-import "../css/list.css";
+import iconCheck from "../assets/icon-check.svg";
+import "../css/item.css";
 
-export const TaskList = () => {
+export const TaskItem = () => {
   const {
     filteredTodoList,
     completedTask,
@@ -25,15 +25,13 @@ export const TaskList = () => {
       ) : (
         <>
           {filteredTodoList.map((task) => (
-            <div className="task__container" key={task.id}>
-              <label className="checkbox">
-                <input
-                  type="checkbox"
-                  checked={task.completed}
-                  onChange={() => completedTask(task.id)}
-                />
-                <span className="check"></span>
-              </label>
+            <div className="task_container" key={task.id}>
+              <button
+                className={task.completed ? "task_checked" : "task_unchecked"}
+                onClick={() => completedTask(task.id)}
+              >
+                {task.completed && <img src={iconCheck} alt="task completed" />}
+              </button>
               {editMode && editId === task.id ? (
                 <input
                   type="text"
@@ -44,7 +42,7 @@ export const TaskList = () => {
                 />
               ) : (
                 <p
-                  className={task.completed ? "task__completed" : ""}
+                  className={task.completed ? "task_completed" : ""}
                   onDoubleClick={() => {
                     setEditMode(true),
                       setEditId(task.id),
@@ -54,12 +52,9 @@ export const TaskList = () => {
                   {task.text}
                 </p>
               )}
-              <img
-                src={iconDelete}
-                className="task__delete"
-                onClick={() => deleteTask(task.id)}
-                alt="delete task"
-              />
+              <p className="task_delete" onClick={() => deleteTask(task.id)}>
+                ✖
+              </p>
             </div>
           ))}
           <TaskFooter />

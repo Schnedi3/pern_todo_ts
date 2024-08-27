@@ -28,7 +28,7 @@ FOOTER
 }
 
 .footer_cat > li.active {
-  color: var(--accent-bg);
+  color: var(--accent-color);
   font-weight: 900;
 }
 
@@ -43,7 +43,7 @@ THEME
 */
 @media (hover: hover) {
   .footer_cat > li:hover {
-    color: var(--accent-bg);
+    color: var(--accent-color);
   }
 }
 
