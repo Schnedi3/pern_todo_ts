@@ -13,13 +13,9 @@ FORM
   letter-spacing: 2rem;
 }
 
-.input__container {
-  position: relative;
-}
-
-.input__container > input {
+.input_container {
   width: 100%;
-  padding: 1.3rem;
+  padding: 1.3rem 2rem;
   font-family: Poppins;
   font-weight: 300;
   font-size: 1.1rem;
@@ -29,36 +25,13 @@ FORM
   border-radius: 6px;
 }
 
-.input__container > input::placeholder {
+.input_container::placeholder {
   color: var(--light-black-text);
   opacity: 0.3;
 }
 
-.input__container > input:focus-visible {
+.input_container:focus-visible {
   outline: none;
-}
-
-.input__container > img {
-  width: 2.5rem;
-  position: absolute;
-  top: 0.8rem;
-  right: 1rem;
-  opacity: 0.2;
-  transition: 0.3s;
-}
-
-/*
-==========
-HOVER
-=========
-*/
-@media (hover: hover) {
-  .input__container > img:hover {
-    filter: invert(77%) sepia(57%) saturate(2505%) hue-rotate(210deg)
-      brightness(91%) contrast(91%);
-    opacity: 1;
-    cursor: pointer;
-  }
 }
 
 /*
@@ -71,17 +44,13 @@ THEME
     color: var(--dark-black-text);
   }
 
-  .input__container > input {
+  .input_container {
     color: var(--dark-white-text);
     background-color: var(--dark-main-bg);
   }
 
-  .input__container > input::placeholder,
-  .input__container > p {
+  .input_container::placeholder,
+  .input_container > p {
     color: var(--dark-white-text);
-  }
-
-  .input__container > img {
-    filter: invert(1);
   }
 }
