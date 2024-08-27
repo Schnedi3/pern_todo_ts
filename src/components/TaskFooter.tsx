@@ -3,12 +3,17 @@ import { useTaskContext } from "../context/useTaskContext";
 import "../css/footer.css";
 
 export const TaskFooter = () => {
-  const { category, setCategory, noActiveTasks, noCompletedTasks } =
+  const { todoList, category, setCategory, noActiveTasks, noCompletedTasks } =
     useTaskContext();
+
+  const tasksLeft = todoList.filter((task) => !task.completed);
 
   return (
     <footer className="footer">
-      <ul className="footer__cat">
+      <p>
+        {tasksLeft.length} {tasksLeft.length > 1 ? "tasks" : "task"} left
+      </p>
+      <ul className="footer_cat">
         <li
           onClick={() => setCategory("all")}
           className={category === "all" ? "active" : ""}

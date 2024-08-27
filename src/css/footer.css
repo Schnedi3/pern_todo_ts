@@ -4,7 +4,9 @@ FOOTER
 =========
 */
 .footer {
-  padding: 0.8rem;
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
   font-family: Josefin;
   font-weight: 400;
   font-size: 1em;
@@ -13,19 +15,19 @@ FOOTER
   background-color: var(--light-main-bg);
 }
 
-.footer__cat {
+.footer_cat {
   display: flex;
   justify-content: center;
   gap: 1.2rem;
 }
 
-.footer__cat > li {
+.footer_cat > li {
   list-style-type: none;
   cursor: pointer;
   transition: 0.3s;
 }
 
-.footer__cat > li.active {
+.footer_cat > li.active {
   color: var(--accent-bg);
   font-weight: 900;
 }
@@ -40,7 +42,7 @@ THEME
 =========
 */
 @media (hover: hover) {
-  .footer__cat > li:hover {
+  .footer_cat > li:hover {
     color: var(--accent-bg);
   }
 }
