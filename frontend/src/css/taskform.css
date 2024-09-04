@@ -12,20 +12,18 @@ TASK FORM
   font-family: Raleway;
   font-weight: 900;
   font-size: 2.8rem;
+  color: var(--white-text);
   text-transform: uppercase;
   letter-spacing: 2rem;
-}
-
-.input {
-  position: relative;
 }
 
 .input {
   width: 100%;
   padding: 1.3rem;
   font-family: Poppins;
-  font-weight: 300;
   font-size: 1.1rem;
+  color: var(--dark-text);
+  background-color: var(--main-bg);
   border: none;
   border-radius: 6px;
 }
@@ -52,40 +50,5 @@ TABLET & MOBILE
 @media (max-width: 650px) {
   .task_form {
     width: 80%;
-  }
-}
-
-/*
-==========
-THEME
-=========
-*/
-@media (prefers-color-scheme: light) {
-  .task_form > h1 {
-    color: var(--light-white-text);
-  }
-
-  .input {
-    color: var(--light-black-text);
-    background-color: var(--light-main-bg);
-  }
-
-  .inputinput::placeholder {
-    color: var(--light-black-text);
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .task_form > h1 {
-    color: var(--dark-black-text);
-  }
-
-  .input {
-    color: var(--dark-white-text);
-    background-color: var(--dark-main-bg);
-  }
-
-  .input::placeholder {
-    color: var(--dark-white-text);
   }
 }

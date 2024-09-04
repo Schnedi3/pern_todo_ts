@@ -11,6 +11,7 @@ REGISTER & LOGIN
   font-family: Raleway;
   font-weight: 900;
   font-size: 2.7rem;
+  color: var(--white-text);
 }
 
 .title > button {
@@ -20,9 +21,11 @@ REGISTER & LOGIN
   font-family: Poppins;
   font-weight: 500;
   font-size: 1.3rem;
+  color: var(--dark-text);
   text-transform: uppercase;
   border: 0;
   border-radius: 6px;
+  background-color: var(--main-bg);
   cursor: pointer;
   transition: 0.3s;
 }
@@ -43,8 +46,14 @@ REGISTER & LOGIN
   font-family: Poppins;
   font-weight: 300;
   font-size: 1.1rem;
+  color: var(--dark-text);
+  background-color: var(--main-bg);
   border: 0;
   border-radius: 6px;
+}
+
+.form__content > input::placeholder {
+  opacity: 0.2;
 }
 
 .form__content > input:focus-visible {
@@ -59,7 +68,7 @@ REGISTER & LOGIN
   margin-left: 1rem;
   font-family: Poppins;
   font-size: 1rem;
-  color: #dd1a1a;
+  color: var(--error);
 }
 
 .form__content > a {
@@ -67,6 +76,7 @@ REGISTER & LOGIN
   position: relative;
   font-family: Josefin;
   font-size: 1.1rem;
+  color: var(--dark-text);
   align-self: center;
   text-decoration: none;
   cursor: pointer;
@@ -79,6 +89,7 @@ REGISTER & LOGIN
   left: 0;
   width: 100%;
   height: 0.5px;
+  background-color: var(--dark-text);
   transform: scaleX(0);
   transform-origin: center;
   transition: 0.4s;
@@ -86,68 +97,6 @@ REGISTER & LOGIN
 
 .form__content > a:hover:after {
   transform: scaleX(1);
-}
-
-/*
-==========
-THEME
-=========
-*/
-@media (prefers-color-scheme: light) {
-  .title > h2 {
-    color: var(--light-white-text);
-  }
-
-  .title > button {
-    color: var(--light-black-text);
-    background-color: var(--light-main-bg);
-  }
-
-  .form__content > input {
-    color: var(--light-black-text);
-    background-color: var(--light-main-bg);
-  }
-
-  .error {
-    font-weight: 400;
-  }
-
-  .form__content > a {
-    color: var(--light-black-text);
-    font-weight: 500;
-  }
-
-  .form__content > a:after {
-    background-color: var(--light-black-text);
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .title > h2 {
-    color: var(--dark-black-text);
-  }
-
-  .title > button {
-    color: var(--dark-white-text);
-    background-color: var(--dark-main-bg);
-  }
-
-  .form__content > input {
-    color: var(--dark-white-text);
-    background-color: var(--dark-main-bg);
-  }
-
-  .error {
-    color: #ff3636;
-  }
-
-  .form__content > a {
-    color: var(--dark-white-text);
-  }
-
-  .form__content > a:after {
-    background-color: var(--dark-white-text);
-  }
 }
 
 /*

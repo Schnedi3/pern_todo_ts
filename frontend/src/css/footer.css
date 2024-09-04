@@ -8,6 +8,8 @@ FOOTER
   display: flex;
   justify-content: space-between;
   font-size: 1em;
+  color: var(--gray-text);
+  background-color: var(--main-bg);
   border-radius: 0 0 6px 6px;
   font-family: Josefin;
 }
@@ -23,12 +25,8 @@ FOOTER
   transition: 0.3s;
 }
 
-.categories > li:hover {
-  color: var(--accent-bg);
-}
-
 .categories > li.active {
-  color: var(--accent-bg);
+  color: var(--accent);
   font-weight: 900;
 }
 
@@ -36,21 +34,9 @@ FOOTER
   pointer-events: none;
 }
 
-/*
-==========
-THEME
-=========
-*/
-@media (prefers-color-scheme: light) {
-  .footer {
-    background-color: var(--light-main-bg);
-    color: var(--light-gray-text);
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .footer {
-    background-color: var(--dark-main-bg);
-    color: var(--dark-gray-text);
+/* HOVER */
+@media (hover: hover) {
+  .categories > li:hover {
+    color: var(--accent);
   }
 }

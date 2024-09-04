@@ -20,15 +20,6 @@ FONTS
 
 /*
 ==========
-COLORS
-=========
-*/
-:root {
-  --accent-color: #c38ede;
-}
-
-/*
-==========
 COMMON
 =========
 */
@@ -40,7 +31,8 @@ COMMON
 
 body {
   font-family: Poppins;
-  font-weight: 300;
+  background-color: var(--bg);
+  transition: 0.5s;
 }
 
 .main__container {
@@ -77,38 +69,5 @@ MOBILE
 @media (max-width: 650px) {
   .header__image {
     background-position: center;
-  }
-}
-
-/*
-==========
-THEME
-=========
-*/
-@media (prefers-color-scheme: light) {
-  :root {
-    --light-bg: #e6e6e6;
-    --light-main-bg: #efefef;
-    --light-black-text: #2c2f42;
-    --light-gray-text: #a8a8a8;
-    --light-white-text: #f8f8f8;
-  }
-
-  body {
-    background-color: var(--light-bg);
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --dark-bg: #222433;
-    --dark-main-bg: #33354a;
-    --dark-black-text: #33354a;
-    --dark-gray-text: #616161;
-    --dark-white-text: #f8f8f8;
-  }
-
-  body {
-    background-color: var(--dark-bg);
   }
 }

@@ -1,0 +1,26 @@
+/* THEME */
+.header {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.header > img {
+  width: 2rem;
+}
+
+.header > p {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--white-text);
+}
+
+/* HOVER */
+@media (hover: hover) {
+  .header:hover {
+    cursor: pointer;
+  }
+}

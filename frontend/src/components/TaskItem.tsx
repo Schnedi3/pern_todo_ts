@@ -3,7 +3,7 @@ import "../css/item.css";
 import { TaskFooter } from "./TaskFooter";
 import { useTaskContext } from "../context/useTaskContext";
 
-import iconCheck from "../assets/icon-check.svg";
+import iconCheck from "../assets/icons/check.svg";
 
 export const TaskItem = () => {
   const {
@@ -56,9 +56,7 @@ export const TaskItem = () => {
                   {task.text}
                 </p>
               )}
-              <p className="task__delete" onClick={() => deleteTask(task.id)}>
-                ✖
-              </p>
+              <span onClick={() => deleteTask(task.id)}>✖</span>
             </li>
           ))}
           <TaskFooter />

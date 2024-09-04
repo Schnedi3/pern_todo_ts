@@ -14,6 +14,8 @@ LIST
   display: grid;
   grid-template-columns: 1fr 15fr 1fr;
   gap: 1rem;
+  background-color: var(--main-bg);
+  border-bottom: 1px solid var(--gray-text);
 }
 
 .task__container:first-child {
@@ -26,6 +28,7 @@ LIST
   text-align: center;
   font-size: 1.3rem;
   font-weight: 300;
+  color: var(--dark-text);
 }
 
 input[type="checkbox"] {
@@ -38,7 +41,7 @@ input[type="checkbox"] {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid var(--dark-gray-text);
+  border: 2px solid var(--gray-text);
   border-radius: 50%;
   cursor: pointer;
 }
@@ -60,6 +63,7 @@ input[type="checkbox"]:checked + .label > img {
   font-family: Poppins;
   font-weight: 300;
   font-size: 1.1rem;
+  color: var(--dark-text);
   border: none;
   background-color: transparent;
 }
@@ -71,6 +75,7 @@ input[type="checkbox"]:checked + .label > img {
 
 .task__container > p {
   font-size: 1.1rem;
+  color: var(--dark-text);
 }
 
 .task__completed {
@@ -78,23 +83,22 @@ input[type="checkbox"]:checked + .label > img {
   opacity: 0.4;
 }
 
-.task__delete {
-  font-size: 1.5rem;
-  opacity: 0.2;
+.task__container > span {
+  font-size: 1.15rem;
+  color: var(--gray-text);
   cursor: pointer;
-  transition: 0.3s linear;
+  transition: 0.3s;
 }
 
 /* HOVER */
 @media (hover: hover) {
   .label:hover {
-    border: 2px solid var(--dark-white-text);
+    border: 2px solid var(--accent);
     cursor: pointer;
   }
 
-  .task__delete:hover {
-    opacity: 0.9;
-    color: var(--accent-color);
+  .task__container > span:hover {
+    color: var(--accent);
   }
 }
 
@@ -112,40 +116,5 @@ TABLET & MOBILE
 @media (max-width: 650px) {
   .list {
     width: 80%;
-  }
-}
-
-/*
-==========
-THEME
-=========
-*/
-@media (prefers-color-scheme: light) {
-  .task__container {
-    background-color: var(--light-main-bg);
-    border-bottom: 2px solid var(--light-bg);
-  }
-
-  .empty,
-  .checkbox .check:after,
-  .task__container > input,
-  .task__container > p,
-  .task__delete {
-    color: var(--light-black-text);
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .task__container {
-    background-color: var(--dark-main-bg);
-    border-bottom: 2px solid var(--dark-bg);
-  }
-
-  .empty,
-  .checkbox .check:after,
-  .task__container > input,
-  .task__container > p,
-  .task__delete {
-    color: var(--dark-white-text);
   }
 }

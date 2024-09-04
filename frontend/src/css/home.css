@@ -12,6 +12,7 @@ HOME
   font-family: Raleway;
   font-weight: 900;
   font-size: 3.5rem;
+  color: var(--white-text);
   text-align: center;
 }
 
@@ -27,43 +28,17 @@ HOME
   font-family: Poppins;
   font-weight: 300;
   font-size: 1.1rem;
+  color: var(--dark-text);
   border: 0;
   border-radius: 6px;
   text-align: center;
+  background-color: var(--main-bg);
   text-decoration: none;
-  transition: .3s;
+  transition: 0.3s;
 }
 
 .home__links > a:hover {
-    filter: brightness(90%);
-}
-
-/*
-  ==========
-  THEME
-  =========
-  */
-@media (prefers-color-scheme: light) {
-  .home > h1 {
-    color: var(--light-white-text);
-  }
-
-  .home__links > a {
-    font-weight: 400;
-    color: var(--light-black-text);
-    background-color: var(--light-main-bg);
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .home > h1 {
-    color: var(--dark-black-text);
-  }
-
-  .home__links > a {
-    color: var(--dark-white-text);
-    background-color: var(--dark-main-bg);
-  }
+  filter: brightness(90%);
 }
 
 /*
