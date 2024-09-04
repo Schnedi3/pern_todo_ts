@@ -3,6 +3,8 @@ import "../css/item.css";
 import { TaskFooter } from "./TaskFooter";
 import { useTaskContext } from "../context/useTaskContext";
 
+import iconCheck from "../assets/icon-check.svg";
+
 export const TaskItem = () => {
   const {
     filteredTodoList,
@@ -25,13 +27,14 @@ export const TaskItem = () => {
         <>
           {filteredTodoList.map((task, index) => (
             <li className="task__container" key={task.id || index}>
-              <label className="checkbox">
-                <input
-                  type="checkbox"
-                  checked={task.completed}
-                  onChange={() => completeTask(task.id, task.completed)}
-                />
-                <span className="check"></span>
+              <input
+                type="checkbox"
+                id={task.text}
+                checked={task.completed}
+                onChange={() => completeTask(task.id, task.completed)}
+              />
+              <label htmlFor={task.text} className="label">
+                <img src={iconCheck} />
               </label>
               {editMode && editId === task.id ? (
                 <input
