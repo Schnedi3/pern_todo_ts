@@ -1,11 +1,11 @@
 import { TaskForm } from "../components/TaskForm";
-import { TaskList } from "../components/TaskList";
+import { TaskItem } from "../components/TaskItem";
 
 export const Tasks = () => {
   return (
     <section className="main__container">
       <TaskForm />
-      <TaskList />
+      <TaskItem />
     </section>
   );
 };

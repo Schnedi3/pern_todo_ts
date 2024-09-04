@@ -1,9 +1,9 @@
-import "../css/list.css";
+import "../css/item.css";
 
 import { TaskFooter } from "./TaskFooter";
 import { useTaskContext } from "../context/useTaskContext";
 
-export const TaskList = () => {
+export const TaskItem = () => {
   const {
     filteredTodoList,
     completeTask,
