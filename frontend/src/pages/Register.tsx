@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { useRegister } from "../hooks/useValidateForm";
 import { useAuthContext } from "../context/useAuthContext";
+
 import "../css/auth.css";
 
 export const Register = () => {
@@ -27,23 +28,26 @@ export const Register = () => {
         </div>
         <div className="form__content">
           <input
+            className={errors.username ? "input_error" : ""}
             type="text"
             placeholder="Username"
-            {...register("username", { required: true })}
+            {...register("username")}
           />
           {errors.username && (
             <p className="error">{errors.username.message}</p>
           )}
           <input
+            className={errors.email ? "input_error" : ""}
             type="email"
             placeholder="Email"
-            {...register("email", { required: true })}
+            {...register("email")}
           />
           {errors.email && <p className="error">{errors.email.message}</p>}
           <input
+            className={errors.password ? "input_error" : ""}
             type="password"
             placeholder="Password"
-            {...register("password", { required: true })}
+            {...register("password")}
           />
           {errors.password && (
             <p className="error">{errors.password.message}</p>

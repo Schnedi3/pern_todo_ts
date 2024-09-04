@@ -6,7 +6,7 @@
   --gray-text: #c3c3c3;
   --white-text: #f8f8f8;
   --accent: #c76cf5;
-  --error: #d23636;
+  --error: #f25454;
 }
 
 /* Dark */
@@ -17,5 +17,5 @@
   --gray-text: #4d506f;
   --white-text: #f8f8f8;
   --accent: #c38ede;
-  --error: #db5959;
+  --error: #d66d6d;
 }

@@ -57,6 +57,7 @@ REGISTER & LOGIN
 }
 
 .form__content > input:focus-visible {
+  border: 1px solid var(--accent);
   outline: 0;
 }
 
@@ -65,10 +66,17 @@ REGISTER & LOGIN
 }
 
 .error {
-  margin-left: 1rem;
+  position: relative;
+  right: 1rem;
+  display: flex;
+  justify-content: flex-end;
   font-family: Poppins;
   font-size: 1rem;
   color: var(--error);
+}
+
+.form__content > input.input_error {
+  border: 1px solid var(--error);
 }
 
 .form__content > a {
