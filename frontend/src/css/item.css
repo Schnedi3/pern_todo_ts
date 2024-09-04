@@ -84,10 +84,11 @@ input[type="checkbox"]:checked + .label > img {
 }
 
 .task__container > span {
-  font-size: 1.15rem;
+  font-size: 1.2rem;
   color: var(--gray-text);
   cursor: pointer;
   transition: 0.3s;
+  opacity: 0;
 }
 
 /* HOVER */
@@ -95,6 +96,10 @@ input[type="checkbox"]:checked + .label > img {
   .label:hover {
     border: 2px solid var(--accent);
     cursor: pointer;
+  }
+
+  .task__container:hover > span {
+    opacity: 1;
   }
 
   .task__container > span:hover {
