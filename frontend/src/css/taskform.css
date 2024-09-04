@@ -13,23 +13,49 @@
   letter-spacing: 2rem;
 }
 
-.input {
+.input_continer {
   width: 100%;
   padding: 1.3rem;
+  background-color: var(--main-bg);
+  border-radius: 0.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.input_continer > input {
+  width: 95%;
   font-family: Poppins;
   font-size: 1.1rem;
   color: var(--dark-text);
-  background-color: var(--main-bg);
-  border: none;
-  border-radius: 0.4rem;
+  border: 0;
+  background-color: transparent;
 }
 
-.input::placeholder {
+.input_continer > input::placeholder {
   opacity: 0.3;
 }
 
-.input:focus-visible {
+.input_continer > input:focus-visible {
   outline: none;
+}
+
+.input_continer > span.clear_icon-show {
+  display: block;
+}
+
+.input_continer > span {
+  display: none;
+  font-size: 1.2rem;
+  color: var(--gray-text);
+}
+
+/* HOVER */
+@media (hover: hover) {
+  .input_continer > span:hover {
+    color: var(--accent);
+    cursor: pointer;
+  }
 }
 
 /* TABLET & MOBILE */
