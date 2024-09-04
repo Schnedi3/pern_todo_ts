@@ -1,8 +1,4 @@
-/*
-==========
-LIST
-=========
-*/
+/* ITEM */
 .list {
   width: 40%;
   position: relative;
@@ -19,7 +15,7 @@ LIST
 }
 
 .task__container:first-child {
-  border-radius: 6px 6px 0 0;
+  border-radius: 0.4rem 0.4rem 0 0;
 }
 
 .empty {
@@ -43,7 +39,6 @@ input[type="checkbox"] {
   justify-content: center;
   border: 2px solid var(--gray-text);
   border-radius: 50%;
-  cursor: pointer;
 }
 
 .label > img {
@@ -61,10 +56,9 @@ input[type="checkbox"]:checked + .label > img {
 
 .task__container > input {
   font-family: Poppins;
-  font-weight: 300;
   font-size: 1.1rem;
   color: var(--dark-text);
-  border: none;
+  border: 0;
   background-color: transparent;
 }
 
@@ -86,7 +80,6 @@ input[type="checkbox"]:checked + .label > img {
 .task__container > span {
   font-size: 1.2rem;
   color: var(--gray-text);
-  cursor: pointer;
   transition: 0.3s;
   opacity: 0;
 }
@@ -104,14 +97,11 @@ input[type="checkbox"]:checked + .label > img {
 
   .task__container > span:hover {
     color: var(--accent);
+    cursor: pointer;
   }
 }
 
-/*
-==========
-TABLET & MOBILE
-=========
-*/
+/* TABLET & MOBILE */
 @media (max-width: 1100px) {
   .list {
     width: 55%;

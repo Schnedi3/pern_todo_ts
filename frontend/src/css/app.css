@@ -1,8 +1,4 @@
-/*
-==========
-FONTS
-=========
-*/
+/* FONTS */
 @font-face {
   font-family: Josefin;
   src: url(../assets/Josefin.ttf) format(truetype);
@@ -18,21 +14,17 @@ FONTS
   src: url(../assets/Raleway.ttf) format(truetype);
 }
 
-/*
-==========
-COMMON
-=========
-*/
+/* GLOBALS */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  transition: all 0.5s;
 }
 
 body {
   font-family: Poppins;
   background-color: var(--bg);
-  transition: 0.5s;
 }
 
 .main__container {
@@ -45,11 +37,7 @@ body {
   gap: 1rem;
 }
 
-/*
-==========
-HEADER IMAGE
-=========
-*/
+/* HEADER IMAGE */
 .header__image {
   position: absolute;
   width: 100%;
@@ -61,11 +49,7 @@ HEADER IMAGE
   z-index: -1;
 }
 
-/*
-==========
-MOBILE
-=========
-*/
+/* MOBILE */
 @media (max-width: 650px) {
   .header__image {
     background-position: center;

@@ -1,4 +1,4 @@
-/* Light */
+/* LIGHT */
 .theme-light {
   --bg: #e6e6e6;
   --main-bg: #efefef;
@@ -9,7 +9,7 @@
   --error: #f25454;
 }
 
-/* Dark */
+/* DARK */
 .theme-dark {
   --bg: #222433;
   --main-bg: #33354a;

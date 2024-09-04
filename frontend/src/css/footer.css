@@ -1,8 +1,4 @@
-/*
-==========
-FOOTER
-=========
-*/
+/* FOOTER */
 .footer {
   padding: 1rem 1.5rem;
   display: flex;
@@ -10,7 +6,7 @@ FOOTER
   font-size: 1em;
   color: var(--gray-text);
   background-color: var(--main-bg);
-  border-radius: 0 0 6px 6px;
+  border-radius: 0 0 0.4rem 0.4rem;
   font-family: Josefin;
 }
 
@@ -21,7 +17,6 @@ FOOTER
 
 .categories > li {
   list-style-type: none;
-  cursor: pointer;
   transition: 0.3s;
 }
 
@@ -38,5 +33,6 @@ FOOTER
 @media (hover: hover) {
   .categories > li:hover {
     color: var(--accent);
+    cursor: pointer;
   }
 }
