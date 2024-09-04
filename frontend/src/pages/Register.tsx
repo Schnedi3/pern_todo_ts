@@ -12,7 +12,7 @@ export const Register = () => {
 
   useEffect(() => {
     if (isAuthenticated) return navigate("/tasks");
-  }, [isAuthenticated]);
+  }, [isAuthenticated, navigate]);
 
   const submitForm = handleSubmit((values) => {
     signup(values);
