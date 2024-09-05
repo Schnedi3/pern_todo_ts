@@ -25,6 +25,7 @@
 body {
   font-family: Poppins;
   background-color: var(--bg);
+  animation: fade-In 1s;
 }
 
 .main__container {
@@ -53,5 +54,17 @@ body {
 @media (max-width: 650px) {
   .header__image {
     background-position: center;
+  }
+}
+
+/* ANIMATION */
+@keyframes fade-In {
+  0% {
+    opacity: 0;
+    transform: scale(1.2);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
   }
 }
