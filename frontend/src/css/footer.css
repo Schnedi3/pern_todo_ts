@@ -22,7 +22,6 @@
 
 .categories > li.active {
   color: var(--accent);
-  font-weight: 900;
 }
 
 #disabled {
