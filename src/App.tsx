@@ -8,7 +8,7 @@ export const App = () => {
   return (
     <main className="app">
       <figure className="header__image"></figure>
-      <div className="todo__container">
+      <div className="todo container">
         <Header />
         <TaskForm />
         <TaskItem />
