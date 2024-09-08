@@ -10,9 +10,9 @@ FOOTER
   font-family: Josefin;
   font-weight: 400;
   font-size: 1em;
-  color: var(--light-gray-text);
+  color: var(--gray-text);
   border-radius: 0 0 6px 6px;
-  background-color: var(--light-main-bg);
+  background-color: var(--main-bg);
 }
 
 .footer_cat {
@@ -23,38 +23,21 @@ FOOTER
 
 .footer_cat > li {
   list-style-type: none;
-  cursor: pointer;
   transition: 0.3s;
 }
 
 .footer_cat > li.active {
-  color: var(--accent-color);
-  font-weight: 900;
+  color: var(--accent);
 }
 
 #disable {
   pointer-events: none;
 }
 
-/*
-==========
-THEME
-=========
-*/
+/* HOVER */
 @media (hover: hover) {
   .footer_cat > li:hover {
-    color: var(--accent-color);
-  }
-}
-
-/*
-==========
-THEME
-=========
-*/
-@media (prefers-color-scheme: dark) {
-  .footer {
-    color: var(--dark-gray-text);
-    background-color: var(--dark-main-bg);
+    color: var(--accent);
+    cursor: pointer;
   }
 }

@@ -14,8 +14,8 @@ TASK LIST
   grid-template-columns: 1fr 15fr 1fr;
   gap: 1rem;
   align-items: center;
-  background-color: var(--light-main-bg);
-  border-bottom: 2px solid var(--light-bg);
+  background-color: var(--main-bg);
+  border-bottom: 2px solid var(--bg);
 }
 
 .task_container:first-child {
@@ -28,48 +28,48 @@ TASK LIST
   text-align: center;
   font-size: 1.3rem;
   font-weight: 300;
-  color: var(--light-black-text);
+  color: var(--main-text);
 }
 
-.task_container > button {
+.task_unchecked {
   height: 1.5rem;
   width: 1.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
+  border: 2px solid var(--main-text);
+  opacity: 0.3;
   background-color: transparent;
   transition: 0.3s;
 }
 
-.task_unchecked {
-  opacity: 0.3;
-  border: 2px solid var(--light-black-text);
-}
-
 .task_checked {
+  height: 1.5rem;
+  width: 1.5rem;
   opacity: 0.8;
   background-image: linear-gradient(to right, #3ea4bd, #ae50dc);
   border: 0;
+  border-radius: 50%;
 }
 
 .task_container > input {
   font-family: Poppins;
   font-weight: 300;
   font-size: 1.1rem;
-  color: var(--light-black-text);
+  color: var(--main-text);
   border: none;
   background-color: transparent;
 }
 
 .task_container > input:focus-visible {
-  outline: none;
+  outline: 0;
   opacity: 0.6;
 }
 
 .task_container > p {
   font-size: 1.1rem;
-  color: var(--light-black-text);
+  color: var(--main-text);
 }
 
 .task_completed {
@@ -94,35 +94,13 @@ HOVER
     cursor: pointer;
   }
 
+  .task_unchecked:hover {
+    border: 2px solid var(--accent);
+  }
+
   .task_delete:hover {
-    color: var(--accent-color);
+    color: var(--accent);
     opacity: 1;
     cursor: pointer;
-  }
-}
-
-/*
-==========
-THEME
-=========
-*/
-@media (prefers-color-scheme: dark) {
-  .task_container {
-    background-color: var(--dark-main-bg);
-    border-bottom: 2px solid var(--dark-bg);
-  }
-
-  .empty,
-  .task_container > input,
-  .task_container > p {
-    color: var(--dark-white-text);
-  }
-
-  .task_unchecked {
-    border: 2px solid var(--dark-white-text);
-  }
-
-  .task_container > img {
-    filter: invert(1);
   }
 }

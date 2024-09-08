@@ -1,0 +1,21 @@
+/* LIGHT */
+.theme-light {
+  --bg: #e6e6e6;
+  --main-bg: #efefef;
+  --main-text: #35384f;
+  --gray-text: #c3c3c3;
+  --white-text: #f8f8f8;
+  --accent: #c76cf5;
+  --error: #f25454;
+}
+
+/* DARK */
+.theme-dark {
+  --bg: #222433;
+  --main-bg: #33354a;
+  --main-text: #f8f8f8;
+  --gray-text: #535569;
+  --white-text: #f8f8f8;
+  --accent: #c38ede;
+  --error: #d66d6d;
+}

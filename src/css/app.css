@@ -20,15 +20,6 @@ FONTS
 
 /*
 ==========
-COLORS
-=========
-*/
-:root {
-  --accent-color: #c38ede;
-}
-
-/*
-==========
 COMMON
 =========
 */
@@ -41,6 +32,7 @@ COMMON
 body {
   font-family: Poppins;
   font-weight: 300;
+  background-color: var(--bg);
 }
 
 .todo__container {
@@ -94,43 +86,5 @@ TABLET AND MOBILE DESIGN
   .form,
   .list {
     width: 80%;
-  }
-}
-
-/*
-==========
-LIGHT
-=========
-*/
-@media (prefers-color-scheme: light) {
-  :root {
-    --light-bg: #e6e6e6;
-    --light-main-bg: #efefef;
-    --light-black-text: #2c2f42;
-    --light-gray-text: #a8a8a8;
-    --light-white-text: #f8f8f8;
-  }
-
-  body {
-    background-color: var(--light-bg);
-  }
-}
-
-/*
-==========
-DARK
-=========
-*/
-@media (prefers-color-scheme: dark) {
-  :root {
-    --dark-bg: #161722;
-    --dark-main-bg: #25273c;
-    --dark-black-text: #25273c;
-    --dark-gray-text: #616161;
-    --dark-white-text: #f8f8f8;
-  }
-
-  body {
-    background-color: var(--dark-bg);
   }
 }

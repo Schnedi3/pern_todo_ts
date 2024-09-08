@@ -7,12 +7,11 @@ export const TaskForm = () => {
 
   return (
     <form className="form" onSubmit={handleOnSubmit}>
-      <h1>todo</h1>
       <input
-        className="input_container"
-        placeholder="Add a new task"
-        onChange={handleChange}
+        type="text"
+        placeholder="Add a new task..."
         value={newTask}
+        onChange={handleChange}
         autoFocus
       />
     </form>

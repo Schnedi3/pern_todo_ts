@@ -1,0 +1,26 @@
+/* HEADER */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header > h1 {
+  font-family: Raleway;
+  font-weight: 900;
+  font-size: 2.8rem;
+  color: var(--white-text);
+  text-transform: uppercase;
+  letter-spacing: 2rem;
+}
+
+.header > img {
+  width: 2rem;
+}
+
+/* HOVER */
+@media (hover: hover) {
+  .header > img:hover {
+    cursor: pointer;
+  }
+}

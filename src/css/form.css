@@ -3,54 +3,22 @@
 FORM
 =========
 */
-.form > h1 {
-  margin-bottom: 1rem;
-  font-family: Raleway;
-  font-weight: 900;
-  font-size: 2.8rem;
-  color: var(--light-white-text);
-  text-transform: uppercase;
-  letter-spacing: 2rem;
-}
-
-.input_container {
+.form > input {
   width: 100%;
   padding: 1.3rem 2rem;
   font-family: Poppins;
   font-weight: 300;
   font-size: 1.1rem;
-  color: var(--light-black-text);
-  background-color: var(--light-main-bg);
+  color: var(--main-text);
+  background-color: var(--main-bg);
   border: none;
   border-radius: 6px;
 }
 
-.input_container::placeholder {
-  color: var(--light-black-text);
+.form > input::placeholder {
   opacity: 0.3;
 }
 
-.input_container:focus-visible {
+.form > input:focus-visible {
   outline: none;
-}
-
-/*
-==========
-THEME
-=========
-*/
-@media (prefers-color-scheme: dark) {
-  .form > h1 {
-    color: var(--dark-black-text);
-  }
-
-  .input_container {
-    color: var(--dark-white-text);
-    background-color: var(--dark-main-bg);
-  }
-
-  .input_container::placeholder,
-  .input_container > p {
-    color: var(--dark-white-text);
-  }
 }
