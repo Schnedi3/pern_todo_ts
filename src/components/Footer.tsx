@@ -2,7 +2,7 @@ import { useTaskContext } from "../context/useTaskContext";
 
 import "../css/footer.css";
 
-export const TaskFooter = () => {
+export const Footer = () => {
   const { todoList, category, setCategory, noActiveTasks, noCompletedTasks } =
     useTaskContext();
 

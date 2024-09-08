@@ -2,7 +2,7 @@ import { useTaskContext } from "../context/useTaskContext";
 
 import "../css/form.css";
 
-export const TaskForm = () => {
+export const Form = () => {
   const { newTask, setNewTask, handleOnSubmit, handleChange } =
     useTaskContext();
 

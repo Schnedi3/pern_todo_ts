@@ -1,9 +1,9 @@
-import { TaskFooter } from "./TaskFooter";
+import { Footer } from "./Footer";
 import { useTaskContext } from "../context/useTaskContext";
 
 import "../css/item.css";
 
-export const TaskItem = () => {
+export const Item = () => {
   const {
     filteredTodoList,
     completedTask,
@@ -56,7 +56,7 @@ export const TaskItem = () => {
               <span onClick={() => deleteTask(task.id)}>✖</span>
             </div>
           ))}
-          <TaskFooter />
+          <Footer />
         </>
       )}
     </section>

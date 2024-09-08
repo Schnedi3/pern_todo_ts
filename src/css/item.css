@@ -1,8 +1,4 @@
-/*
-==========
-TASK LIST
-=========
-*/
+/* LIST */
 .list {
   position: relative;
   margin-bottom: 3rem;
@@ -19,7 +15,7 @@ TASK LIST
 }
 
 .task_container:first-child {
-  border-radius: 6px 6px 0 0;
+  border-radius: 0.5rem 0.5rem 0 0;
 }
 
 .empty {
@@ -93,11 +89,7 @@ TASK LIST
   transition: 0.3s;
 }
 
-/*
-==========
-HOVER
-=========
-*/
+/* HOVER */
 @media (hover: hover) {
   .checkbox_task:hover {
     border: 2px solid var(--accent);

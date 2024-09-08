@@ -1,17 +1,17 @@
 import { Header } from "./components/Header";
-import { TaskForm } from "./components/TaskForm";
-import { TaskItem } from "./components/TaskItem";
+import { Form } from "./components/Form";
+import { Item } from "./components/Item";
 
 import "./css/app.css";
 
 export const App = () => {
   return (
     <main className="app">
-      <figure className="header__image"></figure>
+      <figure className="header_image"></figure>
       <div className="todo container">
         <Header />
-        <TaskForm />
-        <TaskItem />
+        <Form />
+        <Item />
       </div>
     </main>
   );

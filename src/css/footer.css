@@ -1,8 +1,4 @@
-/*
-==========
-FOOTER
-=========
-*/
+/* FOOTER */
 .footer {
   padding: 1rem 1.5rem;
   display: flex;
@@ -11,8 +7,9 @@ FOOTER
   font-weight: 400;
   font-size: 1em;
   color: var(--gray-text);
-  border-radius: 0 0 6px 6px;
+  border-radius: 0 0 0.5rem 0.5rem;
   background-color: var(--main-bg);
+  box-shadow: 0 1px 0 0 var(--gray-text);
 }
 
 .footer_cat {
@@ -36,6 +33,10 @@ FOOTER
 
 /* HOVER */
 @media (hover: hover) {
+  .footer:hover  {
+    box-shadow: 0 1px 0 0 var(--accent);
+  }
+
   .footer_cat > li:hover {
     color: var(--accent);
     cursor: pointer;
