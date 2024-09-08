@@ -1,7 +1,6 @@
 import { TaskFooter } from "./TaskFooter";
 import { useTaskContext } from "../context/useTaskContext";
 
-import iconCheck from "../assets/icon-check.svg";
 import "../css/item.css";
 
 export const TaskItem = () => {
@@ -26,14 +25,16 @@ export const TaskItem = () => {
         <>
           {filteredTodoList.map((task) => (
             <div className="task_container" key={task.id}>
-              <button
-                className={task.completed ? "task_checked" : "task_unchecked"}
-                onClick={() => completedTask(task.id)}
-              >
-                {task.completed && <img src={iconCheck} alt="task completed" />}
-              </button>
+              <input
+                className="checkbox_task checkbox_border"
+                type="checkbox"
+                id={task.text}
+                checked={task.completed}
+                onChange={() => completedTask(task.id)}
+              />
               {editMode && editId === task.id ? (
                 <input
+                  className="task_edit"
                   type="text"
                   value={updatedText}
                   onChange={(e) => setUpdatedText(e.target.value)}

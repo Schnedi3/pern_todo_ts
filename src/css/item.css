@@ -31,29 +31,37 @@ TASK LIST
   color: var(--main-text);
 }
 
-.task_unchecked {
-  height: 1.5rem;
-  width: 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.checkbox_task {
+  appearance: none;
+  display: grid;
+  place-content: center;
+}
+
+.checkbox_border {
+  width: 1.6rem;
+  height: 1.6rem;
   border-radius: 50%;
-  border: 2px solid var(--main-text);
-  opacity: 0.3;
-  background-color: transparent;
+  border: 2px solid var(--gray-text);
+}
+
+.checkbox_task::before {
+  content: "";
+  background-image: url(../assets/icons/check.svg),
+    linear-gradient(to bottom right, #5df 0%, #c058f3 100%);
+  background-position: 50%;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+  width: 1.6rem;
+  height: 1.6rem;
+  transform: scale(0);
   transition: 0.3s;
 }
 
-.task_checked {
-  height: 1.5rem;
-  width: 1.5rem;
-  opacity: 0.8;
-  background-image: linear-gradient(to right, #3ea4bd, #ae50dc);
-  border: 0;
-  border-radius: 50%;
+.checkbox_task:checked::before {
+  transform: scale(1);
 }
 
-.task_container > input {
+.task_edit {
   font-family: Poppins;
   font-weight: 300;
   font-size: 1.1rem;
@@ -62,7 +70,7 @@ TASK LIST
   background-color: transparent;
 }
 
-.task_container > input:focus-visible {
+.task_edit:focus-visible {
   outline: 0;
   opacity: 0.6;
 }
@@ -89,13 +97,9 @@ HOVER
 =========
 */
 @media (hover: hover) {
-  .task_container > button:hover {
-    opacity: 1;
-    cursor: pointer;
-  }
-
-  .task_unchecked:hover {
+  .checkbox_task:hover {
     border: 2px solid var(--accent);
+    cursor: pointer;
   }
 
   .task_delete:hover {
