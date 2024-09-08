@@ -15,7 +15,7 @@ export const Form = ({ todoList, setTodoList }: IFormProps) => {
 
   const addTask = () => {
     const task: Task = {
-      id: todoList.length + 1,
+      id: Date.now(),
       text: newTask,
       completed: false,
     };
