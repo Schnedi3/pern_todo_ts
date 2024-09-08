@@ -1,63 +1,78 @@
-import { Footer } from "./Footer";
-import { useTaskContext } from "../context/useTaskContext";
+import { useState } from "react";
 
+import { IItemProps } from "../types/types";
 import "../css/item.css";
 
-export const Item = () => {
-  const {
-    filteredTodoList,
-    completedTask,
-    deleteTask,
-    editMode,
-    setEditMode,
-    editId,
-    setEditId,
-    updatedText,
-    setUpdatedText,
-    handleUpdate,
-  } = useTaskContext();
+export const Item = ({ todoList, setTodoList, filteredList }: IItemProps) => {
+  const [editId, setEditId] = useState<number>(0);
+  const [editMode, setEditMode] = useState<boolean>(false);
+  const [updatedText, setUpdatedText] = useState<string>("");
+
+  const completedTask = (id: number) => {
+    setTodoList(
+      todoList.map((task) =>
+        task.id === id ? { ...task, completed: !task.completed } : task
+      )
+    );
+  };
+
+  const handleUpdate = (id: number) => {
+    setTodoList(
+      todoList.map((task) => {
+        if (task.id === id) {
+          return {
+            ...task,
+            text: updatedText ? updatedText : task.text,
+          };
+        }
+        return task;
+      })
+    );
+    setEditMode(false);
+  };
+
+  const deleteTask = (id: number) => {
+    setTodoList(todoList.filter((task) => task.id !== id));
+  };
 
   return (
     <section className="list">
-      {filteredTodoList.length === 0 ? (
+      {filteredList.length === 0 ? (
         <p className="empty">Nothing to do...</p>
       ) : (
-        <>
-          {filteredTodoList.map((task) => (
-            <div className="task_container" key={task.id}>
+        filteredList.map((task) => (
+          <div className="task_container" key={task.id}>
+            <input
+              className="checkbox_task checkbox_border"
+              type="checkbox"
+              id={task.text}
+              checked={task.completed}
+              onChange={() => completedTask(task.id)}
+            />
+            {editMode && editId === task.id ? (
               <input
-                className="checkbox_task checkbox_border"
-                type="checkbox"
-                id={task.text}
-                checked={task.completed}
-                onChange={() => completedTask(task.id)}
+                className="task_edit"
+                type="text"
+                value={updatedText}
+                onChange={(e) => setUpdatedText(e.target.value)}
+                onBlur={() => handleUpdate(task.id)}
+                autoFocus
               />
-              {editMode && editId === task.id ? (
-                <input
-                  className="task_edit"
-                  type="text"
-                  value={updatedText}
-                  onChange={(e) => setUpdatedText(e.target.value)}
-                  onBlur={() => handleUpdate(task.id)}
-                  autoFocus
-                />
-              ) : (
-                <p
-                  className={task.completed ? "task_completed" : ""}
-                  onDoubleClick={() => {
-                    setEditMode(true),
-                      setEditId(task.id),
-                      setUpdatedText(task.text);
-                  }}
-                >
-                  {task.text}
-                </p>
-              )}
-              <span onClick={() => deleteTask(task.id)}>✖</span>
-            </div>
-          ))}
-          <Footer />
-        </>
+            ) : (
+              <p
+                className={task.completed ? "task_completed" : ""}
+                onDoubleClick={() => {
+                  setEditMode(true);
+                  setEditId(task.id);
+                  setUpdatedText(task.text);
+                }}
+              >
+                {task.text}
+              </p>
+            )}
+            <span onClick={() => deleteTask(task.id)}>✖</span>
+          </div>
+        ))
       )}
     </section>
   );

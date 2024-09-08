@@ -1,12 +1,26 @@
-import { useTaskContext } from "../context/useTaskContext";
+import { useEffect, useState } from "react";
 
+import { IFooterProps } from "../types/types";
 import "../css/footer.css";
 
-export const Footer = () => {
-  const { todoList, category, setCategory, noActiveTasks, noCompletedTasks } =
-    useTaskContext();
+export const Footer = ({ todoList, setFilteredList }: IFooterProps) => {
+  const [category, setCategory] = useState<string>("all");
+
+  useEffect(() => {
+    const filtered = todoList.filter((task) => {
+      if (category === "active") return !task.completed;
+      if (category === "completed") return task.completed;
+      return task;
+    });
+
+    setFilteredList(filtered);
+  }, [category, todoList, setFilteredList]);
 
   const tasksLeft = todoList.filter((task) => !task.completed);
+
+  const noTasks = todoList.length === 0;
+  const noActiveTasks = todoList.some((task) => !task.completed);
+  const noCompletedTasks = todoList.some((task) => task.completed);
 
   return (
     <footer className="footer">
@@ -17,6 +31,7 @@ export const Footer = () => {
         <li
           onClick={() => setCategory("all")}
           className={category === "all" ? "active" : ""}
+          id={noTasks ? "disable" : ""}
         >
           All
         </li>

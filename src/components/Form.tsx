@@ -1,10 +1,28 @@
-import { useTaskContext } from "../context/useTaskContext";
+import { useState } from "react";
 
+import { IFormProps, Task } from "../types/types";
 import "../css/form.css";
 
-export const Form = () => {
-  const { newTask, setNewTask, handleOnSubmit, handleChange } =
-    useTaskContext();
+export const Form = ({ todoList, setTodoList }: IFormProps) => {
+  const [newTask, setNewTask] = useState<string>("");
+
+  const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (newTask) {
+      addTask();
+    }
+  };
+
+  const addTask = () => {
+    const task: Task = {
+      id: todoList.length + 1,
+      text: newTask,
+      completed: false,
+    };
+    if (!newTask) return;
+    setTodoList([...todoList, task]);
+    setNewTask("");
+  };
 
   return (
     <form className="form" onSubmit={handleOnSubmit}>
@@ -12,7 +30,7 @@ export const Form = () => {
         type="text"
         placeholder="Add a new task..."
         value={newTask}
-        onChange={handleChange}
+        onChange={(e) => setNewTask(e.target.value)}
         autoFocus
       />
       <span

@@ -28,12 +28,13 @@
 }
 
 #disable {
+  color: var(--gray-text);
   pointer-events: none;
 }
 
 /* HOVER */
 @media (hover: hover) {
-  .footer:hover  {
+  .footer:hover {
     box-shadow: 0 1px 0 0 var(--accent);
   }
 

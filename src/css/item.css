@@ -1,9 +1,4 @@
 /* LIST */
-.list {
-  position: relative;
-  margin-bottom: 3rem;
-}
-
 .task_container {
   padding: 1.2rem;
   display: grid;
@@ -19,12 +14,13 @@
 }
 
 .empty {
-  position: absolute;
-  inset: 3rem;
   text-align: center;
   font-size: 1.3rem;
-  font-weight: 300;
   color: var(--main-text);
+  padding: 1.2rem;
+  background-color: var(--main-bg);
+  border-radius: 0.5rem 0.5rem 0 0;
+  border-bottom: 2px solid var(--bg);
 }
 
 .checkbox_task {
