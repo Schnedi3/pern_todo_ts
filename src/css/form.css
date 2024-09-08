@@ -3,16 +3,24 @@
 FORM
 =========
 */
-.form > input {
+.form {
   width: 100%;
-  padding: 1.3rem 2rem;
+  padding: 1.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--main-bg);
+  border-radius: 0.4rem;
+}
+
+.form > input {
+  width: 90%;
   font-family: Poppins;
   font-weight: 300;
   font-size: 1.1rem;
   color: var(--main-text);
-  background-color: var(--main-bg);
-  border: none;
-  border-radius: 6px;
+  background-color: transparent;
+  border: 0;
 }
 
 .form > input::placeholder {
@@ -21,4 +29,23 @@ FORM
 
 .form > input:focus-visible {
   outline: none;
+}
+
+.form > span {
+  display: none;
+  font-size: 1.2rem;
+  color: var(--gray-text);
+  transition: 0.3s;
+}
+
+.form > span.clear_icon-show {
+  display: block;
+}
+
+/* HOVER */
+@media (hover: hover) {
+  .form > span:hover {
+    color: var(--accent);
+    cursor: pointer;
+  }
 }

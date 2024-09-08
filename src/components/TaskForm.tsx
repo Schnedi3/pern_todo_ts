@@ -3,7 +3,8 @@ import { useTaskContext } from "../context/useTaskContext";
 import "../css/form.css";
 
 export const TaskForm = () => {
-  const { newTask, handleOnSubmit, handleChange } = useTaskContext();
+  const { newTask, setNewTask, handleOnSubmit, handleChange } =
+    useTaskContext();
 
   return (
     <form className="form" onSubmit={handleOnSubmit}>
@@ -14,6 +15,12 @@ export const TaskForm = () => {
         onChange={handleChange}
         autoFocus
       />
+      <span
+        className={newTask ? "clear_icon-show" : ""}
+        onClick={() => setNewTask("")}
+      >
+        ✖
+      </span>
     </form>
   );
 };

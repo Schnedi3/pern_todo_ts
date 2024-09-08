@@ -94,6 +94,7 @@ export const TaskProvider = ({ children }: PropsWithChildren) => {
       value={{
         todoList,
         newTask,
+        setNewTask,
         handleOnSubmit,
         handleChange,
         addTask,

@@ -11,6 +11,7 @@ export interface Task {
 export interface TaskContextType {
   todoList: Task[];
   newTask: string;
+  setNewTask: (newTask: string) => void;
   handleOnSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   addTask: () => void;
