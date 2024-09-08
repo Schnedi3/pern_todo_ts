@@ -85,9 +85,11 @@ TASK LIST
   opacity: 0.4;
 }
 
-.task_delete {
+.task_container > span {
   font-weight: 900;
-  opacity: 0.2;
+  font-size: 1.2rem;
+  color: var(--gray-text);
+  opacity: 0;
   transition: 0.3s;
 }
 
@@ -102,7 +104,11 @@ HOVER
     cursor: pointer;
   }
 
-  .task_delete:hover {
+  .task_container:hover > span {
+    opacity: 1;
+  }
+
+  .task_container > span:hover {
     color: var(--accent);
     opacity: 1;
     cursor: pointer;

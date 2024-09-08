@@ -53,9 +53,7 @@ export const TaskItem = () => {
                   {task.text}
                 </p>
               )}
-              <p className="task_delete" onClick={() => deleteTask(task.id)}>
-                ✖
-              </p>
+              <span onClick={() => deleteTask(task.id)}>✖</span>
             </div>
           ))}
           <TaskFooter />
