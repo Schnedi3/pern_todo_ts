@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Reorder } from "framer-motion";
 
 import {
   completeTaskRequest,
@@ -55,12 +56,17 @@ export const TaskItem = ({
   };
 
   return (
-    <ul className="list">
+    <Reorder.Group
+      axis="y"
+      values={todoList}
+      onReorder={setTodoList}
+      className="list"
+    >
       {filteredList.length === 0 ? (
         <p className="empty">Nothing to do...</p>
       ) : (
         filteredList.map((task) => (
-          <li className="task_container" key={task.id}>
+          <Reorder.Item className="task_container" key={task.id} value={task}>
             <input
               className="checkbox_task checkbox_border"
               type="checkbox"
@@ -100,9 +106,9 @@ export const TaskItem = ({
               ✎
             </span>
             <span onClick={() => deleteTask(task.id)}>✖</span>
-          </li>
+          </Reorder.Item>
         ))
       )}
-    </ul>
+    </Reorder.Group>
   );
 };

@@ -6,6 +6,7 @@
   gap: 1rem;
   background-color: var(--main-bg);
   border-bottom: 1px solid var(--gray-text);
+  transition: background-color 0.2s ease;
 }
 
 .task_container:first-child {
@@ -84,6 +85,10 @@
 
 /* HOVER */
 @media (hover: hover) {
+  .task_container:hover {
+    cursor: grab;
+  }
+
   .checkbox_task:hover {
     border: 2px solid var(--accent);
     cursor: pointer;
