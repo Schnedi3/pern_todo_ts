@@ -1,5 +1,6 @@
 /* FOOTER */
 .footer {
+  position: relative;
   padding: 1rem 1.5rem;
   display: flex;
   justify-content: space-between;
@@ -30,6 +31,15 @@
 #disable {
   color: var(--gray-text);
   pointer-events: none;
+}
+
+.footer > span {
+  position: absolute;
+  bottom: -3rem;
+  left: 0;
+  right: 0;
+  font-size: 1.1rem;
+  text-align: center;
 }
 
 /* HOVER */

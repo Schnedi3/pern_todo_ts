@@ -50,6 +50,7 @@ export const Footer = ({ todoList, setFilteredList }: IFooterProps) => {
           Completed
         </li>
       </ul>
+      <span>Drag and drop to reorder list</span>
     </footer>
   );
 };

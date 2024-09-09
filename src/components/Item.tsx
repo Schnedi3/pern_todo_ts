@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Reorder } from "framer-motion";
 
 import { IItemProps } from "../types/types";
 import "../css/item.css";
@@ -38,12 +39,17 @@ export const Item = ({ todoList, setTodoList, filteredList }: IItemProps) => {
   };
 
   return (
-    <section className="list">
+    <Reorder.Group
+      axis="y"
+      values={todoList}
+      onReorder={setTodoList}
+      className="list"
+    >
       {filteredList.length === 0 ? (
         <p className="empty">Nothing to do...</p>
       ) : (
         filteredList.map((task) => (
-          <div className="task_container" key={task.id}>
+          <Reorder.Item className="task_container" key={task.id} value={task}>
             <input
               className="checkbox_task checkbox_border"
               type="checkbox"
@@ -76,9 +82,9 @@ export const Item = ({ todoList, setTodoList, filteredList }: IItemProps) => {
               ✎
             </span>
             <span onClick={() => deleteTask(task.id)}>✖</span>
-          </div>
+          </Reorder.Item>
         ))
       )}
-    </section>
+    </Reorder.Group>
   );
 };
