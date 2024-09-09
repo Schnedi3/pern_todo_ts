@@ -7,6 +7,10 @@
   --white-text: #f8f8f8;
   --accent: #c76cf5;
   --error: #f25454;
+  --filter: invert(79%) sepia(19%) saturate(19%) hue-rotate(51deg)
+    brightness(98%) contrast(87%);
+  --filter-accent: invert(54%) sepia(89%) saturate(2699%) hue-rotate(239deg)
+    brightness(101%) contrast(92%);
 }
 
 /* DARK */
@@ -18,4 +22,8 @@
   --white-text: #f8f8f8;
   --accent: #c38ede;
   --error: #d66d6d;
+  --filter: invert(33%) sepia(9%) saturate(993%) hue-rotate(197deg)
+    brightness(95%) contrast(90%);
+  --filter-accent: invert(79%) sepia(80%) saturate(3083%) hue-rotate(209deg)
+    brightness(92%) contrast(90%);
 }

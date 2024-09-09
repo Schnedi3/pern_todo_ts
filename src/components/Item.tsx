@@ -16,7 +16,9 @@ export const Item = ({ todoList, setTodoList, filteredList }: IItemProps) => {
     );
   };
 
-  const handleUpdate = (id: number) => {
+  const handleUpdate = (id: number, e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
     setTodoList(
       todoList.map((task) => {
         if (task.id === id) {
@@ -50,26 +52,29 @@ export const Item = ({ todoList, setTodoList, filteredList }: IItemProps) => {
               onChange={() => completedTask(task.id)}
             />
             {editMode && editId === task.id ? (
-              <input
-                className="task_edit"
-                type="text"
-                value={updatedText}
-                onChange={(e) => setUpdatedText(e.target.value)}
-                onBlur={() => handleUpdate(task.id)}
-                autoFocus
-              />
+              <form onSubmit={(e) => handleUpdate(task.id, e)}>
+                <input
+                  className="task_edit"
+                  type="text"
+                  value={updatedText}
+                  onChange={(e) => setUpdatedText(e.target.value)}
+                  autoFocus
+                />
+              </form>
             ) : (
-              <p
-                className={task.completed ? "task_completed" : ""}
-                onDoubleClick={() => {
-                  setEditMode(true);
-                  setEditId(task.id);
-                  setUpdatedText(task.text);
-                }}
-              >
+              <p className={task.completed ? "task_completed" : ""}>
                 {task.text}
               </p>
             )}
+            <span
+              onClick={() => {
+                setEditMode(true);
+                setEditId(task.id);
+                setUpdatedText(task.text);
+              }}
+            >
+              ✎
+            </span>
             <span onClick={() => deleteTask(task.id)}>✖</span>
           </div>
         ))

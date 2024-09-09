@@ -2,7 +2,7 @@
 .task_container {
   padding: 1.2rem;
   display: grid;
-  grid-template-columns: 1fr 15fr 1fr;
+  grid-template-columns: 1fr 15fr 1fr 1fr;
   gap: 1rem;
   align-items: center;
   background-color: var(--main-bg);
@@ -79,6 +79,8 @@
 
 .task_container > span {
   font-weight: 900;
+  display: flex;
+  justify-content: center;
   font-size: 1.2rem;
   color: var(--gray-text);
   opacity: 0;
@@ -94,6 +96,12 @@
 
   .task_container:hover > span {
     opacity: 1;
+  }
+
+  .task_container > img:hover {
+    filter: var(--filter-accent);
+    opacity: 1;
+    cursor: pointer;
   }
 
   .task_container > span:hover {
