@@ -16,7 +16,7 @@ export const App = () => {
   return (
     <BrowserRouter>
       <main className="app">
-        <div className="header__image"></div>
+        <div className="header_image"></div>
         <Header />
 
         {isAuthenticated && <Logout />}

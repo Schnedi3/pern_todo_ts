@@ -20,13 +20,13 @@ export const Login = () => {
   });
 
   return (
-    <section className="main__container">
-      <form className="auth__form" autoComplete="off" onSubmit={submitForm}>
+    <section className="main_container">
+      <form className="auth_form" autoComplete="off" onSubmit={submitForm}>
         <div className="title">
           <h2>Enter your account</h2>
           <button type="submit">Log in</button>
         </div>
-        <div className="form__content">
+        <div className="form_content">
           <input
             className={errors.email ? "input_error" : ""}
             type="email"

@@ -28,7 +28,7 @@ body {
   animation: fade-In 1s;
 }
 
-.main__container {
+.main_container {
   width: 40%;
   max-width: 1000px;
   margin: auto;
@@ -38,7 +38,7 @@ body {
 }
 
 /* HEADER IMAGE */
-.header__image {
+.header_image {
   position: absolute;
   width: 100%;
   height: 345px;
@@ -51,17 +51,17 @@ body {
 
 /* ADAPTIVE */
 @media (max-width: 1000px) {
-  .main__container {
+  .main_container {
     width: 57%;
   }
 }
 
 @media (max-width: 650px) {
-  .main__container {
+  .main_container {
     width: 90%;
   }
 
-  .header__image {
+  .header_image {
     background-position: center;
   }
 }

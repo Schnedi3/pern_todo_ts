@@ -60,7 +60,7 @@ export const TaskItem = ({
         <p className="empty">Nothing to do...</p>
       ) : (
         filteredList.map((task) => (
-          <li className="task__container" key={task.id}>
+          <li className="task_container" key={task.id}>
             <input
               className="checkbox_task checkbox_border"
               type="checkbox"
@@ -80,7 +80,7 @@ export const TaskItem = ({
               </form>
             ) : (
               <p
-                className={task.completed ? "task__completed" : ""}
+                className={task.completed ? "task_completed" : ""}
                 onDoubleClick={() => {
                   setEditMode(true),
                     setEditId(task.id),

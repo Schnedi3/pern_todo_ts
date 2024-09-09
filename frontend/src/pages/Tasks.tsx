@@ -11,7 +11,7 @@ export const Tasks = () => {
   const [filteredList, setFilteredList] = useState<Task[]>([]);
 
   return (
-    <section className="main__container">
+    <section className="main_container">
       <TaskForm todoList={todoList} setTodoList={setTodoList} />
       <TaskItem
         todoList={todoList}

@@ -1,5 +1,5 @@
 /* ITEM */
-.task__container {
+.task_container {
   padding: 1.3rem;
   display: grid;
   grid-template-columns: 1fr 15fr 1fr 1fr;
@@ -8,7 +8,7 @@
   border-bottom: 1px solid var(--gray-text);
 }
 
-.task__container:first-child {
+.task_container:first-child {
   border-radius: 0.4rem 0.4rem 0 0;
 }
 
@@ -65,17 +65,17 @@
   opacity: 0.6;
 }
 
-.task__container > p {
+.task_container > p {
   font-size: 1.1rem;
   color: var(--main-text);
 }
 
-.task__completed {
+.task_completed {
   text-decoration: line-through;
   opacity: 0.4;
 }
 
-.task__container > span {
+.task_container > span {
   font-size: 1.2rem;
   color: var(--gray-text);
   transition: 0.3s;
@@ -89,11 +89,11 @@
     cursor: pointer;
   }
 
-  .task__container:hover > span {
+  .task_container:hover > span {
     opacity: 1;
   }
 
-  .task__container > span:hover {
+  .task_container > span:hover {
     color: var(--accent);
     cursor: pointer;
   }
