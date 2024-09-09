@@ -1,14 +1,8 @@
 /* ITEM */
-.list {
-  width: 40%;
-  position: relative;
-  margin-bottom: 3rem;
-}
-
 .task__container {
   padding: 1.3rem;
   display: grid;
-  grid-template-columns: 1fr 15fr 1fr;
+  grid-template-columns: 1fr 15fr 1fr 1fr;
   gap: 1rem;
   background-color: var(--main-bg);
   border-bottom: 1px solid var(--gray-text);
@@ -19,12 +13,13 @@
 }
 
 .empty {
-  position: absolute;
-  inset: 3rem;
   text-align: center;
   font-size: 1.3rem;
-  font-weight: 300;
-  color: var(--dark-text);
+  color: var(--main-text);
+  padding: 1.2rem;
+  background-color: var(--main-bg);
+  border-radius: 0.5rem 0.5rem 0 0;
+  border-bottom: 2px solid var(--bg);
 }
 
 .checkbox_task {
@@ -60,7 +55,7 @@
 .task_edit {
   font-family: Poppins;
   font-size: 1.1rem;
-  color: var(--dark-text);
+  color: var(--main-text);
   border: 0;
   background-color: transparent;
 }
@@ -72,7 +67,7 @@
 
 .task__container > p {
   font-size: 1.1rem;
-  color: var(--dark-text);
+  color: var(--main-text);
 }
 
 .task__completed {
@@ -101,18 +96,5 @@
   .task__container > span:hover {
     color: var(--accent);
     cursor: pointer;
-  }
-}
-
-/* TABLET & MOBILE */
-@media (max-width: 1100px) {
-  .list {
-    width: 55%;
-  }
-}
-
-@media (max-width: 650px) {
-  .list {
-    width: 80%;
   }
 }

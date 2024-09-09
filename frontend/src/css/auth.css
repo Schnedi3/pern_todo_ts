@@ -1,12 +1,8 @@
 /* LOGIN & REGISTER */
-.auth__form {
-  width: 45%;
-}
-
 .title > h2 {
   font-family: Raleway;
   font-weight: 900;
-  font-size: 2.4rem;
+  font-size: 2.3rem;
   color: var(--white-text);
 }
 
@@ -17,7 +13,7 @@
   font-family: Poppins;
   font-weight: 500;
   font-size: 1.3rem;
-  color: var(--dark-text);
+  color: var(--main-text);
   text-transform: uppercase;
   border: 0;
   border-radius: 0.4rem;
@@ -30,6 +26,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.15rem;
+  margin-bottom: 0.5rem;
 }
 
 .form__content > input {
@@ -37,18 +34,17 @@
   font-family: Poppins;
   font-weight: 300;
   font-size: 1.1rem;
-  color: var(--dark-text);
+  color: var(--main-text);
   background-color: var(--main-bg);
   border: 0;
   border-radius: 0.4rem;
 }
 
 .form__content > input::placeholder {
-  opacity: 0.2;
+  opacity: 0.3;
 }
 
 .form__content > input:focus-visible {
-  border: 1px solid var(--accent);
   outline: 0;
 }
 
@@ -75,7 +71,7 @@
   position: relative;
   font-family: Josefin;
   font-size: 1.1rem;
-  color: var(--dark-text);
+  color: var(--main-text);
   align-self: center;
   text-decoration: none;
 }
@@ -113,18 +109,8 @@
   }
 }
 
-/* TABLET & MOBILE */
-@media (max-width: 1000px) {
-  .auth__form {
-    width: 65%;
-  }
-}
-
+/* ADAPTIVE */
 @media (max-width: 650px) {
-  .auth__form {
-    width: 85%;
-  }
-
   .title > h2 {
     font-size: 2rem;
   }

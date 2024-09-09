@@ -1,31 +1,23 @@
-export interface TaskType {
+export interface Task {
   id: number;
   text: string;
   completed: boolean;
 }
 
-export interface TaskContextType {
-  todoList: TaskType[];
-  newTask: string;
-  setNewTask: (newTask: string) => void;
-  handleOnSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  getTasks: () => void;
-  addTask: () => void;
-  completeTask: (id: number, completed: boolean) => void;
-  editMode: boolean;
-  setEditMode: (editMode: boolean) => void;
-  editId: number | undefined;
-  setEditId: (editId: number | undefined) => void;
-  updatedText: string;
-  setUpdatedText: (updatedText: string) => void;
-  updateTask: (id: number) => void;
-  deleteTask: (id: number) => void;
-  category: string;
-  setCategory: (category: string) => void;
-  filteredTodoList: TaskType[];
-  noActiveTasks: boolean;
-  noCompletedTasks: boolean;
+export interface IFormProps {
+  todoList: Task[];
+  setTodoList: (todoList: Task[]) => void;
+}
+
+export interface IItemProps {
+  todoList: Task[];
+  setTodoList: (todoList: Task[]) => void;
+  filteredList: Task[];
+}
+
+export interface IFooterProps {
+  todoList: Task[];
+  setFilteredList: (filteredList: Task[]) => void;
 }
 
 export interface RegisterType {

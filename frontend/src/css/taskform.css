@@ -1,10 +1,5 @@
 /* TASK FORM  */
-.task_form {
-  width: 40%;
-}
-
 .task_form > h1 {
-  margin-bottom: 1rem;
   font-family: Raleway;
   font-weight: 900;
   font-size: 2.8rem;
@@ -16,6 +11,7 @@
 .input_continer {
   width: 100%;
   padding: 1.3rem;
+  margin: 1rem 0;
   background-color: var(--main-bg);
   border-radius: 0.4rem;
   display: flex;
@@ -27,7 +23,7 @@
   width: 95%;
   font-family: Poppins;
   font-size: 1.1rem;
-  color: var(--dark-text);
+  color: var(--main-text);
   border: 0;
   background-color: transparent;
 }
@@ -55,18 +51,5 @@
   .input_continer > span:hover {
     color: var(--accent);
     cursor: pointer;
-  }
-}
-
-/* TABLET & MOBILE */
-@media (max-width: 1100px) {
-  .task_form {
-    width: 55%;
-  }
-}
-
-@media (max-width: 650px) {
-  .task_form {
-    width: 80%;
   }
 }

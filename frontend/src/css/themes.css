@@ -2,7 +2,7 @@
 .theme-light {
   --bg: #e6e6e6;
   --main-bg: #efefef;
-  --dark-text: #35384f;
+  --main-text: #35384f;
   --gray-text: #c3c3c3;
   --white-text: #f8f8f8;
   --accent: #c76cf5;
@@ -13,7 +13,7 @@
 .theme-dark {
   --bg: #222433;
   --main-bg: #33354a;
-  --dark-text: #f8f8f8;
+  --main-text: #f8f8f8;
   --gray-text: #535569;
   --white-text: #f8f8f8;
   --accent: #c38ede;
