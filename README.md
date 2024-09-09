@@ -10,11 +10,8 @@ This is a solution to the [Todo app challenge on Frontend Mentor](https://www.fr
 - Filter by all/active/complete todos
 
 ## Screenshots
-<img src="./screenshots/dark_desktop.jpg">
-<img src="./screenshots/light_desktop.jpg">
-
-<img src="./screenshots/dark_mobile.jpg">
-<img src="./screenshots/light_mobile.jpg">
+<img src="./screenshots/desktop_design.jpg">
+<img src="./screenshots/mobile_design.jpg">
 
 ## Built with
 - React
