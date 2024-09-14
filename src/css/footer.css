@@ -35,11 +35,13 @@
 
 .footer > span {
   position: absolute;
-  bottom: -3rem;
+  bottom: -2.5rem;
   left: 0;
   right: 0;
-  font-size: 1.1rem;
+  font-size: 1rem;
   text-align: center;
+  opacity: 0.6;
+  pointer-events: none;
 }
 
 /* HOVER */
