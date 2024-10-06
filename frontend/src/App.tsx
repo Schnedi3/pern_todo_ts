@@ -2,12 +2,14 @@ import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import { Header } from "./components/Header";
-import { ProtectedRoute } from "./pages/ProtectedRoute";
-import { Tasks } from "./pages/Tasks";
-import { Login } from "./pages/Login";
-import { Register } from "./pages/Register";
-import { Logout } from "./components/Logout";
+import {
+  Header,
+  Login,
+  Logout,
+  ProtectedRoute,
+  Register,
+  Tasks,
+} from "./Routes";
 
 import { useAuthContext } from "./context/useAuthContext";
 import "./css/app.css";

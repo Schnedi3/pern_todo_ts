@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 import { addTaskRequest, getTasksRequest } from "../api/task";
 import { IFormProps } from "../types/types";
 import "../css/taskform.css";
-import { toast } from "react-toastify";
 
 export const TaskForm = ({ todoList, setTodoList }: IFormProps) => {
   const [newTask, setNewTask] = useState<string>("");

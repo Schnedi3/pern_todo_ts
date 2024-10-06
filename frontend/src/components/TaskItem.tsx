@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Reorder } from "framer-motion";
+import { toast } from "react-toastify";
 
 import {
   completeTaskRequest,
@@ -8,7 +9,6 @@ import {
 } from "../api/task";
 import { IItemProps } from "../types/types";
 import "../css/item.css";
-import { toast } from "react-toastify";
 
 export const TaskItem = ({
   todoList,
