@@ -29,7 +29,9 @@
   margin-bottom: 0.5rem;
 }
 
-.form_content > input {
+.form_content > input,
+.form_content > div > input {
+  width: 100%;
   padding: 1.3rem;
   font-family: Poppins;
   font-weight: 300;
@@ -40,15 +42,33 @@
   border-radius: 0.4rem;
 }
 
-.form_content > input::placeholder {
+.form_content > div {
+  position: relative;
+}
+
+.form_content > input::placeholder,
+.form_content > div > input::placeholder {
   opacity: 0.3;
+}
+
+.form_content > div > button {
+  background-color: transparent;
+  position: absolute;
+  top: 35%;
+  right: 1rem;
+}
+
+.form_content > div > button > img {
+  width: 1.5rem;
+  filter: var(--filter);
 }
 
 #hidden {
   display: none;
 }
 
-.form_content > input.input_error {
+.form_content > input.input_error,
+.form_content > div > input.input_error {
   background-color: var(--error);
 }
 
@@ -58,15 +78,15 @@
   padding: 0 0.5rem;
   display: flex;
   justify-content: space-between;
+  font-family: Josefin;
+  font-size: 1.1rem;
 }
 
 .auth_footer > p {
-  font-size: 0.9rem;
   color: var(--main-text);
 }
 
 .auth_footer > a {
-  font-size: 0.9rem;
   color: var(--accent);
 }
 
@@ -78,6 +98,10 @@
 
   .title > button:hover {
     color: var(--accent);
+  }
+
+  .form_content > div > button:hover > img {
+    cursor: pointer;
   }
 
   .auth_footer > a:hover {

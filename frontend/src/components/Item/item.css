@@ -91,7 +91,7 @@
 
 .task_container > button > img {
   width: 1.2rem;
-  filter: var(--filter-color);
+  filter: var(--filter);
   opacity: 0.25;
 }
 

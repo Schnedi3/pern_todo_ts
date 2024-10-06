@@ -1,12 +1,14 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 import { useAuthContext } from "../../context/useAuthContext";
 import { ILogin } from "../../types/types";
+import { iconEyeClose, iconEyeOpen } from "../../Routes";
 import "./auth.css";
 
 export const Login = () => {
+  const [visiblePassword, setVisiblePassword] = useState<boolean>(false);
   const {
     register,
     handleSubmit,
@@ -42,12 +44,23 @@ export const Login = () => {
             placeholder="Email"
             {...register("email", { required: true })}
           />
-          <input
-            className={errors.password ? "input_error" : ""}
-            type="password"
-            placeholder="Password"
-            {...register("password", { required: true, minLength: 8 })}
-          />
+          <div>
+            <input
+              className={errors.password ? "input_error" : ""}
+              type={visiblePassword ? "text" : "password"}
+              placeholder="Password"
+              {...register("password", { required: true, minLength: 8 })}
+            />
+            <button
+              type="button"
+              onClick={() => setVisiblePassword(!visiblePassword)}
+            >
+              <img
+                src={visiblePassword ? iconEyeClose : iconEyeOpen}
+                alt="password visibility"
+              />
+            </button>
+          </div>
         </article>
 
         <article className="auth_footer">

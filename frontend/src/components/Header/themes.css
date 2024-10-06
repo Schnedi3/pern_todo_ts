@@ -7,7 +7,7 @@
   --white-text: #f8f8f8;
   --accent: #c76cf5;
   --error: #ebcccc;
-  --filter-color: invert(1);
+  --filter: invert(1);
 }
 
 /* DARK */
@@ -19,5 +19,5 @@
   --white-text: #f8f8f8;
   --accent: #c38ede;
   --error: #4a3333;
-  --filter-color: invert(0);
+  --filter: invert(0);
 }
