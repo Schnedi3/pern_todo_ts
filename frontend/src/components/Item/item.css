@@ -47,7 +47,7 @@
 
 .checkbox_task::before {
   content: "";
-  background-image: url(../assets/icons/check.svg),
+  background-image: url(../../assets/icons/check.svg),
     linear-gradient(to bottom right, #5df 0%, #c058f3 100%);
   background-position: center;
   background-repeat: no-repeat;

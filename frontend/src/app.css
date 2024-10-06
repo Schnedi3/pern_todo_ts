@@ -1,17 +1,17 @@
 /* FONTS */
 @font-face {
   font-family: Josefin;
-  src: url(../assets/Josefin.ttf) format(truetype);
+  src: url(./assets/Josefin.ttf) format(truetype);
 }
 
 @font-face {
   font-family: Poppins;
-  src: url(../assets/Poppins.ttf) format(truetype);
+  src: url(./assets/Poppins.ttf) format(truetype);
 }
 
 @font-face {
   font-family: Raleway;
-  src: url(../assets/Raleway.ttf) format(truetype);
+  src: url(./assets/Raleway.ttf) format(truetype);
 }
 
 /* RESET */
@@ -72,7 +72,7 @@ body {
   width: 100%;
   height: 345px;
   background-image: linear-gradient(to right, #12c2e9cc, #c46f37cc),
-    url(../assets/header.jpg);
+    url(./assets/header.jpg);
   background-size: cover;
   background-position: 0 20%;
   z-index: -1;

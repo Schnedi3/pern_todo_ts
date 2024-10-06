@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-import { TaskFooter, TaskForm, TaskItem } from "../Routes";
-import { Task } from "../types/types";
+import { Footer, Form, Item } from "../../Routes";
+import { Task } from "../../types/types";
 
 export const Tasks = () => {
   const [todoList, setTodoList] = useState<Task[]>([]);
@@ -9,13 +9,13 @@ export const Tasks = () => {
 
   return (
     <section className="main_container">
-      <TaskForm todoList={todoList} setTodoList={setTodoList} />
-      <TaskItem
+      <Form todoList={todoList} setTodoList={setTodoList} />
+      <Item
         todoList={todoList}
         setTodoList={setTodoList}
         filteredList={filteredList}
       />
-      <TaskFooter todoList={todoList} setFilteredList={setFilteredList} />
+      <Footer todoList={todoList} setFilteredList={setFilteredList} />
     </section>
   );
 };

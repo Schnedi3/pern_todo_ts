@@ -6,12 +6,12 @@ import {
   completeTaskRequest,
   updateTaskRequest,
   deleteTaskRequest,
-} from "../api/task";
-import { IItemProps } from "../types/types";
-import { iconEdit, iconTrash } from "../Routes";
-import "../css/item.css";
+} from "../../api/task";
+import { IItemProps } from "../../types/types";
+import { iconEdit, iconTrash } from "../../Routes";
+import "./item.css";
 
-export const TaskItem = ({
+export const Item = ({
   todoList,
   setTodoList,
   filteredList,

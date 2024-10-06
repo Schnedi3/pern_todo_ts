@@ -1,27 +1,19 @@
-import { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
-import { useAuthContext } from "../context/useAuthContext";
-import { ILogin } from "../types/types";
+import { useAuthContext } from "../../context/useAuthContext";
+import { IRegister } from "../../types/types";
 
-import "../css/auth.css";
-
-export const Login = () => {
+export const Register = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<ILogin>();
-  const { loginUser, isAuthenticated } = useAuthContext();
-  const navigate = useNavigate();
+  } = useForm<IRegister>();
+  const { registerUser } = useAuthContext();
 
-  useEffect(() => {
-    if (isAuthenticated) return navigate("/");
-  }, [isAuthenticated, navigate]);
-
-  const onSubmit = (data: ILogin) => {
-    loginUser(data);
+  const onSubmit = (data: IRegister) => {
+    registerUser(data);
   };
 
   return (
@@ -32,11 +24,17 @@ export const Login = () => {
         onSubmit={handleSubmit(onSubmit)}
       >
         <div className="title">
-          <h2>Enter your account</h2>
-          <button type="submit">Log in</button>
+          <h2>Create an account</h2>
+          <button type="submit">Sign up</button>
         </div>
 
         <div className="form_content">
+          <input
+            className={errors.username ? "input_error" : ""}
+            type="text"
+            placeholder="Username"
+            {...register("username", { required: true, minLength: 4 })}
+          />
           <input
             className={errors.email ? "input_error" : ""}
             type="email"
@@ -49,7 +47,7 @@ export const Login = () => {
             placeholder="Password"
             {...register("password", { required: true, minLength: 8 })}
           />
-          <Link to="/register">Create an account</Link>
+          <Link to="/">Already have an account</Link>
         </div>
       </form>
     </section>

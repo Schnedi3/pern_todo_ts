@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 
-import { IFooterProps } from "../types/types";
-import "../css/footer.css";
+import { IFooterProps } from "../../types/types";
+import "./footer.css";
 
-export const TaskFooter = ({ todoList, setFilteredList }: IFooterProps) => {
+export const Footer = ({ todoList, setFilteredList }: IFooterProps) => {
   const [category, setCategory] = useState<string>("all");
 
   useEffect(() => {

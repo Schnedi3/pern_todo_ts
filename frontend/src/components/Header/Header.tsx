@@ -1,10 +1,8 @@
-import { useTheme } from "../hooks/useTheme";
+import { useTheme } from "../../hooks/useTheme";
+import { iconMoon, iconSun } from "../../Routes";
 
-import iconMoon from "../assets/icons/moon.svg";
-import iconSun from "../assets/icons/sun.svg";
-
-import "../css/header.css";
-import "../css/themes.css";
+import "./header.css";
+import "./themes.css";
 
 export const Header = () => {
   const { theme, setTheme } = useTheme();

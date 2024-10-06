@@ -12,7 +12,7 @@ import {
 } from "./Routes";
 
 import { useAuthContext } from "./context/useAuthContext";
-import "./css/app.css";
+import "./app.css";
 
 export const App = () => {
   const { isAuthenticated } = useAuthContext();

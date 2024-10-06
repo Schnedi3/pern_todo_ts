@@ -1,21 +1,27 @@
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
-import { useAuthContext } from "../context/useAuthContext";
-import { IRegister } from "../types/types";
+import { useAuthContext } from "../../context/useAuthContext";
+import { ILogin } from "../../types/types";
 
-import "../css/auth.css";
+import "./auth.css";
 
-export const Register = () => {
+export const Login = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IRegister>();
-  const { registerUser } = useAuthContext();
+  } = useForm<ILogin>();
+  const { loginUser, isAuthenticated } = useAuthContext();
+  const navigate = useNavigate();
 
-  const onSubmit = (data: IRegister) => {
-    registerUser(data);
+  useEffect(() => {
+    if (isAuthenticated) return navigate("/");
+  }, [isAuthenticated, navigate]);
+
+  const onSubmit = (data: ILogin) => {
+    loginUser(data);
   };
 
   return (
@@ -26,17 +32,11 @@ export const Register = () => {
         onSubmit={handleSubmit(onSubmit)}
       >
         <div className="title">
-          <h2>Create an account</h2>
-          <button type="submit">Sign up</button>
+          <h2>Enter your account</h2>
+          <button type="submit">Log in</button>
         </div>
 
         <div className="form_content">
-          <input
-            className={errors.username ? "input_error" : ""}
-            type="text"
-            placeholder="Username"
-            {...register("username", { required: true, minLength: 4 })}
-          />
           <input
             className={errors.email ? "input_error" : ""}
             type="email"
@@ -49,7 +49,7 @@ export const Register = () => {
             placeholder="Password"
             {...register("password", { required: true, minLength: 8 })}
           />
-          <Link to="/">Already have an account</Link>
+          <Link to="/register">Create an account</Link>
         </div>
       </form>
     </section>

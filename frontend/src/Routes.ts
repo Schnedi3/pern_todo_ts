@@ -1,11 +1,11 @@
 // components
-import { Header } from "./components/Header";
-import { Logout } from "./components/Logout";
-import { TaskFooter } from "./components/TaskFooter";
-import { TaskForm } from "./components/TaskForm";
-import { TaskItem } from "./components/TaskItem";
+import { Header } from "./components/Header/Header";
+import { Logout } from "./components/Logout/Logout";
+import { Footer } from "./components/Footer/Footer";
+import { Form } from "./components/Form/Form";
+import { Item } from "./components/Item/Item";
 
-export { Header, Logout, TaskFooter, TaskForm, TaskItem };
+export { Header, Logout, Footer, Form, Item };
 
 // icons
 import iconCheck from "./assets/icons/check.svg";
@@ -17,9 +17,9 @@ import iconTrash from "./assets/icons/trash.svg";
 export { iconCheck, iconEdit, iconMoon, iconSun, iconTrash };
 
 // pages
-import { Login } from "./pages/Login";
+import { Login } from "./pages/Login/Login";
 import { ProtectedRoute } from "./pages/ProtectedRoute";
-import { Register } from "./pages/Register";
-import { Tasks } from "./pages/Tasks";
+import { Register } from "./pages/Register/Register";
+import { Tasks } from "./pages/Task/Tasks";
 
 export { Login, ProtectedRoute, Register, Tasks };
