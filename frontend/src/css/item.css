@@ -49,7 +49,7 @@
   content: "";
   background-image: url(../assets/icons/check.svg),
     linear-gradient(to bottom right, #5df 0%, #c058f3 100%);
-  background-position: 50%;
+  background-position: center;
   background-repeat: no-repeat;
   border-radius: 50%;
   width: 1.6rem;
@@ -85,11 +85,14 @@
   opacity: 0.4;
 }
 
-.task_container > span {
-  font-size: 1.2rem;
-  color: var(--gray-text);
-  transition: 0.3s;
-  opacity: 0;
+.task_container > button {
+  background-color: transparent;
+}
+
+.task_container > button > img {
+  width: 1.2rem;
+  filter: var(--filter-color);
+  opacity: 0.25;
 }
 
 /* HOVER */
@@ -103,12 +106,11 @@
     cursor: pointer;
   }
 
-  .task_container:hover > span {
-    opacity: 1;
+  .task_container > button:hover {
+    cursor: pointer;
   }
 
-  .task_container > span:hover {
-    color: var(--accent);
-    cursor: pointer;
+  .task_container > button:hover > img {
+    opacity: 1;
   }
 }

@@ -8,6 +8,7 @@ import {
   deleteTaskRequest,
 } from "../api/task";
 import { IItemProps } from "../types/types";
+import { iconEdit, iconTrash } from "../Routes";
 import "../css/item.css";
 
 export const TaskItem = ({
@@ -135,16 +136,18 @@ export const TaskItem = ({
               {task.text}
             </p>
           )}
-          <span
+          <button
             onClick={() => {
               setEditMode(true);
               setEditId(task.id);
               setUpdatedText(task.text);
             }}
           >
-            ✎
-          </span>
-          <span onClick={() => deleteTask(task.id)}>✖</span>
+            <img src={iconEdit} alt="edit text" />
+          </button>
+          <button onClick={() => deleteTask(task.id)}>
+            <img src={iconTrash} alt="delete task" />
+          </button>
         </Reorder.Item>
       ))}
     </Reorder.Group>

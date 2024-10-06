@@ -7,6 +7,15 @@ import { TaskItem } from "./components/TaskItem";
 
 export { Header, Logout, TaskFooter, TaskForm, TaskItem };
 
+// icons
+import iconCheck from "./assets/icons/check.svg";
+import iconEdit from "./assets/icons/edit.svg";
+import iconMoon from "./assets/icons/moon.svg";
+import iconSun from "./assets/icons/sun.svg";
+import iconTrash from "./assets/icons/trash.svg";
+
+export { iconCheck, iconEdit, iconMoon, iconSun, iconTrash };
+
 // pages
 import { Login } from "./pages/Login";
 import { ProtectedRoute } from "./pages/ProtectedRoute";
