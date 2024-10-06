@@ -1,13 +1,22 @@
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-import { useLogin } from "../hooks/useValidateForm";
 import { useAuthContext } from "../context/useAuthContext";
+import { loginSchema } from "../schemas/schemas";
+import { ILogin } from "../types/types";
 
 import "../css/auth.css";
 
 export const Login = () => {
-  const { register, handleSubmit, errors } = useLogin();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ILogin>({
+    resolver: zodResolver(loginSchema),
+  });
   const { login, isAuthenticated, error } = useAuthContext();
   const navigate = useNavigate();
 

@@ -1,7 +1,7 @@
 import { createContext, PropsWithChildren, useEffect, useState } from "react";
 import Cookies from "js-cookie";
 
-import { AuthContextType, LoginType, RegisterType } from "../types/types";
+import { AuthContextType, ILogin, IRegister } from "../types/types";
 import { loginRequest, registerRequest } from "../api/auth";
 
 export const AuthContext = createContext<AuthContextType | undefined>(
@@ -9,11 +9,11 @@ export const AuthContext = createContext<AuthContextType | undefined>(
 );
 
 export const AuthProvider = ({ children }: PropsWithChildren) => {
-  const [user, setUser] = useState<RegisterType | LoginType | null>(null);
+  const [user, setUser] = useState<ILogin | IRegister | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  const signup = async (user: RegisterType) => {
+  const signup = async (user: IRegister) => {
     try {
       const res = await registerRequest(user);
       setUser(res.data);
@@ -27,7 +27,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     }
   };
 
-  const login = async (user: LoginType) => {
+  const login = async (user: ILogin) => {
     try {
       const res = await loginRequest(user);
       setUser(res.data);
