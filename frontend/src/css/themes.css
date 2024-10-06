@@ -6,7 +6,7 @@
   --gray-text: #c3c3c3;
   --white-text: #f8f8f8;
   --accent: #c76cf5;
-  --error: #f25454;
+  --error: #ebcccc;
   --filter-color: invert(1);
 }
 
@@ -18,6 +18,6 @@
   --gray-text: #535569;
   --white-text: #f8f8f8;
   --accent: #c38ede;
-  --error: #d66d6d;
+  --error: #4a3333;
   --filter-color: invert(0);
 }

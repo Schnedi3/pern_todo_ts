@@ -1,10 +1,8 @@
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 
 import { useAuthContext } from "../context/useAuthContext";
-import { loginSchema } from "../schemas/schema";
 import { ILogin } from "../types/types";
 
 import "../css/auth.css";
@@ -14,9 +12,7 @@ export const Login = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<ILogin>({
-    resolver: zodResolver(loginSchema),
-  });
+  } = useForm<ILogin>();
   const { loginUser, isAuthenticated } = useAuthContext();
   const navigate = useNavigate();
 
@@ -45,20 +41,14 @@ export const Login = () => {
             className={errors.email ? "input_error" : ""}
             type="email"
             placeholder="Email"
-            {...register("email")}
+            {...register("email", { required: true })}
           />
-          {errors.email && (
-            <span className="error">{errors.email.message}</span>
-          )}
           <input
             className={errors.password ? "input_error" : ""}
             type="password"
             placeholder="Password"
-            {...register("password")}
+            {...register("password", { required: true, minLength: 8 })}
           />
-          {errors.password && (
-            <span className="error">{errors.password.message}</span>
-          )}
           <Link to="/register">Create an account</Link>
         </div>
       </form>

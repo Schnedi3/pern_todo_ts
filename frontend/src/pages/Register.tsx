@@ -1,9 +1,7 @@
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 
 import { useAuthContext } from "../context/useAuthContext";
-import { registerSchema } from "../schemas/schema";
 import { IRegister } from "../types/types";
 
 import "../css/auth.css";
@@ -13,9 +11,7 @@ export const Register = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IRegister>({
-    resolver: zodResolver(registerSchema),
-  });
+  } = useForm<IRegister>();
   const { registerUser } = useAuthContext();
 
   const onSubmit = (data: IRegister) => {
@@ -39,27 +35,20 @@ export const Register = () => {
             className={errors.username ? "input_error" : ""}
             type="text"
             placeholder="Username"
-            {...register("username")}
+            {...register("username", { required: true, minLength: 4 })}
           />
-          {errors.username && (
-            <p className="error">{errors.username.message}</p>
-          )}
           <input
             className={errors.email ? "input_error" : ""}
             type="email"
             placeholder="Email"
-            {...register("email")}
+            {...register("email", { required: true })}
           />
-          {errors.email && <p className="error">{errors.email.message}</p>}
           <input
             className={errors.password ? "input_error" : ""}
             type="password"
             placeholder="Password"
-            {...register("password")}
+            {...register("password", { required: true, minLength: 8 })}
           />
-          {errors.password && (
-            <p className="error">{errors.password.message}</p>
-          )}
           <Link to="/">Already have an account</Link>
         </div>
       </form>
