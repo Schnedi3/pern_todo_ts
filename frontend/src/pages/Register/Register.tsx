@@ -23,12 +23,12 @@ export const Register = () => {
         autoComplete="off"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <div className="title">
+        <article className="title">
           <h2>Create an account</h2>
           <button type="submit">Sign up</button>
-        </div>
+        </article>
 
-        <div className="form_content">
+        <article className="form_content">
           <input
             className={errors.username ? "input_error" : ""}
             type="text"
@@ -47,8 +47,12 @@ export const Register = () => {
             placeholder="Password"
             {...register("password", { required: true, minLength: 8 })}
           />
-          <Link to="/">Already have an account</Link>
-        </div>
+        </article>
+
+        <article className="auth_footer">
+          <p>Already have an account</p>
+          <Link to="/Login">Login</Link>
+        </article>
       </form>
     </section>
   );

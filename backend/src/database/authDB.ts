@@ -27,3 +27,15 @@ export const registerUserDB = async (
 
   return result.rows[0];
 };
+
+export const resetPasswordDB = async (
+  hashedPassword: string,
+  email: string
+) => {
+  const loginQuery = `
+    UPDATE "user"
+    SET password = $1
+    WHERE email = $2`;
+
+  await pool.query(loginQuery, [hashedPassword, email]);
+};

@@ -1,7 +1,8 @@
 export interface AuthContextType {
   user: IRegister | ILogin | null;
-  registerUser: (user: IRegister) => Promise<void>;
-  loginUser: (user: ILogin) => Promise<void>;
+  registerUser: (user: IRegister) => void;
+  loginUser: (user: ILogin) => void;
+  resetPassword: (user: ILogin) => void;
   logout: () => void;
   isAuthenticated: boolean;
   setIsAuthenticated: (isAuthenticated: boolean) => void;

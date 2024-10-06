@@ -1,26 +1,18 @@
-import { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 import { useAuthContext } from "../../context/useAuthContext";
 import { ILogin } from "../../types/types";
-import "./auth.css";
 
-export const Login = () => {
+export const ResetPassword = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<ILogin>();
-  const { loginUser, isAuthenticated } = useAuthContext();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (isAuthenticated) return navigate("/");
-  }, [isAuthenticated, navigate]);
+  const { resetPassword } = useAuthContext();
 
   const onSubmit = (data: ILogin) => {
-    loginUser(data);
+    resetPassword(data);
   };
 
   return (
@@ -31,8 +23,8 @@ export const Login = () => {
         onSubmit={handleSubmit(onSubmit)}
       >
         <article className="title">
-          <h2>Enter your account</h2>
-          <button type="submit">Log in</button>
+          <h2>Reset your password</h2>
+          <button type="submit">Set new password</button>
         </article>
 
         <article className="form_content">
@@ -48,11 +40,6 @@ export const Login = () => {
             placeholder="Password"
             {...register("password", { required: true, minLength: 8 })}
           />
-        </article>
-
-        <article className="auth_footer">
-          <Link to="/reset-password">Reset password</Link>
-          <Link to="/register">Create an account</Link>
         </article>
       </form>
     </section>

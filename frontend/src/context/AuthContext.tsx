@@ -3,7 +3,11 @@ import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-import { loginRequest, registerRequest } from "../api/auth";
+import {
+  loginRequest,
+  registerRequest,
+  resetPasswordRequest,
+} from "../api/auth";
 import { AuthContextType, ILogin, IRegister } from "../types/types";
 
 export const AuthContext = createContext<AuthContextType | undefined>(
@@ -14,6 +18,29 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   const [user, setUser] = useState<ILogin | IRegister | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const navigate = useNavigate();
+
+  const loginUser = async (user: ILogin) => {
+    try {
+      const response = await loginRequest(user);
+
+      if (response.data.success) {
+        setUser(response.data.result);
+        toast.success(response.data.message);
+        setIsAuthenticated(true);
+        Cookies.set("token", response.data.token);
+        localStorage.setItem("user", JSON.stringify(response.data.result));
+        navigate("/");
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.log(error.message);
+      } else {
+        console.log("An unexpected error occurred");
+      }
+    }
+  };
 
   const registerUser = async (user: IRegister) => {
     try {
@@ -38,17 +65,13 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     }
   };
 
-  const loginUser = async (user: ILogin) => {
+  const resetPassword = async (user: ILogin) => {
     try {
-      const response = await loginRequest(user);
+      const response = await resetPasswordRequest(user);
 
       if (response.data.success) {
-        setUser(response.data.result);
         toast.success(response.data.message);
-        setIsAuthenticated(true);
-        Cookies.set("token", response.data.token);
-        localStorage.setItem("user", JSON.stringify(response.data.result));
-        navigate("/");
+        navigate("/Login");
       } else {
         toast.error(response.data.message);
       }
@@ -89,8 +112,9 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     <AuthContext.Provider
       value={{
         user,
-        registerUser,
         loginUser,
+        registerUser,
+        resetPassword,
         logout,
         isAuthenticated,
         setIsAuthenticated,

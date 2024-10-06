@@ -52,27 +52,22 @@
   background-color: var(--error);
 }
 
-.form_content > a {
+/* ----- */
+.auth_footer {
   margin-top: 1rem;
-  position: relative;
-  font-family: Josefin;
-  font-size: 1.1rem;
-  color: var(--main-text);
-  align-self: center;
-  text-decoration: none;
+  padding: 0 0.5rem;
+  display: flex;
+  justify-content: space-between;
 }
 
-.form_content > a:after {
-  content: "";
-  width: 100%;
-  height: 0.5px;
-  position: absolute;
-  left: 0;
-  bottom: -20%;
-  background-color: var(--accent);
-  transform: scaleX(0);
-  transform-origin: center;
-  transition: 0.4s;
+.auth_footer > p {
+  font-size: 0.9rem;
+  color: var(--main-text);
+}
+
+.auth_footer > a {
+  font-size: 0.9rem;
+  color: var(--accent);
 }
 
 /* HOVER */
@@ -85,13 +80,9 @@
     color: var(--accent);
   }
 
-  .form_content > a:hover {
-    color: var(--accent);
+  .auth_footer > a:hover {
+    text-decoration: underline;
     cursor: pointer;
-  }
-
-  .form_content > a:hover:after {
-    transform: scaleX(1);
   }
 }
 

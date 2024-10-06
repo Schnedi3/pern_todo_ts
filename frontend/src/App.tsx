@@ -8,6 +8,7 @@ import {
   Logout,
   ProtectedRoute,
   Register,
+  ResetPassword,
   Tasks,
 } from "./Routes";
 
@@ -39,6 +40,7 @@ export const App = () => {
 
         <Route path="/Login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
       </Routes>
     </main>
   );
