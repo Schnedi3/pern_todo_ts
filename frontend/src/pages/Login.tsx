@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { useAuthContext } from "../context/useAuthContext";
-import { loginSchema } from "../schemas/schemas";
+import { loginSchema } from "../schemas/schema";
 import { ILogin } from "../types/types";
 
 import "../css/auth.css";
@@ -17,24 +17,29 @@ export const Login = () => {
   } = useForm<ILogin>({
     resolver: zodResolver(loginSchema),
   });
-  const { login, isAuthenticated, error } = useAuthContext();
+  const { loginUser, isAuthenticated } = useAuthContext();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (isAuthenticated) return navigate("/tasks");
+    if (isAuthenticated) return navigate("/");
   }, [isAuthenticated, navigate]);
 
-  const submitForm = handleSubmit((values) => {
-    login(values);
-  });
+  const onSubmit = (data: ILogin) => {
+    loginUser(data);
+  };
 
   return (
     <section className="main_container">
-      <form className="auth_form" autoComplete="off" onSubmit={submitForm}>
+      <form
+        className="auth_form"
+        autoComplete="off"
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <div className="title">
           <h2>Enter your account</h2>
           <button type="submit">Log in</button>
         </div>
+
         <div className="form_content">
           <input
             className={errors.email ? "input_error" : ""}
@@ -54,7 +59,6 @@ export const Login = () => {
           {errors.password && (
             <span className="error">{errors.password.message}</span>
           )}
-          {error && <p className="error">{error}</p>}
           <Link to="/register">Create an account</Link>
         </div>
       </form>

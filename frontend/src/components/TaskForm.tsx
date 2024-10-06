@@ -1,13 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
 
-import { useAuthContext } from "../context/useAuthContext";
-import { addTaskRequest, getTasksRequest } from "../api/tasks";
+import { addTaskRequest, getTasksRequest } from "../api/task";
 import { IFormProps } from "../types/types";
 import "../css/taskform.css";
+import { toast } from "react-toastify";
 
 export const TaskForm = ({ todoList, setTodoList }: IFormProps) => {
   const [newTask, setNewTask] = useState<string>("");
-  const { isAuthenticated } = useAuthContext();
 
   const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -18,27 +17,44 @@ export const TaskForm = ({ todoList, setTodoList }: IFormProps) => {
 
   const getTasks = useCallback(async () => {
     try {
-      const res = await getTasksRequest();
-      setTodoList(res.data);
-    } catch (error) {
-      console.error(error);
+      const response = await getTasksRequest();
+
+      if (response.data.success) {
+        setTodoList(response.data.result);
+      } else {
+        console.log(response.data.message);
+      }
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.log(error.message);
+      } else {
+        console.log("An unexpected error occurred");
+      }
     }
   }, [setTodoList]);
 
   useEffect(() => {
-    if (isAuthenticated) {
-      getTasks();
-    }
-  }, [isAuthenticated, getTasks]);
+    getTasks();
+  }, [getTasks]);
 
   const addTask = async () => {
     if (newTask.trim()) {
       try {
-        const res = await addTaskRequest(newTask);
-        setTodoList([...todoList, res.data]);
-        setNewTask("");
-      } catch (error) {
-        console.error(error);
+        const response = await addTaskRequest(newTask);
+
+        if (response.data.success) {
+          setTodoList([...todoList, response.data.result]);
+          setNewTask("");
+          toast.success(response.data.message);
+        } else {
+          console.log(response.data.message);
+        }
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          console.log(error.message);
+        } else {
+          console.log("An unexpected error occurred");
+        }
       }
     }
   };

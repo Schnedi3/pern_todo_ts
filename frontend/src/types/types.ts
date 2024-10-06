@@ -1,11 +1,10 @@
 export interface AuthContextType {
   user: IRegister | ILogin | null;
-  signup: (user: IRegister) => Promise<void>;
-  login: (user: ILogin) => Promise<void>;
+  registerUser: (user: IRegister) => Promise<void>;
+  loginUser: (user: ILogin) => Promise<void>;
   logout: () => void;
   isAuthenticated: boolean;
   setIsAuthenticated: (isAuthenticated: boolean) => void;
-  error: string | null;
 }
 
 export interface IFormProps {

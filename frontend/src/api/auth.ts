@@ -1,11 +1,11 @@
 import axios from "./axios";
 
-import { LoginType, RegisterType } from "../types/types";
+import { ILogin, IRegister } from "../types/types";
 
-export const registerRequest = (user: RegisterType) => {
-  return axios.post("/register", user);
+export const loginRequest = (user: ILogin) => {
+  return axios.post("/auth/login", user);
 };
 
-export const loginRequest = (user: LoginType) => {
-  return axios.post("/login", user);
+export const registerRequest = (user: IRegister) => {
+  return axios.post("/auth/register", user);
 };

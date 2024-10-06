@@ -1,35 +1,43 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { Header } from "./components/Header";
+import { ProtectedRoute } from "./pages/ProtectedRoute";
+import { Tasks } from "./pages/Tasks";
 import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
-import { Tasks } from "./pages/Tasks";
-import { ProtectedRoute } from "./pages/ProtectedRoute";
 import { Logout } from "./components/Logout";
-import { useAuthContext } from "./context/useAuthContext";
 
+import { useAuthContext } from "./context/useAuthContext";
 import "./css/app.css";
 
 export const App = () => {
   const { isAuthenticated } = useAuthContext();
 
   return (
-    <BrowserRouter>
-      <main className="app">
-        <div className="header_image"></div>
-        <Header />
+    <main className="app">
+      <ToastContainer
+        position="bottom-right"
+        autoClose={1000}
+        pauseOnHover={false}
+        pauseOnFocusLoss={false}
+        newestOnTop={true}
+      />
 
-        {isAuthenticated && <Logout />}
+      <div className="header_image"></div>
+      <Header />
 
-        <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+      {isAuthenticated && <Logout />}
 
-          <Route element={<ProtectedRoute />}>
-            <Route path="/tasks" element={<Tasks />} />
-          </Route>
-        </Routes>
-      </main>
-    </BrowserRouter>
+      <Routes>
+        <Route element={<ProtectedRoute />}>
+          <Route path="/" element={<Tasks />} />
+        </Route>
+
+        <Route path="/Login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+      </Routes>
+    </main>
   );
 };

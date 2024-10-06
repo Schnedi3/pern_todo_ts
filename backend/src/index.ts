@@ -4,8 +4,8 @@ import cookieParser from "cookie-parser";
 
 import { COOKIE_URL, PORT } from "./config/config";
 
-import authRoutes from "./routes/auth_route";
-import taskRoutes from "./routes/task_route";
+import authRoutes from "./routes/authRoute";
+import taskRoutes from "./routes/taskRoute";
 
 export const app = express();
 
@@ -19,8 +19,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-app.use("/api", authRoutes);
-app.use("/api", taskRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/task", taskRoutes);
 
 app.listen(PORT);
 console.log("Server running on port", PORT);

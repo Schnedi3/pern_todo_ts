@@ -1,10 +1,10 @@
 import { useState } from "react";
 
-import { Task } from "../types/types";
-
 import { TaskForm } from "../components/TaskForm";
 import { TaskItem } from "../components/TaskItem";
 import { TaskFooter } from "../components/TaskFooter";
+
+import { Task } from "../types/types";
 
 export const Tasks = () => {
   const [todoList, setTodoList] = useState<Task[]>([]);

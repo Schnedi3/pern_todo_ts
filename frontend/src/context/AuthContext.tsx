@@ -1,8 +1,10 @@
 import { createContext, PropsWithChildren, useEffect, useState } from "react";
 import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
-import { AuthContextType, ILogin, IRegister } from "../types/types";
 import { loginRequest, registerRequest } from "../api/auth";
+import { AuthContextType, ILogin, IRegister } from "../types/types";
 
 export const AuthContext = createContext<AuthContextType | undefined>(
   undefined
@@ -11,33 +13,51 @@ export const AuthContext = createContext<AuthContextType | undefined>(
 export const AuthProvider = ({ children }: PropsWithChildren) => {
   const [user, setUser] = useState<ILogin | IRegister | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
-  const signup = async (user: IRegister) => {
+  const registerUser = async (user: IRegister) => {
     try {
-      const res = await registerRequest(user);
-      setUser(res.data);
-      setIsAuthenticated(true);
-      setError(null);
+      const response = await registerRequest(user);
 
-      Cookies.set("token", res.data.token);
-      localStorage.setItem("user", JSON.stringify(res.data.user));
-    } catch (error: any) {
-      setError(error.response.data.message);
+      if (response.data.success) {
+        setUser(response.data.result);
+        toast.success(response.data.message);
+        setIsAuthenticated(true);
+        Cookies.set("token", response.data.token);
+        localStorage.setItem("user", JSON.stringify(response.data.result));
+        navigate("/");
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.log(error.message);
+      } else {
+        console.log("An unexpected error occurred");
+      }
     }
   };
 
-  const login = async (user: ILogin) => {
+  const loginUser = async (user: ILogin) => {
     try {
-      const res = await loginRequest(user);
-      setUser(res.data);
-      setIsAuthenticated(true);
-      setError(null);
+      const response = await loginRequest(user);
 
-      Cookies.set("token", res.data.token);
-      localStorage.setItem("user", JSON.stringify(res.data.user));
-    } catch (error: any) {
-      setError(error.response.data.message);
+      if (response.data.success) {
+        setUser(response.data.result);
+        toast.success(response.data.message);
+        setIsAuthenticated(true);
+        Cookies.set("token", response.data.token);
+        localStorage.setItem("user", JSON.stringify(response.data.result));
+        navigate("/");
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.log(error.message);
+      } else {
+        console.log("An unexpected error occurred");
+      }
     }
   };
 
@@ -69,12 +89,11 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     <AuthContext.Provider
       value={{
         user,
-        signup,
-        login,
+        registerUser,
+        loginUser,
         logout,
         isAuthenticated,
         setIsAuthenticated,
-        error,
       }}
     >
       {children}
