@@ -16,6 +16,7 @@ export const Tasks = () => {
         filteredList={filteredList}
       />
       <Footer todoList={todoList} setFilteredList={setFilteredList} />
+      <p>Drag and drop to reorder list</p>
     </section>
   );
 };

@@ -1,12 +1,39 @@
 import { Request, Response } from "express";
 import bcrypt from "bcrypt";
+import axios from "axios";
 
 import {
+  loginGoogleDB,
   loginUserDB,
   registerUserDB,
   resetPasswordDB,
 } from "../database/authDB";
 import { generateToken } from "../libs/generateToken";
+
+export const loginGoogle = async (req: Request, res: Response) => {
+  const { accessToken } = req.body;
+
+  const tokenURL = `https://www.googleapis.com/oauth2/v3/userinfo?access_token=${accessToken}`;
+
+  try {
+    const userInfo = await axios.get(tokenURL);
+    const { name, email, sub } = userInfo.data;
+
+    const result = await loginGoogleDB(name, email, sub);
+
+    const token = generateToken(result.id);
+    res.cookie("token", token);
+
+    res.status(200).json({
+      success: true,
+      message: "Logged in succesfully",
+      result,
+      token,
+    });
+  } catch (error: any) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
 
 export const loginUser = async (req: Request, res: Response) => {
   const { email, password } = req.body;

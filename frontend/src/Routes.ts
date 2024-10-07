@@ -12,8 +12,8 @@ import iconCheck from "./assets/icons/check.svg";
 import iconEdit from "./assets/icons/edit.svg";
 import iconEyeClose from "./assets/icons/eye_close.svg";
 import iconEyeOpen from "./assets/icons/eye_open.svg";
-import iconMoon from "./assets/icons/moon.svg";
-import iconSun from "./assets/icons/sun.svg";
+import iconGoogle from "./assets/icons/google.svg";
+import iconTheme from "./assets/icons/theme.svg";
 import iconTrash from "./assets/icons/trash.svg";
 
 export {
@@ -21,8 +21,8 @@ export {
   iconEdit,
   iconEyeClose,
   iconEyeOpen,
-  iconMoon,
-  iconSun,
+  iconGoogle,
+  iconTheme,
   iconTrash,
 };
 

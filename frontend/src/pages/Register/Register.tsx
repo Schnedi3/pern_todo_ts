@@ -64,7 +64,7 @@ export const Register = () => {
         </article>
 
         <article className="auth_footer">
-          <p>Already have an account</p>
+          <p>Already have an account?</p>
           <Link to="/Login">Login</Link>
         </article>
       </form>

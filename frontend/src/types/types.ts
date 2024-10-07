@@ -1,7 +1,8 @@
 export interface AuthContextType {
   user: IRegister | ILogin | null;
-  registerUser: (user: IRegister) => void;
+  loginGoogle: () => void;
   loginUser: (user: ILogin) => void;
+  registerUser: (user: IRegister) => void;
   resetPassword: (user: ILogin) => void;
   logout: () => void;
   isAuthenticated: boolean;

@@ -1,5 +1,23 @@
 import { pool } from "./db";
 
+export const loginGoogleDB = async (
+  name: string,
+  email: string,
+  googleId: string
+) => {
+  const username = name;
+
+  const createUserQuery = `
+    INSERT INTO "user" (username, email, google_id, password)
+    VALUES ($1, $2, $3, NULL)
+    ON CONFLICT (email) DO UPDATE
+    SET google_id = EXCLUDED.google_id
+    RETURNING *`;
+
+  const result = await pool.query(createUserQuery, [username, email, googleId]);
+  return result.rows[0];
+};
+
 export const loginUserDB = async (email: string) => {
   const loginQuery = `
     SELECT * FROM "user"

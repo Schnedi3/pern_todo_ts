@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 
 import { useAuthContext } from "../../context/useAuthContext";
 import { ILogin } from "../../types/types";
-import { iconEyeClose, iconEyeOpen } from "../../Routes";
+import { iconEyeClose, iconEyeOpen, iconGoogle } from "../../Routes";
 import "./auth.css";
 
 export const Login = () => {
@@ -14,7 +14,7 @@ export const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<ILogin>();
-  const { loginUser, isAuthenticated } = useAuthContext();
+  const { loginGoogle, loginUser, isAuthenticated } = useAuthContext();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -61,13 +61,24 @@ export const Login = () => {
               />
             </button>
           </div>
-        </article>
 
-        <article className="auth_footer">
-          <Link to="/reset-password">Reset password</Link>
-          <Link to="/register">Create an account</Link>
+          <div className="auth_footer">
+            <Link to="/reset-password">Reset password</Link>
+            <Link to="/register">Create an account</Link>
+          </div>
         </article>
       </form>
+
+      <article className="separator">
+        <span></span>
+        <p>or</p>
+        <span></span>
+      </article>
+
+      <button className="gbutton" onClick={() => loginGoogle()}>
+        <img src={iconGoogle} />
+        <p>Login with Google</p>
+      </button>
     </section>
   );
 };

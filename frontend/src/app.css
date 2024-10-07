@@ -59,11 +59,19 @@ body {
 
 .main_container {
   width: 45%;
-  position: relative;
-  top: 10rem;
   max-width: 1000px;
   margin: auto;
+  position: relative;
+  top: 10rem;
   overflow: hidden;
+}
+
+.main_container > p {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  font-family: Josefin;
+  color: var(--gray-text);
 }
 
 /* HEADER IMAGE */
@@ -71,7 +79,7 @@ body {
   position: absolute;
   width: 100%;
   height: 345px;
-  background-image: linear-gradient(to right, #12c2e9cc, #c46f37cc),
+  background-image: linear-gradient(to right, #12e9e9cc, #d169c7cc),
     url(./assets/header.jpg);
   background-size: cover;
   background-position: 0 20%;

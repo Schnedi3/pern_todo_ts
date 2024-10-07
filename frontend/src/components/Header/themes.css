@@ -1,10 +1,15 @@
 /* LIGHT */
 .theme-light {
-  --bg: #e6e6e6;
-  --main-bg: #efefef;
+  --bg: #f3f3f3;
+  --main-bg: #ffffff;
+
+  --google-bg: #353638;
+  --google-text: #f8f8f8;
+
   --main-text: #35384f;
   --gray-text: #c3c3c3;
   --white-text: #f8f8f8;
+
   --accent: #c76cf5;
   --error: #ebcccc;
   --filter: invert(1);
@@ -12,12 +17,17 @@
 
 /* DARK */
 .theme-dark {
-  --bg: #222433;
-  --main-bg: #33354a;
+  --bg: #242425;
+  --main-bg: #353638;
+
+  --google-bg: #f8f8f8;
+  --google-text: #242425;
+
   --main-text: #f8f8f8;
   --gray-text: #535569;
   --white-text: #f8f8f8;
-  --accent: #c38ede;
+
+  --accent: #7fbfd5;
   --error: #4a3333;
   --filter: invert(0);
 }
