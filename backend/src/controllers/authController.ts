@@ -17,9 +17,9 @@ export const loginGoogle = async (req: Request, res: Response) => {
 
   try {
     const userInfo = await axios.get(tokenURL);
-    const { name, email, sub } = userInfo.data;
+    const { email, sub } = userInfo.data;
 
-    const result = await loginGoogleDB(name, email, sub);
+    const result = await loginGoogleDB(email, sub);
 
     const token = generateToken(result.id);
     res.cookie("token", token);
@@ -63,12 +63,12 @@ export const loginUser = async (req: Request, res: Response) => {
 };
 
 export const registerUser = async (req: Request, res: Response) => {
-  const { username, email, password } = req.body;
+  const { email, password } = req.body;
 
   const hashedPassword = await bcrypt.hash(password, 10);
 
   try {
-    const result = await registerUserDB(username, email, hashedPassword);
+    const result = await registerUserDB(email, hashedPassword);
 
     const token = generateToken(result.id);
     res.cookie("token", token);

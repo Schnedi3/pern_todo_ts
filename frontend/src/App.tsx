@@ -9,7 +9,7 @@ import {
   ProtectedRoute,
   Register,
   ResetPassword,
-  Tasks,
+  Todo,
 } from "./Routes";
 
 import { useAuthContext } from "./context/useAuthContext";
@@ -35,7 +35,7 @@ export const App = () => {
 
       <Routes>
         <Route element={<ProtectedRoute />}>
-          <Route path="/" element={<Tasks />} />
+          <Route path="/" element={<Todo />} />
         </Route>
 
         <Route path="/Login" element={<Login />} />

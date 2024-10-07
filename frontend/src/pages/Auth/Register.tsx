@@ -1,21 +1,22 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 import { useAuthContext } from "../../context/useAuthContext";
-import { ILogin } from "../../types/types";
+import { IUser } from "../../types/types";
 import { iconEyeClose, iconEyeOpen } from "../../Routes";
 
-export const ResetPassword = () => {
+export const Register = () => {
   const [visiblePassword, setVisiblePassword] = useState<boolean>(false);
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<ILogin>();
-  const { resetPassword } = useAuthContext();
+  } = useForm<IUser>();
+  const { registerUser } = useAuthContext();
 
-  const onSubmit = (data: ILogin) => {
-    resetPassword(data);
+  const onSubmit = (data: IUser) => {
+    registerUser(data);
   };
 
   return (
@@ -26,8 +27,8 @@ export const ResetPassword = () => {
         onSubmit={handleSubmit(onSubmit)}
       >
         <article className="title">
-          <h2>Reset your password</h2>
-          <button type="submit">Set new password</button>
+          <h2>Create an account</h2>
+          <button type="submit">Sign up</button>
         </article>
 
         <article className="form_content">
@@ -54,6 +55,11 @@ export const ResetPassword = () => {
               />
             </button>
           </div>
+        </article>
+
+        <article className="auth_footer">
+          <p>Already have an account?</p>
+          <Link to="/Login">Login</Link>
         </article>
       </form>
     </section>

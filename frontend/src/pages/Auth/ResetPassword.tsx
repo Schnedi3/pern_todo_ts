@@ -1,22 +1,21 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 import { useAuthContext } from "../../context/useAuthContext";
-import { IRegister } from "../../types/types";
+import { IUser } from "../../types/types";
 import { iconEyeClose, iconEyeOpen } from "../../Routes";
 
-export const Register = () => {
+export const ResetPassword = () => {
   const [visiblePassword, setVisiblePassword] = useState<boolean>(false);
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IRegister>();
-  const { registerUser } = useAuthContext();
+  } = useForm<IUser>();
+  const { resetPassword } = useAuthContext();
 
-  const onSubmit = (data: IRegister) => {
-    registerUser(data);
+  const onSubmit = (data: IUser) => {
+    resetPassword(data);
   };
 
   return (
@@ -27,17 +26,11 @@ export const Register = () => {
         onSubmit={handleSubmit(onSubmit)}
       >
         <article className="title">
-          <h2>Create an account</h2>
-          <button type="submit">Sign up</button>
+          <h2>Reset your password</h2>
+          <button type="submit">Set new password</button>
         </article>
 
         <article className="form_content">
-          <input
-            className={errors.username ? "input_error" : ""}
-            type="text"
-            placeholder="Username"
-            {...register("username", { required: true, minLength: 4 })}
-          />
           <input
             className={errors.email ? "input_error" : ""}
             type="email"
@@ -61,11 +54,6 @@ export const Register = () => {
               />
             </button>
           </div>
-        </article>
-
-        <article className="auth_footer">
-          <p>Already have an account?</p>
-          <Link to="/Login">Login</Link>
         </article>
       </form>
     </section>

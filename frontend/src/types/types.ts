@@ -1,43 +1,37 @@
 export interface AuthContextType {
-  user: IRegister | ILogin | null;
+  user: IUser | null;
   loginGoogle: () => void;
-  loginUser: (user: ILogin) => void;
-  registerUser: (user: IRegister) => void;
-  resetPassword: (user: ILogin) => void;
+  loginUser: (user: IUser) => void;
+  registerUser: (user: IUser) => void;
+  resetPassword: (user: IUser) => void;
   logout: () => void;
   isAuthenticated: boolean;
   setIsAuthenticated: (isAuthenticated: boolean) => void;
 }
 
 export interface IFormProps {
-  todoList: Task[];
-  setTodoList: (todoList: Task[]) => void;
+  todoList: ITask[];
+  setTodoList: (todoList: ITask[]) => void;
 }
 
 export interface IFooterProps {
-  todoList: Task[];
-  setFilteredList: (filteredList: Task[]) => void;
-}
-
-export interface ILogin {
-  email: string;
-  password: string;
-}
-
-export interface IRegister {
-  username: string;
-  email: string;
-  password: string;
+  todoList: ITask[];
+  setFilteredList: (filteredList: ITask[]) => void;
 }
 
 export interface IItemProps {
-  todoList: Task[];
-  setTodoList: (todoList: Task[]) => void;
-  filteredList: Task[];
+  todoList: ITask[];
+  setTodoList: (todoList: ITask[]) => void;
+  filteredList: ITask[];
 }
 
-export interface Task {
+export interface ITask {
   id: number;
   text: string;
   completed: boolean;
+}
+
+export interface IUser {
+  email: string;
+  password: string;
 }

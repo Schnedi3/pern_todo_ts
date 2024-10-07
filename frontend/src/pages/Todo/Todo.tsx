@@ -1,11 +1,11 @@
 import { useState } from "react";
 
 import { Footer, Form, Item } from "../../Routes";
-import { Task } from "../../types/types";
+import { ITask } from "../../types/types";
 
-export const Tasks = () => {
-  const [todoList, setTodoList] = useState<Task[]>([]);
-  const [filteredList, setFilteredList] = useState<Task[]>([]);
+export const Todo = () => {
+  const [todoList, setTodoList] = useState<ITask[]>([]);
+  const [filteredList, setFilteredList] = useState<ITask[]>([]);
 
   return (
     <section className="main_container">

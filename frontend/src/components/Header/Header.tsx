@@ -12,9 +12,9 @@ export const Header = () => {
   };
 
   return (
-    <div className="header" onClick={toggleTheme}>
+    <button className="header" onClick={toggleTheme}>
       <img src={iconTheme} alt="change theme icon" />
       <p>{theme === "theme-light" ? "Dark theme" : " Light theme"}</p>
-    </div>
+    </button>
   );
 };

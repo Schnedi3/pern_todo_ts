@@ -27,10 +27,10 @@ export {
 };
 
 // pages
-import { Login } from "./pages/Login/Login";
+import { Login } from "./pages/Auth/Login";
 import { ProtectedRoute } from "./pages/ProtectedRoute";
-import { Register } from "./pages/Register/Register";
-import { ResetPassword } from "./pages/ResetPassword/ResetPassword";
-import { Tasks } from "./pages/Task/Tasks";
+import { Register } from "./pages/Auth/Register";
+import { ResetPassword } from "./pages/Auth/ResetPassword";
+import { Todo } from "./pages/Todo/Todo";
 
-export { Login, ProtectedRoute, Register, ResetPassword, Tasks };
+export { Login, ProtectedRoute, Register, ResetPassword, Todo };

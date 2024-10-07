@@ -10,14 +10,14 @@ import {
   registerRequest,
   resetPasswordRequest,
 } from "../api/auth";
-import { AuthContextType, ILogin, IRegister } from "../types/types";
+import { AuthContextType, IUser } from "../types/types";
 
 export const AuthContext = createContext<AuthContextType | undefined>(
   undefined
 );
 
 export const AuthProvider = ({ children }: PropsWithChildren) => {
-  const [user, setUser] = useState<ILogin | IRegister | null>(null);
+  const [user, setUser] = useState<IUser | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const navigate = useNavigate();
 
@@ -54,7 +54,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     }
   };
 
-  const loginUser = async (user: ILogin) => {
+  const loginUser = async (user: IUser) => {
     try {
       const response = await loginRequest(user);
 
@@ -72,7 +72,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     }
   };
 
-  const registerUser = async (user: IRegister) => {
+  const registerUser = async (user: IUser) => {
     try {
       const response = await registerRequest(user);
 
@@ -90,7 +90,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     }
   };
 
-  const resetPassword = async (user: ILogin) => {
+  const resetPassword = async (user: IUser) => {
     try {
       const response = await resetPasswordRequest(user);
 

@@ -1,20 +1,14 @@
 import { pool } from "./db";
 
-export const loginGoogleDB = async (
-  name: string,
-  email: string,
-  googleId: string
-) => {
-  const username = name;
-
-  const createUserQuery = `
-    INSERT INTO "user" (username, email, google_id, password)
-    VALUES ($1, $2, $3, NULL)
+export const loginGoogleDB = async (email: string, googleId: string) => {
+  const loginGoogleQuery = `
+    INSERT INTO "user" (email, google_id, password)
+    VALUES ($1, $2, NULL)
     ON CONFLICT (email) DO UPDATE
     SET google_id = EXCLUDED.google_id
     RETURNING *`;
 
-  const result = await pool.query(createUserQuery, [username, email, googleId]);
+  const result = await pool.query(loginGoogleQuery, [email, googleId]);
   return result.rows[0];
 };
 
@@ -27,21 +21,13 @@ export const loginUserDB = async (email: string) => {
   return result.rows[0];
 };
 
-export const registerUserDB = async (
-  username: string,
-  email: string,
-  hashedPassword: string
-) => {
+export const registerUserDB = async (email: string, hashedPassword: string) => {
   const registerQuery = `
-    INSERT INTO "user" (username, email, password)
-    VALUES ($1, $2, $3)
+    INSERT INTO "user" (email, password)
+    VALUES ($1, $2)
     RETURNING *`;
 
-  const result = await pool.query(registerQuery, [
-    username,
-    email,
-    hashedPassword,
-  ]);
+  const result = await pool.query(registerQuery, [email, hashedPassword]);
 
   return result.rows[0];
 };

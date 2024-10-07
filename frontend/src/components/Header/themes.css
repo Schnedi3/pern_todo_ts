@@ -12,7 +12,7 @@
 
   --accent: #c76cf5;
   --error: #ebcccc;
-  --filter: invert(1);
+  --filter: invert(1) opacity(0.4);
 }
 
 /* DARK */
@@ -29,5 +29,5 @@
 
   --accent: #7fbfd5;
   --error: #4a3333;
-  --filter: invert(0);
+  --filter: invert(0) opacity(0.4);
 }

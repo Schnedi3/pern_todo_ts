@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 import { useAuthContext } from "../../context/useAuthContext";
-import { ILogin } from "../../types/types";
+import { IUser } from "../../types/types";
 import { iconEyeClose, iconEyeOpen, iconGoogle } from "../../Routes";
 import "./auth.css";
 
@@ -13,7 +13,7 @@ export const Login = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<ILogin>();
+  } = useForm<IUser>();
   const { loginGoogle, loginUser, isAuthenticated } = useAuthContext();
   const navigate = useNavigate();
 
@@ -21,7 +21,7 @@ export const Login = () => {
     if (isAuthenticated) return navigate("/");
   }, [isAuthenticated, navigate]);
 
-  const onSubmit = (data: ILogin) => {
+  const onSubmit = (data: IUser) => {
     loginUser(data);
   };
 
