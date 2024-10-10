@@ -11,38 +11,12 @@ import { IItemProps } from "../../types/types";
 import { iconEdit, iconTrash } from "../../Routes";
 import "./item.css";
 
-export const Item = ({
-  todoList,
-  setTodoList,
-  filteredList,
-}: IItemProps) => {
+export const Item = ({ todoList, setTodoList, filteredList }: IItemProps) => {
   const [editId, setEditId] = useState<number>(0);
   const [editMode, setEditMode] = useState<boolean>(false);
   const [updatedText, setUpdatedText] = useState<string>("");
 
-  const completeTask = async (completed: boolean, id: number) => {
-    completed = !completed;
-
-    try {
-      const response = await completeTaskRequest(completed, id);
-
-      if (response.data.success) {
-        setTodoList(
-          todoList.map((task) => (task.id === id ? response.data.result : task))
-        );
-      } else {
-        console.log(response.data.message);
-      }
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        console.log(error.message);
-      } else {
-        console.log("An unexpected error occurred");
-      }
-    }
-  };
-
-  const handleUpdate = async (
+  const updateTask = async (
     e: React.FormEvent<HTMLFormElement>,
     id: number
   ) => {
@@ -72,12 +46,35 @@ export const Item = ({
     }
   };
 
+  const completeTask = async (completed: boolean, id: number) => {
+    completed = !completed;
+
+    try {
+      const response = await completeTaskRequest(completed, id);
+
+      if (response.data.success) {
+        setTodoList(
+          todoList.map((task) => (task.id === id ? response.data.result : task))
+        );
+      } else {
+        console.log(response.data.message);
+      }
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.log(error.message);
+      } else {
+        console.log("An unexpected error occurred");
+      }
+    }
+  };
+
   const deleteTask = async (id: number) => {
     try {
       const response = await deleteTaskRequest(id);
 
       if (response.data.success) {
         setTodoList(todoList.filter((task) => task.id !== id));
+        toast.success(response.data.message);
       } else {
         console.log(response.data.message);
       }
@@ -115,7 +112,7 @@ export const Item = ({
             onChange={() => completeTask(task.completed, task.id)}
           />
           {editMode && editId === task.id ? (
-            <form onSubmit={(e) => handleUpdate(e, task.id)}>
+            <form onSubmit={(e) => updateTask(e, task.id)}>
               <input
                 className="task_edit"
                 type="text"
