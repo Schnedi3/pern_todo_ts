@@ -1,7 +1,7 @@
 import { useTheme } from "../../hooks/useTheme";
 import { iconTheme } from "../../Routes";
 
-import "./header.css";
+import styles from "./header.module.css";
 import "./themes.css";
 
 export const Header = () => {
@@ -12,9 +12,9 @@ export const Header = () => {
   };
 
   return (
-    <button className="header" onClick={toggleTheme}>
-      <img src={iconTheme} alt="change theme icon" />
-      <p>{theme === "theme-light" ? "Dark theme" : " Light theme"}</p>
+    <button className={styles.theme} onClick={toggleTheme}>
+      <img className={styles.iconTheme} src={iconTheme} alt="change theme icon" />
+      <p className={styles.themeText}>{theme === "theme-light" ? "Dark theme" : " Light theme"}</p>
     </button>
   );
 };

@@ -1,0 +1,29 @@
+/* TODO */
+.todo {
+  width: 45%;
+  max-width: 1000px;
+  margin: auto;
+  overflow: hidden;
+  position: relative;
+  top: 11rem;
+}
+
+.reorderText {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  color: var(--gray-text);
+}
+
+/* ADAPTIVE */
+@media (max-width: 1000px) {
+  .todo {
+    width: 60%;
+  }
+}
+
+@media (max-width: 650px) {
+  .todo {
+    width: 90%;
+  }
+}

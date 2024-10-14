@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { IFooterProps } from "../../types/types";
-import "./footer.css";
+import styles from "./footer.module.css";
 
 export const Footer = ({ todoList, setFilteredList }: IFooterProps) => {
   const [category, setCategory] = useState<string>("all");
@@ -23,29 +23,32 @@ export const Footer = ({ todoList, setFilteredList }: IFooterProps) => {
   const noCompletedTasks = todoList.some((task) => task.completed);
 
   return (
-    <footer className="footer">
+    <footer className={styles.footer}>
       <p>
         {tasksLeft.length} {tasksLeft.length > 1 ? "tasks" : "task"} left
       </p>
-      <ul className="categories">
+      <ul className={styles.categories}>
         <li
+          className={`${styles.category} ${
+            category === "all" ? styles.active : ""
+          } ${noTasks ? styles.disabled : ""}`}
           onClick={() => setCategory("all")}
-          className={category === "all" ? "active" : ""}
-          id={noTasks ? "disabled" : ""}
         >
           All
         </li>
         <li
+          className={`${styles.category} ${
+            category === "active" ? styles.active : ""
+          } ${noActiveTasks || noTasks ? styles.disabled : ""}`}
           onClick={() => setCategory("active")}
-          className={category === "active" ? "active" : ""}
-          id={!noActiveTasks ? "disabled" : ""}
         >
           Active
         </li>
         <li
+          className={`${styles.category} ${
+            category === "completed" ? styles.active : ""
+          } ${noCompletedTasks || noTasks ? styles.disabled : ""}`}
           onClick={() => setCategory("completed")}
-          className={category === "completed" ? "active" : ""}
-          id={!noCompletedTasks ? "disabled" : ""}
         >
           Completed
         </li>

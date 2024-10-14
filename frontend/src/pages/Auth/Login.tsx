@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { useAuthContext } from "../../context/useAuthContext";
 import { IUser } from "../../types/types";
 import { iconEyeClose, iconEyeOpen, iconGoogle } from "../../Routes";
-import "./auth.css";
+import styles from "./auth.module.css";
 
 export const Login = () => {
   const [visiblePassword, setVisiblePassword] = useState<boolean>(false);
@@ -26,58 +26,70 @@ export const Login = () => {
   };
 
   return (
-    <section className="main_container">
+    <section className={styles.auth}>
       <form
-        className="auth_form"
-        autoComplete="off"
+        className={styles.form}
         onSubmit={handleSubmit(onSubmit)}
+        autoComplete="off"
       >
-        <article className="title">
-          <h2>Enter your account</h2>
-          <button type="submit">Log in</button>
+        <article className={styles.header}>
+          <h2 className={styles.title}>Enter your account</h2>
+          <button className={styles.authButton} type="submit">
+            Log in
+          </button>
         </article>
 
-        <article className="form_content">
+        <article className={styles.inputs}>
           <input
-            className={errors.email ? "input_error" : ""}
+            className={`${styles.input} ${
+              errors.email ? styles.inputError : ""
+            }`}
             type="email"
             placeholder="Email"
             {...register("email", { required: true })}
           />
-          <div>
+          <div className={styles.inputPassword}>
             <input
-              className={errors.password ? "input_error" : ""}
+              className={`${styles.input} ${
+                errors.password ? styles.inputError : ""
+              }`}
               type={visiblePassword ? "text" : "password"}
               placeholder="Password"
               {...register("password", { required: true, minLength: 8 })}
             />
             <button
+              className={styles.viewPass}
               type="button"
               onClick={() => setVisiblePassword(!visiblePassword)}
             >
               <img
+                className={styles.iconEye}
                 src={visiblePassword ? iconEyeClose : iconEyeOpen}
                 alt="password visibility"
               />
             </button>
           </div>
 
-          <div className="auth_footer">
-            <Link to="/reset-password">Reset password</Link>
-            <Link to="/register">Create an account</Link>
+          <div className={styles.footer}>
+            <Link className={styles.footerLink} to="/reset-password">
+              Reset password
+            </Link>
+            <Link className={styles.footerLink} to="/register">
+              Create an account
+            </Link>
           </div>
         </article>
       </form>
 
-      <article className="separator">
+      <article className={styles.separator}>
         <span></span>
         <p>or</p>
         <span></span>
       </article>
 
-      <button className="gbutton" onClick={() => loginGoogle()}>
-        <img src={iconGoogle} />
-        <p>Login with Google</p>
+      <button className={styles.gbutton} onClick={() => loginGoogle()}>
+        <img className={styles.iconGoogle} src={iconGoogle} />
+        <p className={styles.gbuttonText}>Login with Google</p>
       </button>
     </section>
   );

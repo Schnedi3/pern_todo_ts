@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 
 import { addTaskRequest, getTasksRequest } from "../../api/task";
 import { IFormProps } from "../../types/types";
-import "./form.css";
+import styles from "./form.module.css";
 
 export const Form = ({ todoList, setTodoList }: IFormProps) => {
   const [newTask, setNewTask] = useState<string>("");
@@ -60,10 +60,11 @@ export const Form = ({ todoList, setTodoList }: IFormProps) => {
   };
 
   return (
-    <form className="task_form" onSubmit={handleOnSubmit}>
-      <h1>todo</h1>
-      <article className="input_continer">
+    <form className={styles.form} onSubmit={handleOnSubmit}>
+      <h1 className={styles.title}>todo</h1>
+      <article className={styles.inputContainer}>
         <input
+          className={styles.input}
           type="text"
           placeholder="Add a new task..."
           value={newTask}
@@ -71,7 +72,7 @@ export const Form = ({ todoList, setTodoList }: IFormProps) => {
           autoFocus
         />
         <span
-          className={newTask ? "clear_icon-show" : ""}
+          className={`${styles.span} ${newTask ? styles.iconClear : ""}`}
           onClick={() => setNewTask("")}
         >
           ✖

@@ -8,8 +8,8 @@ import {
   deleteTaskRequest,
 } from "../../api/task";
 import { IItemProps } from "../../types/types";
-import { iconEdit, iconTrash } from "../../Routes";
-import "./item.css";
+import { iconTrash } from "../../Routes";
+import styles from "./item.module.css";
 
 export const Item = ({ todoList, setTodoList, filteredList }: IItemProps) => {
   const [editId, setEditId] = useState<number>(0);
@@ -33,6 +33,7 @@ export const Item = ({ todoList, setTodoList, filteredList }: IItemProps) => {
             )
           );
           toast.success(response.data.message);
+          setEditMode(false);
         } else {
           console.log(response.data.message);
         }
@@ -89,23 +90,18 @@ export const Item = ({ todoList, setTodoList, filteredList }: IItemProps) => {
 
   if (filteredList.length === 0) {
     return (
-      <section className="empty">
-        <p>No pending tasks</p>
+      <section className={styles.empty}>
+        <p className={styles.emptyText}>No pending tasks</p>
       </section>
     );
   }
 
   return (
-    <Reorder.Group
-      axis="y"
-      values={todoList}
-      onReorder={setTodoList}
-      className="list"
-    >
+    <Reorder.Group axis="y" values={todoList} onReorder={setTodoList}>
       {filteredList.map((task) => (
-        <Reorder.Item className="task_container" key={task.id} value={task}>
+        <Reorder.Item className={styles.tasks} key={task.id} value={task}>
           <input
-            className="checkbox_task checkbox_border"
+            className={`${styles.checkbox} ${styles.checkboxBorder}`}
             type="checkbox"
             id={task.text}
             checked={task.completed}
@@ -114,7 +110,7 @@ export const Item = ({ todoList, setTodoList, filteredList }: IItemProps) => {
           {editMode && editId === task.id ? (
             <form onSubmit={(e) => updateTask(e, task.id)}>
               <input
-                className="task_edit"
+                className={styles.edit}
                 type="text"
                 value={updatedText}
                 onChange={(e) => setUpdatedText(e.target.value)}
@@ -123,7 +119,9 @@ export const Item = ({ todoList, setTodoList, filteredList }: IItemProps) => {
             </form>
           ) : (
             <p
-              className={task.completed ? "task_completed" : ""}
+              className={`${styles.taskText} ${
+                task.completed ? styles.taskCompleted : ""
+              }`}
               onDoubleClick={() => {
                 setEditMode(true),
                   setEditId(task.id),
@@ -133,17 +131,8 @@ export const Item = ({ todoList, setTodoList, filteredList }: IItemProps) => {
               {task.text}
             </p>
           )}
-          <button
-            onClick={() => {
-              setEditMode(true);
-              setEditId(task.id);
-              setUpdatedText(task.text);
-            }}
-          >
-            <img src={iconEdit} alt="edit text" />
-          </button>
-          <button onClick={() => deleteTask(task.id)}>
-            <img src={iconTrash} alt="delete task" />
+          <button className={styles.button} onClick={() => deleteTask(task.id)}>
+            <img className={styles.icon} src={iconTrash} alt="delete task" />
           </button>
         </Reorder.Item>
       ))}

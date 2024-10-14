@@ -1,5 +1,5 @@
 /* TASK FORM  */
-.task_form > h1 {
+.title {
   font-family: Raleway;
   font-weight: 900;
   font-size: 2.8rem;
@@ -8,7 +8,7 @@
   letter-spacing: 2rem;
 }
 
-.input_continer {
+.inputContainer {
   width: 100%;
   padding: 1.3rem;
   margin: 1rem 0;
@@ -19,7 +19,7 @@
   justify-content: space-between;
 }
 
-.input_continer > input {
+.input {
   width: 95%;
   font-family: Poppins;
   font-size: 1.1rem;
@@ -28,19 +28,15 @@
   background-color: transparent;
 }
 
-.input_continer > input::placeholder {
+.input::placeholder {
   opacity: 0.3;
 }
 
-.input_continer > input:focus-visible {
-  outline: none;
-}
-
-.input_continer > span.clear_icon-show {
+.iconClear {
   display: block;
 }
 
-.input_continer > span {
+.span {
   display: none;
   font-size: 1.2rem;
   color: var(--gray-text);
@@ -48,7 +44,7 @@
 
 /* HOVER */
 @media (hover: hover) {
-  .input_continer > span:hover {
+  .span:hover {
     color: var(--accent);
     cursor: pointer;
   }

@@ -1,5 +1,5 @@
 /* THEME */
-.header {
+.theme {
   position: absolute;
   top: 2rem;
   left: 2rem;
@@ -9,18 +9,18 @@
   background-color: transparent;
 }
 
-.header > img {
+.iconTheme {
   width: 2rem;
 }
 
-.header > p {
+.themeText {
   font-size: 1rem;
   color: var(--white-text);
 }
 
 /* HOVER */
 @media (hover: hover) {
-  .header:hover {
+  .theme:hover {
     cursor: pointer;
   }
 }

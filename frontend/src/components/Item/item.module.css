@@ -1,29 +1,14 @@
-/* ITEM */
-.task_container {
-  padding: 1.3rem;
-  display: grid;
-  grid-template-columns: 1fr 15fr 1fr 1fr;
-  gap: 1rem;
-  background-color: var(--main-bg);
-  border-bottom: 1px solid var(--gray-text);
-  transition: background-color 0.2s ease;
-}
-
-.task_container:first-child {
-  border-radius: 0.4rem 0.4rem 0 0;
-}
-
-/* ----- */
+/* EMPTY */
 .empty {
   padding: 1.3rem;
   display: flex;
   justify-content: center;
   background-color: var(--main-bg);
-  border-radius: 0.5rem 0.5rem 0 0;
+  border-radius: 0.3rem;
   border-bottom: 2px solid var(--bg);
 }
 
-.empty > p {
+.emptyText {
   font-family: Josefin;
   font-weight: 900;
   font-size: 1.5rem;
@@ -31,21 +16,32 @@
   opacity: 0.6;
 }
 
-/* ----- */
-.checkbox_task {
+/* ITEM */
+.tasks {
+  padding: 1.3rem;
+  margin-bottom: 0.15rem;
+  display: grid;
+  grid-template-columns: 1fr 15fr 1fr;
+  gap: 1rem;
+  background-color: var(--main-bg);
+  border-radius: 0.3rem;
+  transition: background-color 0.2s ease;
+}
+
+.checkbox {
   appearance: none;
   display: grid;
   place-content: center;
 }
 
-.checkbox_border {
+.checkboxBorder {
   width: 1.6rem;
   height: 1.6rem;
   border: 2px solid var(--gray-text);
   border-radius: 50%;
 }
 
-.checkbox_task::before {
+.checkbox::before {
   content: "";
   background-image: url(../../assets/icons/check.svg),
     linear-gradient(to bottom right, #5df 0%, #c058f3 100%);
@@ -58,11 +54,11 @@
   transition: 0.3s;
 }
 
-.checkbox_task:checked::before {
+.checkbox:checked::before {
   transform: scale(1);
 }
 
-.task_edit {
+.edit {
   font-family: Poppins;
   font-size: 1.1rem;
   color: var(--main-text);
@@ -70,49 +66,45 @@
   background-color: transparent;
 }
 
-.task_edit:focus-visible {
-  outline: none;
+.edit:focus-visible {
   opacity: 0.6;
 }
 
-.task_container > p {
+.taskText {
   font-size: 1.1rem;
   color: var(--main-text);
 }
 
-.task_completed {
+.taskCompleted {
   text-decoration: line-through;
   opacity: 0.4;
 }
 
-.task_container > button {
+.button {
   display: flex;
   align-items: center;
   background-color: transparent;
 }
 
-.task_container > button > img {
+.icon {
   width: 1.2rem;
   filter: var(--filter);
-  opacity: 0.5;
+  opacity: 0.4;
 }
 
 /* HOVER */
 @media (hover: hover) {
-  .task_container:hover {
+  .tasks:hover {
     cursor: grab;
   }
 
-  .checkbox_task:hover {
+  .checkboxBorder:hover {
     border: 2px solid var(--accent);
     cursor: pointer;
   }
 
-  .task_container > button:hover {
-    cursor: pointer;
-  }
-
-  .task_container > button:hover > img {
+  .button:hover > .icon {
     opacity: 1;
+    cursor: pointer;
   }
 }

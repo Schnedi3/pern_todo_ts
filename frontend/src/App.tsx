@@ -43,7 +43,7 @@ export const App = () => {
         newestOnTop={true}
       />
 
-      <div className="header_image"></div>
+      <div className="header"></div>
       <Header />
 
       <RouterProvider router={router} />

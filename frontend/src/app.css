@@ -1,19 +1,3 @@
-/* FONTS */
-@font-face {
-  font-family: Josefin;
-  src: url(./assets/Josefin.ttf) format(truetype);
-}
-
-@font-face {
-  font-family: Poppins;
-  src: url(./assets/Poppins.ttf) format(truetype);
-}
-
-@font-face {
-  font-family: Raleway;
-  src: url(./assets/Raleway.ttf) format(truetype);
-}
-
 /* RESET */
 * {
   margin: 0;
@@ -31,54 +15,60 @@ a {
 
 button,
 input,
-textarea,
-select {
-  font-family: inherit;
-  font-weight: inherit;
+select,
+textarea {
+  font: inherit;
   border: 0;
 }
 
-ul,
-ol {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  overflow-wrap: break-word;
+}
+
+ol,
+ul {
   list-style: none;
+}
+
+/* FONTS */
+@font-face {
+  font-family: Josefin;
+  src: url(./assets/Josefin.ttf) format(truetype);
+}
+
+@font-face {
+  font-family: Poppins;
+  src: url(./assets/Poppins.ttf) format(truetype);
+}
+
+@font-face {
+  font-family: Raleway;
+  src: url(./assets/Raleway.ttf) format(truetype);
 }
 
 /* GLOBALS */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
   transition: all 0.5s;
 }
 
 body {
-  font-family: Poppins;
+  font: 0.9rem Poppins;
   background-color: var(--bg);
   animation: fade-In 1s;
 }
 
-.main_container {
-  width: 45%;
-  max-width: 1000px;
-  margin: auto;
-  position: relative;
-  top: 10rem;
-  overflow: hidden;
-}
-
-.main_container > p {
-  margin-top: 1rem;
-  display: flex;
-  justify-content: center;
-  font-family: Josefin;
-  color: var(--gray-text);
-}
-
 /* HEADER IMAGE */
-.header_image {
-  position: absolute;
+.header {
   width: 100%;
   height: 345px;
+  position: absolute;
+  inset: 0;
   background-image: linear-gradient(to right, #12e9e9cc, #d169c7cc),
     url(./assets/header.jpg);
   background-size: cover;
@@ -87,18 +77,8 @@ body {
 }
 
 /* ADAPTIVE */
-@media (max-width: 1000px) {
-  .main_container {
-    width: 57%;
-  }
-}
-
 @media (max-width: 650px) {
-  .main_container {
-    width: 90%;
-  }
-
-  .header_image {
+  .header {
     background-position: center;
   }
 }

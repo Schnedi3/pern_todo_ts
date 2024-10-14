@@ -9,7 +9,6 @@ export { Header, Logout, Footer, Form, Item };
 
 // icons
 import iconCheck from "./assets/icons/check.svg";
-import iconEdit from "./assets/icons/edit.svg";
 import iconEyeClose from "./assets/icons/eye_close.svg";
 import iconEyeOpen from "./assets/icons/eye_open.svg";
 import iconGoogle from "./assets/icons/google.svg";
@@ -18,7 +17,6 @@ import iconTrash from "./assets/icons/trash.svg";
 
 export {
   iconCheck,
-  iconEdit,
   iconEyeClose,
   iconEyeOpen,
   iconGoogle,

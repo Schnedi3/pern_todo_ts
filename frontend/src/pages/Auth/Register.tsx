@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { useAuthContext } from "../../context/useAuthContext";
 import { IUser } from "../../types/types";
 import { iconEyeClose, iconEyeOpen } from "../../Routes";
+import styles from "./auth.module.css";
 
 export const Register = () => {
   const [visiblePassword, setVisiblePassword] = useState<boolean>(false);
@@ -20,36 +21,44 @@ export const Register = () => {
   };
 
   return (
-    <section className="main_container">
+    <section className={styles.auth}>
       <form
-        className="auth_form"
-        autoComplete="off"
+        className={styles.form}
         onSubmit={handleSubmit(onSubmit)}
+        autoComplete="off"
       >
-        <article className="title">
-          <h2>Create an account</h2>
-          <button type="submit">Sign up</button>
+        <article className={styles.header}>
+          <h2 className={styles.title}>Create an account</h2>
+          <button className={styles.authButton} type="submit">
+            Sign up
+          </button>
         </article>
 
-        <article className="form_content">
+        <article className={styles.inputs}>
           <input
-            className={errors.email ? "input_error" : ""}
+            className={`${styles.input} ${
+              errors.email ? styles.inputError : ""
+            }`}
             type="email"
             placeholder="Email"
             {...register("email", { required: true })}
           />
-          <div>
+          <div className={styles.inputPassword}>
             <input
-              className={errors.password ? "input_error" : ""}
+              className={`${styles.input} ${
+                errors.password ? styles.inputError : ""
+              }`}
               type={visiblePassword ? "text" : "password"}
               placeholder="Password"
               {...register("password", { required: true, minLength: 8 })}
             />
             <button
+              className={styles.viewPass}
               type="button"
               onClick={() => setVisiblePassword(!visiblePassword)}
             >
               <img
+                className={styles.iconEye}
                 src={visiblePassword ? iconEyeClose : iconEyeOpen}
                 alt="password visibility"
               />
@@ -57,9 +66,11 @@ export const Register = () => {
           </div>
         </article>
 
-        <article className="auth_footer">
-          <p>Already have an account?</p>
-          <Link to="/Login">Login</Link>
+        <article className={styles.footer}>
+          <p className={styles.footerText}>Already have an account?</p>
+          <Link className={styles.footerLink} to="/Login">
+            Login
+          </Link>
         </article>
       </form>
     </section>

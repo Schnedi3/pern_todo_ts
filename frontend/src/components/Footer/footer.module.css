@@ -7,7 +7,7 @@
   font-size: 1em;
   color: var(--gray-text);
   background-color: var(--main-bg);
-  border-radius: 0 0 0.4rem 0.4rem;
+  border-radius: 0.3rem;
 }
 
 .categories {
@@ -15,23 +15,23 @@
   gap: 1.1rem;
 }
 
-.categories > li {
+.category {
   list-style-type: none;
   transition: 0.3s;
 }
 
-.categories > li.active {
+.active {
   color: var(--accent);
 }
 
-#disabled {
+.disabled {
   color: var(--gray-text);
   pointer-events: none;
 }
 
 /* HOVER */
 @media (hover: hover) {
-  .categories > li:hover {
+  .category:hover {
     color: var(--accent);
     cursor: pointer;
   }

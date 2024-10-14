@@ -1,21 +1,29 @@
-/* LOGIN & REGISTER */
-.title {
+/* AUTH */
+.auth {
+  width: 45%;
+  max-width: 1000px;
+  margin: auto;
+  overflow: hidden;
+  position: relative;
+  top: 11rem;
+}
+
+.header {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
-.title > h2 {
+.title {
   font-family: Raleway;
   font-weight: 900;
   font-size: 2.3rem;
   color: var(--white-text);
 }
 
-.title > button {
+.authButton {
   width: 100%;
   padding: 1rem;
-  font-family: Poppins;
   font-weight: 500;
   font-size: 1.3rem;
   color: var(--main-text);
@@ -26,7 +34,7 @@
   transition: 0.3s;
 }
 
-.form_content {
+.inputs {
   margin-top: 1.5rem;
   display: flex;
   flex-direction: column;
@@ -34,11 +42,9 @@
   margin-bottom: 0.5rem;
 }
 
-.form_content > input,
-.form_content > div > input {
+.input {
   width: 100%;
   padding: 1.3rem;
-  font-family: Poppins;
   font-size: 1rem;
   color: var(--main-text);
   background-color: var(--main-bg);
@@ -46,38 +52,37 @@
   border-radius: 0.4rem;
 }
 
-.form_content > div {
-  position: relative;
-}
-
-.form_content > input::placeholder,
-.form_content > div > input::placeholder {
+.input::placeholder {
   opacity: 0.3;
 }
 
-.form_content > div > button {
+.inputPassword {
+  position: relative;
+}
+
+.viewPass {
   background-color: transparent;
   position: absolute;
   top: 35%;
   right: 1rem;
 }
 
-.form_content > div > button > img {
+.iconEye {
   width: 1.5rem;
   filter: var(--filter);
+  opacity: 0.5;
 }
 
 #hidden {
   display: none;
 }
 
-.form_content > input.input_error,
-.form_content > div > input.input_error {
+.inputError {
   background-color: var(--error);
 }
 
-/* ----- */
-.auth_footer {
+/* FOOTER */
+.footer {
   margin-top: 1rem;
   padding: 0 0.5rem;
   display: flex;
@@ -86,24 +91,24 @@
   font-size: 1.1rem;
 }
 
-.auth_footer > p {
+.footerText {
   color: var(--main-text);
 }
 
-.auth_footer > a {
+.footerLink {
   color: var(--accent);
 }
 
-/* ----- */
+/* SEPARATOR */
 .separator {
-  margin: 1.5rem 0;
+  margin-top: 1.5rem;
   position: relative;
   display: flex;
   justify-content: center;
 }
 
 .separator > p {
-  color: var(--gray-text);
+  color: var(--main-text);
 }
 
 .separator > span {
@@ -112,7 +117,8 @@
   height: 0.05rem;
   position: absolute;
   top: 50%;
-  background-color: var(--gray-text);
+  background-color: var(--google-bg);
+  opacity: 0.5;
 }
 
 .separator > span:nth-child(1) {
@@ -123,48 +129,54 @@
   right: 0;
 }
 
-/* ----- */
+/* GBUTTON */
 .gbutton {
   width: 100%;
-  padding: 1.3rem;
+  padding: 1.2rem;
+  margin-top: 1.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 1.5rem;
-  border-radius: 0.4rem;
+  border-radius: 0.3rem;
   background-color: var(--google-bg);
 }
 
-.gbutton > img {
-  width: 1.2rem;
+.iconGoogle {
+  width: 1.4rem;
 }
 
-.gbutton > p {
-  font-size: 0.9rem;
+.gbuttonText {
   color: var(--google-text);
 }
 
 /* HOVER */
 @media (hover: hover) {
-  .title > button:hover {
+  .authButton:hover {
     color: var(--accent);
     cursor: pointer;
   }
 
-  .form_content > div > button:hover > img,
+  .viewPass:hover,
   .gbutton:hover {
     cursor: pointer;
   }
 
-  .auth_footer > a:hover {
+  .footerLink:hover {
     text-decoration: underline;
     cursor: pointer;
   }
 }
 
 /* ADAPTIVE */
+@media (max-width: 1000px) {
+  .auth {
+    width: 60%;
+  }
+}
+
 @media (max-width: 650px) {
-  .title > h2 {
-    font-size: 2rem;
+  .auth {
+    width: 90%;
   }
 }
