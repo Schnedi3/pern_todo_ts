@@ -1,28 +1,43 @@
-import { Route, Routes } from "react-router-dom";
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  RouterProvider,
+} from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import {
   Header,
   Login,
-  Logout,
   ProtectedRoute,
   Register,
   ResetPassword,
   Todo,
 } from "./Routes";
-
-import { useAuthContext } from "./context/useAuthContext";
+import { RootLayout } from "./layout/RootLayout";
 import "./app.css";
 
-export const App = () => {
-  const { isAuthenticated } = useAuthContext();
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<RootLayout />}>
+      <Route path="Login" element={<Login />} />
+      <Route path="register" element={<Register />} />
+      <Route path="reset-password" element={<ResetPassword />} />
 
+      <Route element={<ProtectedRoute />}>
+        <Route index element={<Todo />} />
+      </Route>
+    </Route>
+  )
+);
+
+export const App = () => {
   return (
     <main className="app">
       <ToastContainer
         position="bottom-right"
-        autoClose={1000}
+        autoClose={1500}
         pauseOnHover={false}
         pauseOnFocusLoss={false}
         newestOnTop={true}
@@ -31,17 +46,7 @@ export const App = () => {
       <div className="header_image"></div>
       <Header />
 
-      {isAuthenticated && <Logout />}
-
-      <Routes>
-        <Route element={<ProtectedRoute />}>
-          <Route path="/" element={<Todo />} />
-        </Route>
-
-        <Route path="/Login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/reset-password" element={<ResetPassword />} />
-      </Routes>
+      <RouterProvider router={router} />
     </main>
   );
 };

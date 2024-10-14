@@ -33,7 +33,6 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     setIsAuthenticated(true);
     Cookies.set("token", response.data.token);
     localStorage.setItem("user", JSON.stringify(response.data.result));
-    navigate("/");
   };
 
   const handleGoogleLogin = async (accessToken: string) => {
