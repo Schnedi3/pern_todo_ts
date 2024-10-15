@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
+import { useTodoStore } from "../../store/todoStore";
 import {
   completeTaskRequest,
   deleteTaskRequest,
@@ -11,17 +12,18 @@ import { IItemProps } from "../../types/types";
 import { iconTrash } from "../../Routes";
 import styles from "./item.module.css";
 
-export const Item = ({ todoList, setTodoList, filteredList }: IItemProps) => {
+export const Item = ({ filteredList }: IItemProps) => {
   const [editId, setEditId] = useState<number>(0);
   const [editMode, setEditMode] = useState<boolean>(false);
   const [updatedText, setUpdatedText] = useState<string>("");
+  const { completeTodo, deleteTodo, getTodos, updateTodo } = useTodoStore();
 
   const getTasks = useCallback(async () => {
     try {
       const { data } = await getTasksRequest();
 
       if (data.success) {
-        setTodoList(data.result);
+        getTodos(data.result);
       } else {
         console.log(data.message);
       }
@@ -32,40 +34,11 @@ export const Item = ({ todoList, setTodoList, filteredList }: IItemProps) => {
         console.log("An unexpected error occurred");
       }
     }
-  }, [setTodoList]);
+  }, [getTodos]);
 
   useEffect(() => {
     getTasks();
   }, [getTasks]);
-
-  const updateTask = async (
-    e: React.FormEvent<HTMLFormElement>,
-    id: number
-  ) => {
-    e.preventDefault();
-
-    try {
-      if (updatedText.trim() !== "") {
-        const { data } = await updateTaskRequest(updatedText, id);
-
-        if (data.success) {
-          setTodoList(
-            todoList.map((task) => (task.id === id ? data.result : task))
-          );
-          toast.success(data.message);
-          setEditMode(false);
-        } else {
-          console.log(data.message);
-        }
-      }
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        console.log(error.message);
-      } else {
-        console.log("An unexpected error occurred");
-      }
-    }
-  };
 
   const completeTask = async (completed: boolean, id: number) => {
     completed = !completed;
@@ -74,9 +47,7 @@ export const Item = ({ todoList, setTodoList, filteredList }: IItemProps) => {
       const { data } = await completeTaskRequest(completed, id);
 
       if (data.success) {
-        setTodoList(
-          todoList.map((task) => (task.id === id ? data.result : task))
-        );
+        completeTodo(id, data.result);
       } else {
         console.log(data.message);
       }
@@ -94,10 +65,37 @@ export const Item = ({ todoList, setTodoList, filteredList }: IItemProps) => {
       const { data } = await deleteTaskRequest(id);
 
       if (data.success) {
-        setTodoList(todoList.filter((task) => task.id !== id));
+        deleteTodo(id);
         toast.success(data.message);
       } else {
         console.log(data.message);
+      }
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.log(error.message);
+      } else {
+        console.log("An unexpected error occurred");
+      }
+    }
+  };
+
+  const updateTask = async (
+    e: React.FormEvent<HTMLFormElement>,
+    id: number
+  ) => {
+    e.preventDefault();
+
+    try {
+      if (updatedText.trim() !== "") {
+        const { data } = await updateTaskRequest(updatedText, id);
+
+        if (data.success) {
+          updateTodo(id, data.result);
+          toast.success(data.message);
+          setEditMode(false);
+        } else {
+          console.log(data.message);
+        }
       }
     } catch (error: unknown) {
       if (error instanceof Error) {

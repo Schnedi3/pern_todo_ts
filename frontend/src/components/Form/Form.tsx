@@ -2,11 +2,12 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 
 import { addTaskRequest } from "../../api/task";
-import { IFormProps } from "../../types/types";
 import styles from "./form.module.css";
+import { useTodoStore } from "../../store/todoStore";
 
-export const Form = ({ todoList, setTodoList }: IFormProps) => {
+export const Form = () => {
   const [newTask, setNewTask] = useState<string>("");
+  const { addTodo } = useTodoStore();
 
   const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -21,7 +22,7 @@ export const Form = ({ todoList, setTodoList }: IFormProps) => {
         const { data } = await addTaskRequest(newTask);
 
         if (data.success) {
-          setTodoList([...todoList, data.result]);
+          addTodo(data.result);
           setNewTask("");
           toast.success(data.message);
         } else {

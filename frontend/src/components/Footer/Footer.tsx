@@ -2,25 +2,27 @@ import { useEffect, useState } from "react";
 
 import { IFooterProps } from "../../types/types";
 import styles from "./footer.module.css";
+import { useTodoStore } from "../../store/todoStore";
 
-export const Footer = ({ todoList, setFilteredList }: IFooterProps) => {
+export const Footer = ({ setFilteredList }: IFooterProps) => {
   const [category, setCategory] = useState<string>("all");
+  const { todos } = useTodoStore();
 
   useEffect(() => {
-    const filtered = todoList.filter((task) => {
+    const filtered = todos.filter((task) => {
       if (category === "active") return !task.completed;
       if (category === "completed") return task.completed;
       return task;
     });
 
     setFilteredList(filtered);
-  }, [category, todoList, setFilteredList]);
+  }, [category, todos, setFilteredList]);
 
-  const tasksLeft = todoList.filter((task) => !task.completed);
+  const tasksLeft = todos.filter((task) => !task.completed);
 
-  const noTasks = todoList.length === 0;
-  const noActiveTasks = todoList.some((task) => !task.completed);
-  const noCompletedTasks = todoList.some((task) => task.completed);
+  const noTasks = todos.length === 0;
+  const noActiveTasks = todos.some((task) => !task.completed);
+  const noCompletedTasks = todos.some((task) => task.completed);
 
   return (
     <footer className={styles.footer}>
@@ -39,7 +41,7 @@ export const Footer = ({ todoList, setFilteredList }: IFooterProps) => {
         <li
           className={`${styles.category} ${
             category === "active" ? styles.active : ""
-          } ${noActiveTasks || noTasks ? styles.disabled : ""}`}
+          } ${!noActiveTasks || noTasks ? styles.disabled : ""}`}
           onClick={() => setCategory("active")}
         >
           Active
@@ -47,7 +49,7 @@ export const Footer = ({ todoList, setFilteredList }: IFooterProps) => {
         <li
           className={`${styles.category} ${
             category === "completed" ? styles.active : ""
-          } ${noCompletedTasks || noTasks ? styles.disabled : ""}`}
+          } ${!noCompletedTasks || noTasks ? styles.disabled : ""}`}
           onClick={() => setCategory("completed")}
         >
           Completed
