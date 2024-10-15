@@ -25,18 +25,14 @@ export const ResetPassword = () => {
     try {
       const { data } = await resetPasswordRequest(user);
 
-      if (data.success) {
-        toast.success(data.message);
-        navigate("/Login");
-      } else {
-        toast.error(data.message);
+      if (!data.success) {
+        console.log(data.message);
       }
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        console.log(error.message);
-      } else {
-        console.log("An unexpected error occurred");
-      }
+
+      toast.success(data.message);
+      navigate("/Login");
+    } catch (error) {
+      console.log(error instanceof Error ? error.message : "Unexpected error");
     }
   };
 

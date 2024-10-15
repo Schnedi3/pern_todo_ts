@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 
+import { useTodoStore } from "../../store/todoStore";
 import { addTaskRequest } from "../../api/task";
 import styles from "./form.module.css";
-import { useTodoStore } from "../../store/todoStore";
 
 export const Form = () => {
   const [newTask, setNewTask] = useState<string>("");
@@ -21,19 +21,17 @@ export const Form = () => {
       try {
         const { data } = await addTaskRequest(newTask);
 
-        if (data.success) {
-          addTodo(data.result);
-          setNewTask("");
-          toast.success(data.message);
-        } else {
+        if (!data.success) {
           console.log(data.message);
         }
-      } catch (error: unknown) {
-        if (error instanceof Error) {
-          console.log(error.message);
-        } else {
-          console.log("An unexpected error occurred");
-        }
+
+        addTodo(data.result);
+        setNewTask("");
+        toast.success(data.message);
+      } catch (error) {
+        console.log(
+          error instanceof Error ? error.message : "Unexpected error"
+        );
       }
     }
   };

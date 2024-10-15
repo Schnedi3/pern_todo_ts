@@ -22,17 +22,13 @@ export const Item = ({ filteredList }: IItemProps) => {
     try {
       const { data } = await getTasksRequest();
 
-      if (data.success) {
-        getTodos(data.result);
-      } else {
+      if (!data.success) {
         console.log(data.message);
       }
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        console.log(error.message);
-      } else {
-        console.log("An unexpected error occurred");
-      }
+
+      getTodos(data.result);
+    } catch (error) {
+      console.log(error instanceof Error ? error.message : "Unexpected error");
     }
   }, [getTodos]);
 
@@ -46,17 +42,13 @@ export const Item = ({ filteredList }: IItemProps) => {
     try {
       const { data } = await completeTaskRequest(completed, id);
 
-      if (data.success) {
-        completeTodo(id, data.result);
-      } else {
+      if (!data.success) {
         console.log(data.message);
       }
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        console.log(error.message);
-      } else {
-        console.log("An unexpected error occurred");
-      }
+
+      completeTodo(id, data.result);
+    } catch (error) {
+      console.log(error instanceof Error ? error.message : "Unexpected error");
     }
   };
 
@@ -64,18 +56,14 @@ export const Item = ({ filteredList }: IItemProps) => {
     try {
       const { data } = await deleteTaskRequest(id);
 
-      if (data.success) {
-        deleteTodo(id);
-        toast.success(data.message);
-      } else {
+      if (!data.success) {
         console.log(data.message);
       }
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        console.log(error.message);
-      } else {
-        console.log("An unexpected error occurred");
-      }
+
+      deleteTodo(id);
+      toast.success(data.message);
+    } catch (error) {
+      console.log(error instanceof Error ? error.message : "Unexpected error");
     }
   };
 
@@ -89,20 +77,16 @@ export const Item = ({ filteredList }: IItemProps) => {
       if (updatedText.trim() !== "") {
         const { data } = await updateTaskRequest(updatedText, id);
 
-        if (data.success) {
-          updateTodo(id, data.result);
-          toast.success(data.message);
-          setEditMode(false);
-        } else {
+        if (!data.success) {
           console.log(data.message);
         }
+
+        updateTodo(id, data.result);
+        toast.success(data.message);
+        setEditMode(false);
       }
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        console.log(error.message);
-      } else {
-        console.log("An unexpected error occurred");
-      }
+    } catch (error) {
+      console.log(error instanceof Error ? error.message : "Unexpected error");
     }
   };
 

@@ -29,18 +29,14 @@ export const Login = () => {
     try {
       const { data } = await loginGoogleRequest(accessToken);
 
-      if (data.success) {
-        authData(data);
-        toast.success(data.message);
-      } else {
-        toast.error(data.message);
+      if (!data.success) {
+        console.log(data.message);
       }
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        console.log(error.message);
-      } else {
-        console.log("An unexpected error occurred");
-      }
+
+      authData(data);
+      toast.success(data.message);
+    } catch (error) {
+      console.log(error instanceof Error ? error.message : "Unexpected error");
     }
   };
 
@@ -52,18 +48,14 @@ export const Login = () => {
     try {
       const { data } = await loginRequest(user);
 
-      if (data.success) {
-        authData(data);
-        toast.success(data.message);
-      } else {
-        toast.error(data.message);
+      if (!data.success) {
+        console.log(data.message);
       }
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        console.log(error.message);
-      } else {
-        console.log("An unexpected error occurred");
-      }
+
+      authData(data);
+      toast.success(data.message);
+    } catch (error) {
+      console.log(error instanceof Error ? error.message : "Unexpected error");
     }
   };
 

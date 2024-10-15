@@ -26,17 +26,14 @@ export const Register = () => {
     try {
       const { data } = await registerRequest(user);
 
-      if (data.success) {
-        authData(data.result);
-      } else {
-        toast.error(data.message);
+      if (!data.success) {
+        console.log(data.message);
       }
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        console.log(error.message);
-      } else {
-        console.log("An unexpected error occurred");
-      }
+
+      authData(data.result);
+      toast.success(data.message);
+    } catch (error) {
+      console.log(error instanceof Error ? error.message : "Unexpected error");
     }
   };
 
