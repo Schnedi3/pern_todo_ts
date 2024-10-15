@@ -24,18 +24,16 @@ export const Item = ({ todoList, setTodoList, filteredList }: IItemProps) => {
 
     try {
       if (updatedText.trim() !== "") {
-        const response = await updateTaskRequest(updatedText, id);
+        const { data } = await updateTaskRequest(updatedText, id);
 
-        if (response.data.success) {
+        if (data.success) {
           setTodoList(
-            todoList.map((task) =>
-              task.id === id ? response.data.result : task
-            )
+            todoList.map((task) => (task.id === id ? data.result : task))
           );
-          toast.success(response.data.message);
+          toast.success(data.message);
           setEditMode(false);
         } else {
-          console.log(response.data.message);
+          console.log(data.message);
         }
       }
     } catch (error: unknown) {
@@ -51,14 +49,14 @@ export const Item = ({ todoList, setTodoList, filteredList }: IItemProps) => {
     completed = !completed;
 
     try {
-      const response = await completeTaskRequest(completed, id);
+      const { data } = await completeTaskRequest(completed, id);
 
-      if (response.data.success) {
+      if (data.success) {
         setTodoList(
-          todoList.map((task) => (task.id === id ? response.data.result : task))
+          todoList.map((task) => (task.id === id ? data.result : task))
         );
       } else {
-        console.log(response.data.message);
+        console.log(data.message);
       }
     } catch (error: unknown) {
       if (error instanceof Error) {
@@ -71,13 +69,13 @@ export const Item = ({ todoList, setTodoList, filteredList }: IItemProps) => {
 
   const deleteTask = async (id: number) => {
     try {
-      const response = await deleteTaskRequest(id);
+      const { data } = await deleteTaskRequest(id);
 
-      if (response.data.success) {
+      if (data.success) {
         setTodoList(todoList.filter((task) => task.id !== id));
-        toast.success(response.data.message);
+        toast.success(data.message);
       } else {
-        console.log(response.data.message);
+        console.log(data.message);
       }
     } catch (error: unknown) {
       if (error instanceof Error) {

@@ -19,6 +19,18 @@ export interface IFooterProps {
   setFilteredList: (filteredList: ITask[]) => void;
 }
 
+export interface IAuthResponse {
+  success: boolean;
+  message: string;
+  result: {
+    id: number;
+    email: string;
+    password: string | null;
+    google_id: string | null;
+  };
+  token: string;
+}
+
 export interface IItemProps {
   todoList: ITask[];
   setTodoList: (todoList: ITask[]) => void;
@@ -33,5 +45,6 @@ export interface ITask {
 
 export interface IUser {
   email: string;
-  password: string;
+  password: string | null;
+  google_id: string | null;
 }

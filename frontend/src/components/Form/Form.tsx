@@ -17,12 +17,12 @@ export const Form = ({ todoList, setTodoList }: IFormProps) => {
 
   const getTasks = useCallback(async () => {
     try {
-      const response = await getTasksRequest();
+      const { data } = await getTasksRequest();
 
-      if (response.data.success) {
-        setTodoList(response.data.result);
+      if (data.success) {
+        setTodoList(data.result);
       } else {
-        console.log(response.data.message);
+        console.log(data.message);
       }
     } catch (error: unknown) {
       if (error instanceof Error) {
@@ -40,14 +40,14 @@ export const Form = ({ todoList, setTodoList }: IFormProps) => {
   const addTask = async () => {
     if (newTask.trim()) {
       try {
-        const response = await addTaskRequest(newTask);
+        const { data } = await addTaskRequest(newTask);
 
-        if (response.data.success) {
-          setTodoList([...todoList, response.data.result]);
+        if (data.success) {
+          setTodoList([...todoList, data.result]);
           setNewTask("");
-          toast.success(response.data.message);
+          toast.success(data.message);
         } else {
-          console.log(response.data.message);
+          console.log(data.message);
         }
       } catch (error: unknown) {
         if (error instanceof Error) {

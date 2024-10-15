@@ -10,7 +10,7 @@ import {
   registerRequest,
   resetPasswordRequest,
 } from "../api/auth";
-import { AuthContextType, IUser } from "../types/types";
+import { AuthContextType, IAuthResponse, IUser } from "../types/types";
 
 export const AuthContext = createContext<AuthContextType | undefined>(
   undefined
@@ -26,23 +26,22 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     onError: (error) => console.log("Login failed", error),
   });
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleAuthSuccess = (response: any) => {
-    setUser(response.data.result);
-    toast.success(response.data.message);
+  const handleAuthSuccess = (data: IAuthResponse) => {
+    setUser(data.result);
+    toast.success(data.message);
     setIsAuthenticated(true);
-    Cookies.set("token", response.data.token);
-    localStorage.setItem("user", JSON.stringify(response.data.result));
+    Cookies.set("token", data.token);
+    localStorage.setItem("user", JSON.stringify(data.result));
   };
 
   const handleGoogleLogin = async (accessToken: string) => {
     try {
-      const response = await loginGoogleRequest(accessToken);
+      const { data } = await loginGoogleRequest(accessToken);
 
-      if (response.data.success) {
-        handleAuthSuccess(response);
+      if (data.success) {
+        handleAuthSuccess(data);
       } else {
-        toast.error(response.data.message);
+        toast.error(data.message);
       }
     } catch (error: unknown) {
       if (error instanceof Error) {
@@ -55,12 +54,12 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
 
   const loginUser = async (user: IUser) => {
     try {
-      const response = await loginRequest(user);
+      const { data } = await loginRequest(user);
 
-      if (response.data.success) {
-        handleAuthSuccess(response);
+      if (data.success) {
+        handleAuthSuccess(data);
       } else {
-        toast.error(response.data.message);
+        toast.error(data.message);
       }
     } catch (error: unknown) {
       if (error instanceof Error) {
@@ -73,12 +72,12 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
 
   const registerUser = async (user: IUser) => {
     try {
-      const response = await registerRequest(user);
+      const { data } = await registerRequest(user);
 
-      if (response.data.success) {
-        handleAuthSuccess(response);
+      if (data.success) {
+        handleAuthSuccess(data);
       } else {
-        toast.error(response.data.message);
+        toast.error(data.message);
       }
     } catch (error: unknown) {
       if (error instanceof Error) {
@@ -91,13 +90,13 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
 
   const resetPassword = async (user: IUser) => {
     try {
-      const response = await resetPasswordRequest(user);
+      const { data } = await resetPasswordRequest(user);
 
-      if (response.data.success) {
-        toast.success(response.data.message);
+      if (data.success) {
+        toast.success(data.message);
         navigate("/Login");
       } else {
-        toast.error(response.data.message);
+        toast.error(data.message);
       }
     } catch (error: unknown) {
       if (error instanceof Error) {
