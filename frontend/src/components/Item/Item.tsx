@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Reorder } from "framer-motion";
 import { toast } from "react-toastify";
 
 import {
   completeTaskRequest,
-  updateTaskRequest,
   deleteTaskRequest,
+  getTasksRequest,
+  updateTaskRequest,
 } from "../../api/task";
 import { IItemProps } from "../../types/types";
 import { iconTrash } from "../../Routes";
@@ -15,6 +16,28 @@ export const Item = ({ todoList, setTodoList, filteredList }: IItemProps) => {
   const [editId, setEditId] = useState<number>(0);
   const [editMode, setEditMode] = useState<boolean>(false);
   const [updatedText, setUpdatedText] = useState<string>("");
+
+  const getTasks = useCallback(async () => {
+    try {
+      const { data } = await getTasksRequest();
+
+      if (data.success) {
+        setTodoList(data.result);
+      } else {
+        console.log(data.message);
+      }
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.log(error.message);
+      } else {
+        console.log("An unexpected error occurred");
+      }
+    }
+  }, [setTodoList]);
+
+  useEffect(() => {
+    getTasks();
+  }, [getTasks]);
 
   const updateTask = async (
     e: React.FormEvent<HTMLFormElement>,

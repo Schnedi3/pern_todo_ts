@@ -1,7 +1,7 @@
-import { useCallback, useEffect, useState } from "react";
+import { useState } from "react";
 import { toast } from "react-toastify";
 
-import { addTaskRequest, getTasksRequest } from "../../api/task";
+import { addTaskRequest } from "../../api/task";
 import { IFormProps } from "../../types/types";
 import styles from "./form.module.css";
 
@@ -14,28 +14,6 @@ export const Form = ({ todoList, setTodoList }: IFormProps) => {
       addTask();
     }
   };
-
-  const getTasks = useCallback(async () => {
-    try {
-      const { data } = await getTasksRequest();
-
-      if (data.success) {
-        setTodoList(data.result);
-      } else {
-        console.log(data.message);
-      }
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        console.log(error.message);
-      } else {
-        console.log("An unexpected error occurred");
-      }
-    }
-  }, [setTodoList]);
-
-  useEffect(() => {
-    getTasks();
-  }, [getTasks]);
 
   const addTask = async () => {
     if (newTask.trim()) {
