@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useGoogleLogin } from "@react-oauth/google";
+import { toast } from "react-toastify";
 
-import { useAuthContext } from "../../context/useAuthContext";
+import { useAuthStore } from "../../store/authStore";
+import { loginGoogleRequest, loginRequest } from "../../api/auth";
 import { IUser } from "../../types/types";
 import { iconEyeClose, iconEyeOpen, iconGoogle } from "../../Routes";
 import styles from "./auth.module.css";
@@ -14,16 +17,59 @@ export const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<IUser>();
-  const { loginGoogle, loginUser, isAuthenticated } = useAuthContext();
+  const { isAuthenticated, authData } = useAuthStore();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (isAuthenticated) return navigate("/");
-  }, [isAuthenticated, navigate]);
+  const loginGoogle = useGoogleLogin({
+    onSuccess: (codeRespose) => googleLogin(codeRespose.access_token),
+    onError: (error) => console.log("Login failed", error),
+  });
+
+  const googleLogin = async (accessToken: string) => {
+    try {
+      const { data } = await loginGoogleRequest(accessToken);
+
+      if (data.success) {
+        authData(data);
+        toast.success(data.message);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.log(error.message);
+      } else {
+        console.log("An unexpected error occurred");
+      }
+    }
+  };
 
   const onSubmit = (data: IUser) => {
     loginUser(data);
   };
+
+  const loginUser = async (user: IUser) => {
+    try {
+      const { data } = await loginRequest(user);
+
+      if (data.success) {
+        authData(data);
+        toast.success(data.message);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.log(error.message);
+      } else {
+        console.log("An unexpected error occurred");
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (isAuthenticated) return navigate("/");
+  }, [isAuthenticated, navigate]);
 
   return (
     <section className={styles.auth}>

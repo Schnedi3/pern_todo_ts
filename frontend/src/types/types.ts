@@ -1,13 +1,9 @@
 // Auth
-export interface AuthContextType {
-  user: IUser | null;
-  loginGoogle: () => void;
-  loginUser: (user: IUser) => void;
-  registerUser: (user: IUser) => void;
-  resetPassword: (user: IUser) => void;
-  logout: () => void;
+export interface IAuthStore {
   isAuthenticated: boolean;
-  setIsAuthenticated: (isAuthenticated: boolean) => void;
+  user: IUser | null;
+  authData: (data: IAuthResponse) => void;
+  logoutAuth: () => void;
 }
 
 export interface IAuthResponse {

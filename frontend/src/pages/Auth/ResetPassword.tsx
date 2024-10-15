@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
-import { useAuthContext } from "../../context/useAuthContext";
+import { resetPasswordRequest } from "../../api/auth";
 import { IUser } from "../../types/types";
 import { iconEyeClose, iconEyeOpen } from "../../Routes";
 import styles from "./auth.module.css";
+import { toast } from "react-toastify";
 
 export const ResetPassword = () => {
   const [visiblePassword, setVisiblePassword] = useState<boolean>(false);
@@ -13,10 +15,29 @@ export const ResetPassword = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<IUser>();
-  const { resetPassword } = useAuthContext();
+  const navigate = useNavigate();
 
   const onSubmit = (data: IUser) => {
     resetPassword(data);
+  };
+
+  const resetPassword = async (user: IUser) => {
+    try {
+      const { data } = await resetPasswordRequest(user);
+
+      if (data.success) {
+        toast.success(data.message);
+        navigate("/Login");
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.log(error.message);
+      } else {
+        console.log("An unexpected error occurred");
+      }
+    }
   };
 
   return (

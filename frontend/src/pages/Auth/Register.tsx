@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
-import { useAuthContext } from "../../context/useAuthContext";
+import { useAuthStore } from "../../store/authStore";
+import { registerRequest } from "../../api/auth";
 import { IUser } from "../../types/types";
 import { iconEyeClose, iconEyeOpen } from "../../Routes";
 import styles from "./auth.module.css";
@@ -14,10 +16,28 @@ export const Register = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<IUser>();
-  const { registerUser } = useAuthContext();
+  const { authData } = useAuthStore();
 
   const onSubmit = (data: IUser) => {
     registerUser(data);
+  };
+
+  const registerUser = async (user: IUser) => {
+    try {
+      const { data } = await registerRequest(user);
+
+      if (data.success) {
+        authData(data.result);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.log(error.message);
+      } else {
+        console.log("An unexpected error occurred");
+      }
+    }
   };
 
   return (

@@ -1,11 +1,15 @@
-import { useAuthContext } from "../../context/useAuthContext";
+import { useAuthStore } from "../../store/authStore";
 import styles from "./logout.module.css";
 
 export const Logout = () => {
-  const { logout } = useAuthContext();
+  const { logoutAuth } = useAuthStore();
+
+  const logOut = () => {
+    logoutAuth();
+  };
 
   return (
-    <button className={styles.logout} onClick={logout}>
+    <button className={styles.logout} onClick={logOut}>
       Logout
     </button>
   );
