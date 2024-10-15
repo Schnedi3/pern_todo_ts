@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useState } from "react";
-import { Reorder } from "framer-motion";
 import { toast } from "react-toastify";
 
 import {
@@ -118,9 +117,9 @@ export const Item = ({ todoList, setTodoList, filteredList }: IItemProps) => {
   }
 
   return (
-    <Reorder.Group axis="y" values={todoList} onReorder={setTodoList}>
+    <ul>
       {filteredList.map((task) => (
-        <Reorder.Item className={styles.tasks} key={task.id} value={task}>
+        <li className={styles.tasks} key={task.id}>
           <input
             className={`${styles.checkbox} ${styles.checkboxBorder}`}
             type="checkbox"
@@ -155,8 +154,8 @@ export const Item = ({ todoList, setTodoList, filteredList }: IItemProps) => {
           <button className={styles.button} onClick={() => deleteTask(task.id)}>
             <img className={styles.icon} src={iconTrash} alt="delete task" />
           </button>
-        </Reorder.Item>
+        </li>
       ))}
-    </Reorder.Group>
+    </ul>
   );
 };

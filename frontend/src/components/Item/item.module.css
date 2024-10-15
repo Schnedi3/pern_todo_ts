@@ -94,10 +94,6 @@
 
 /* HOVER */
 @media (hover: hover) {
-  .tasks:hover {
-    cursor: grab;
-  }
-
   .checkboxBorder:hover {
     border: 2px solid var(--accent);
     cursor: pointer;
