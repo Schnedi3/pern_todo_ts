@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useGoogleLogin } from "@react-oauth/google";
 
-import { useAuthContext } from "../../context/useAuthContext";
+import { useLogin, useLoginGoogle } from "../../api/auth";
 import { IUser } from "../../types/types";
 import { iconEyeClose, iconEyeOpen, iconGoogle } from "../../Routes";
 import styles from "./auth.module.css";
@@ -14,12 +15,13 @@ export const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<IUser>();
-  const { loginGoogle, loginUser, isAuthenticated } = useAuthContext();
-  const navigate = useNavigate();
+  const { mutate: googleLogin } = useLoginGoogle();
+  const { mutate: loginUser } = useLogin();
 
-  useEffect(() => {
-    if (isAuthenticated) return navigate("/");
-  }, [isAuthenticated, navigate]);
+  const loginGoogle = useGoogleLogin({
+    onSuccess: (codeResponse) => googleLogin(codeResponse.access_token),
+    onError: (error) => console.log("Login Failed:", error),
+  });
 
   const onSubmit = (data: IUser) => {
     loginUser(data);

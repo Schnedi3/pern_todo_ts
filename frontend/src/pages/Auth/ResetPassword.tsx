@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
-import { useAuthContext } from "../../context/useAuthContext";
+import { useResetPassword } from "../../api/auth";
 import { IUser } from "../../types/types";
 import { iconEyeClose, iconEyeOpen } from "../../Routes";
 import styles from "./auth.module.css";
@@ -13,7 +13,7 @@ export const ResetPassword = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<IUser>();
-  const { resetPassword } = useAuthContext();
+  const { mutate: resetPassword } = useResetPassword();
 
   const onSubmit = (data: IUser) => {
     resetPassword(data);

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
-import { useAuthContext } from "../../context/useAuthContext";
+import { useRegister } from "../../api/auth";
 import { IUser } from "../../types/types";
 import { iconEyeClose, iconEyeOpen } from "../../Routes";
 import styles from "./auth.module.css";
@@ -14,7 +14,7 @@ export const Register = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<IUser>();
-  const { registerUser } = useAuthContext();
+  const { mutate: registerUser } = useRegister();
 
   const onSubmit = (data: IUser) => {
     registerUser(data);
