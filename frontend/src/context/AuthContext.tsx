@@ -1,5 +1,4 @@
 import { createContext, PropsWithChildren, useEffect, useState } from "react";
-import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useGoogleLogin } from "@react-oauth/google";
@@ -30,7 +29,6 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     setUser(data.result);
     toast.success(data.message);
     setIsAuthenticated(true);
-    Cookies.set("token", data.token);
     localStorage.setItem("user", JSON.stringify(data.result));
   };
 
@@ -108,17 +106,15 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   };
 
   const logout = () => {
-    Cookies.remove("token");
     localStorage.removeItem("user");
     setIsAuthenticated(false);
     setUser(null);
   };
 
   const checkAuth = () => {
-    const token = Cookies.get("token");
     const savedUser = localStorage.getItem("user");
 
-    if (token && savedUser) {
+    if (savedUser) {
       setUser(JSON.parse(savedUser));
       setIsAuthenticated(true);
     } else {
