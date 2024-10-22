@@ -11,8 +11,8 @@ export const useLoginGoogle = () => {
   const navigate = useNavigate();
 
   return useMutation({
-    mutationFn: (accessToken: string) => {
-      return customAxios.post("/auth/google", { accessToken });
+    mutationFn: (access_token: string) => {
+      return customAxios.post("/auth/google", { access_token });
     },
     onSuccess: ({ data }) => {
       authData(data.result);
@@ -65,8 +65,8 @@ export const useResetPassword = () => {
   });
 };
 
-export const generateRefreshToken = () => {
-  return customAxios.post("/auth/refresh-token");
+export const generateRefreshToken = async () => {
+  await customAxios.post("/auth/refresh-token");
 };
 
 customAxios.interceptors.response.use(
@@ -75,7 +75,7 @@ customAxios.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
-    if (error.response.status === 401 && !originalRequest._retry) {
+    if (error.response.status === 403 && !originalRequest._retry) {
       originalRequest._retry = true;
 
       try {

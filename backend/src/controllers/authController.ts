@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import axios from "axios";
+import jwt from "jsonwebtoken";
 
 import {
   loginGoogleDB,
@@ -8,12 +9,16 @@ import {
   registerUserDB,
   resetPasswordDB,
 } from "../database/authDB";
-import { generateToken } from "../libs/generateToken";
+import {
+  generateAccessToken,
+  generateRefreshToken,
+} from "../libs/generateToken";
+import { ACCESS_TOKEN, JWT_SECRET, REFRESH_TOKEN } from "../config/config";
 
 export const loginGoogle = async (req: Request, res: Response) => {
-  const { accessToken } = req.body;
+  const { access_token } = req.body;
 
-  const tokenURL = `https://www.googleapis.com/oauth2/v3/userinfo?access_token=${accessToken}`;
+  const tokenURL = `https://www.googleapis.com/oauth2/v3/userinfo?access_token=${access_token}`;
 
   try {
     const userInfo = await axios.get(tokenURL);
@@ -21,14 +26,15 @@ export const loginGoogle = async (req: Request, res: Response) => {
 
     const result = await loginGoogleDB(email, sub);
 
-    const token = generateToken(result.id);
-    res.cookie("token", token);
+    const accessToken = generateAccessToken(result);
+    const refreshToken = generateRefreshToken(result);
+    setAccessCookie(res, accessToken);
+    setRefreshCookie(res, refreshToken);
 
     res.status(200).json({
       success: true,
       message: "Logged in succesfully",
       result,
-      token,
     });
   } catch (error: any) {
     res.status(500).json({ success: false, message: error.message });
@@ -48,14 +54,15 @@ export const loginUser = async (req: Request, res: Response) => {
         .json({ success: false, message: "Invalid password" });
     }
 
-    const token = generateToken(result.id);
-    res.cookie("token", token);
+    const accessToken = generateAccessToken(result);
+    const refreshToken = generateRefreshToken(result);
+    setAccessCookie(res, accessToken);
+    setRefreshCookie(res, refreshToken);
 
     res.status(200).json({
       success: true,
       message: "Logged in succesfully",
       result,
-      token,
     });
   } catch (error: any) {
     res.status(500).json({ success: false, message: error.message });
@@ -70,14 +77,15 @@ export const registerUser = async (req: Request, res: Response) => {
   try {
     const result = await registerUserDB(email, hashedPassword);
 
-    const token = generateToken(result.id);
-    res.cookie("token", token);
+    const accessToken = generateAccessToken(result);
+    const refreshToken = generateRefreshToken(result);
+    setAccessCookie(res, accessToken);
+    setRefreshCookie(res, refreshToken);
 
     res.status(200).json({
       success: true,
       message: "Registered succesfully",
       result,
-      token,
     });
   } catch (error: any) {
     if (error.code === "23505") {
@@ -102,4 +110,50 @@ export const resetPassword = async (req: Request, res: Response) => {
   } catch (error: any) {
     res.status(500).json({ success: false, message: error.message });
   }
+};
+
+export const tokenController = (req: Request, res: Response) => {
+  const { refreshToken } = req.cookies;
+
+  if (!refreshToken) {
+    return res
+      .status(401)
+      .json({ success: false, message: "Missing refresh token" });
+  }
+
+  try {
+    jwt.verify(refreshToken, JWT_SECRET, (err: Error | null, decoded: any) => {
+      if (err) {
+        return res
+          .status(401)
+          .json({ success: false, message: "Verification failed" });
+      }
+
+      const accessToken = generateAccessToken(decoded);
+      setAccessCookie(res, accessToken);
+
+      res.status(200).json({
+        success: true,
+        message: "Token refreshed succesfully",
+      });
+    });
+  } catch (error: any) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+const setAccessCookie = (res: Response, accessToken: string) => {
+  res.cookie(ACCESS_TOKEN, accessToken, {
+    httpOnly: true,
+    secure: true,
+    path: "/",
+  });
+};
+
+const setRefreshCookie = (res: Response, refreshToken: string) => {
+  res.cookie(REFRESH_TOKEN, refreshToken, {
+    httpOnly: true,
+    secure: true,
+    path: "/",
+  });
 };
