@@ -1,39 +1,17 @@
 import { useState } from "react";
-import { toast } from "react-toastify";
 
-import { addTaskRequest } from "../../api/task";
-import { IFormProps } from "../../types/types";
+import { useAddTask } from "../../api/task";
 import styles from "./form.module.css";
 
-export const Form = ({ todoList, setTodoList }: IFormProps) => {
+export const Form = () => {
   const [newTask, setNewTask] = useState<string>("");
+  const { mutate: addTask } = useAddTask();
 
   const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     if (newTask) {
-      addTask();
-    }
-  };
-
-  const addTask = async () => {
-    if (newTask.trim()) {
-      try {
-        const { data } = await addTaskRequest(newTask);
-
-        if (data.success) {
-          setTodoList([...todoList, data.result]);
-          setNewTask("");
-          toast.success(data.message);
-        } else {
-          console.log(data.message);
-        }
-      } catch (error: unknown) {
-        if (error instanceof Error) {
-          console.log(error.message);
-        } else {
-          console.log("An unexpected error occurred");
-        }
-      }
+      addTask(newTask);
     }
   };
 

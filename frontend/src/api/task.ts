@@ -1,21 +1,70 @@
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+
 import axios from "./axios";
+import { toast } from "react-toastify";
 
-export const addTaskRequest = (text: string) => {
-  return axios.post("/task", { text });
+export const useTask = () => {
+  return useQuery({
+    queryKey: ["tasks"],
+    queryFn: async () => {
+      const { data } = await axios.get("/task");
+      return data.result;
+    },
+  });
 };
 
-export const getTasksRequest = () => {
-  return axios.get("/task");
+export const useAddTask = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (text: string) => {
+      return axios.post("/task", { text });
+    },
+    onSuccess: ({ data }) => {
+      toast.success(data.message);
+      queryClient.invalidateQueries({ queryKey: ["addresses"] });
+    },
+  });
 };
 
-export const updateTaskRequest = (updatedText: string, id: number) => {
-  return axios.put(`/task/update/${id}`, { updatedText });
+export const useCompleteTask = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: ({ completed, id }: { completed: boolean; id: number }) => {
+      return axios.put(`/task/complete/${id}`, { completed });
+    },
+    onSuccess: ({ data }) => {
+      toast.success(data.message);
+      queryClient.invalidateQueries({ queryKey: ["tasks"] });
+    },
+  });
 };
 
-export const completeTaskRequest = (completed: boolean, id: number) => {
-  return axios.put(`/task/complete/${id}`, { completed });
+export const useUpdateTask = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: ({ updatedText, id }: { updatedText: string; id: number }) => {
+      return axios.put(`/task/update/${id}`, { updatedText });
+    },
+    onSuccess: ({ data }) => {
+      toast.success(data.message);
+      queryClient.invalidateQueries({ queryKey: ["tasks"] });
+    },
+  });
 };
 
-export const deleteTaskRequest = (id: number) => {
-  return axios.delete(`/task/${id}`);
+export const useDeleteTask = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (id: number) => {
+      return axios.delete(`/task/${id}`);
+    },
+    onSuccess: ({ data }) => {
+      toast.success(data.message);
+      queryClient.invalidateQueries({ queryKey: ["tasks"] });
+    },
+  });
 };

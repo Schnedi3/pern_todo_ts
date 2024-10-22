@@ -1,13 +1,19 @@
 import { useEffect, useState } from "react";
 
-import { IFooterProps } from "../../types/types";
+import { useTask } from "../../api/task";
+import { ITask } from "../../types/types";
 import styles from "./footer.module.css";
 
-export const Footer = ({ todoList, setFilteredList }: IFooterProps) => {
+export interface IFooterProps {
+  setFilteredList: (filteredList: ITask[]) => void;
+}
+
+export const Footer = ({ setFilteredList }: IFooterProps) => {
   const [category, setCategory] = useState<string>("all");
+  const { data: todoList } = useTask();
 
   useEffect(() => {
-    const filtered = todoList.filter((task) => {
+    const filtered = todoList?.filter((task: ITask) => {
       if (category === "active") return !task.completed;
       if (category === "completed") return task.completed;
       return task;
@@ -16,16 +22,16 @@ export const Footer = ({ todoList, setFilteredList }: IFooterProps) => {
     setFilteredList(filtered);
   }, [category, todoList, setFilteredList]);
 
-  const tasksLeft = todoList.filter((task) => !task.completed);
+  const tasksLeft = todoList?.filter((task: ITask) => !task.completed);
 
-  const noTasks = todoList.length === 0;
-  const noActiveTasks = todoList.some((task) => !task.completed);
-  const noCompletedTasks = todoList.some((task) => task.completed);
+  const noTasks = todoList?.length === 0;
+  const noActiveTasks = todoList?.some((task: ITask) => !task.completed);
+  const noCompletedTasks = todoList?.some((task: ITask) => task.completed);
 
   return (
     <footer className={styles.footer}>
       <p>
-        {tasksLeft.length} {tasksLeft.length > 1 ? "tasks" : "task"} left
+        {tasksLeft?.length} {tasksLeft?.length > 1 ? "tasks" : "task"} left
       </p>
       <ul className={styles.categories}>
         <li
@@ -39,7 +45,7 @@ export const Footer = ({ todoList, setFilteredList }: IFooterProps) => {
         <li
           className={`${styles.category} ${
             category === "active" ? styles.active : ""
-          } ${noActiveTasks || noTasks ? styles.disabled : ""}`}
+          } ${!noActiveTasks || noTasks ? styles.disabled : ""}`}
           onClick={() => setCategory("active")}
         >
           Active
@@ -47,7 +53,7 @@ export const Footer = ({ todoList, setFilteredList }: IFooterProps) => {
         <li
           className={`${styles.category} ${
             category === "completed" ? styles.active : ""
-          } ${noCompletedTasks || noTasks ? styles.disabled : ""}`}
+          } ${!noCompletedTasks || noTasks ? styles.disabled : ""}`}
           onClick={() => setCategory("completed")}
         >
           Completed

@@ -12,22 +12,7 @@ export interface IUser {
   google_id: string | null;
 }
 
-export interface IFormProps {
-  todoList: ITask[];
-  setTodoList: (todoList: ITask[]) => void;
-}
-
-export interface IFooterProps {
-  todoList: ITask[];
-  setFilteredList: (filteredList: ITask[]) => void;
-}
-
-export interface IItemProps {
-  todoList: ITask[];
-  setTodoList: (todoList: ITask[]) => void;
-  filteredList: ITask[];
-}
-
+// todos
 export interface ITask {
   id: number;
   text: string;

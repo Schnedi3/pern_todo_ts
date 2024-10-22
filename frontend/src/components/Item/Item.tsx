@@ -1,114 +1,47 @@
-import { useCallback, useEffect, useState } from "react";
-import { toast } from "react-toastify";
+import { useState } from "react";
 
-import {
-  completeTaskRequest,
-  deleteTaskRequest,
-  getTasksRequest,
-  updateTaskRequest,
-} from "../../api/task";
-import { IItemProps } from "../../types/types";
+import { useCompleteTask, useDeleteTask, useUpdateTask } from "../../api/task";
+import { ITask } from "../../types/types";
 import { iconTrash } from "../../Routes";
 import styles from "./item.module.css";
 
-export const Item = ({ todoList, setTodoList, filteredList }: IItemProps) => {
+interface IItemProps {
+  filteredList: ITask[];
+}
+
+export const Item = ({ filteredList }: IItemProps) => {
   const [editId, setEditId] = useState<number>(0);
   const [editMode, setEditMode] = useState<boolean>(false);
   const [updatedText, setUpdatedText] = useState<string>("");
 
-  const getTasks = useCallback(async () => {
-    try {
-      const { data } = await getTasksRequest();
+  const { mutate: updateTask } = useUpdateTask();
+  const { mutate: completeTask } = useCompleteTask();
+  const { mutate: deleteTask } = useDeleteTask();
 
-      if (data.success) {
-        setTodoList(data.result);
-      } else {
-        console.log(data.message);
-      }
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        console.log(error.message);
-      } else {
-        console.log("An unexpected error occurred");
-      }
-    }
-  }, [setTodoList]);
+  const handleCompleteTask = async (completed: boolean, id: number) => {
+    completed = !completed;
+    completeTask({ completed, id });
+  };
 
-  useEffect(() => {
-    getTasks();
-  }, [getTasks]);
-
-  const updateTask = async (
+  const handleUpdateTask = async (
     e: React.FormEvent<HTMLFormElement>,
     id: number
   ) => {
     e.preventDefault();
 
-    try {
-      if (updatedText.trim() !== "") {
-        const { data } = await updateTaskRequest(updatedText, id);
-
-        if (data.success) {
-          setTodoList(
-            todoList.map((task) => (task.id === id ? data.result : task))
-          );
-          toast.success(data.message);
-          setEditMode(false);
-        } else {
-          console.log(data.message);
+    if (updatedText.trim() !== "") {
+      updateTask(
+        { updatedText, id },
+        {
+          onSuccess: () => {
+            setEditMode(false);
+          },
         }
-      }
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        console.log(error.message);
-      } else {
-        console.log("An unexpected error occurred");
-      }
+      );
     }
   };
 
-  const completeTask = async (completed: boolean, id: number) => {
-    completed = !completed;
-
-    try {
-      const { data } = await completeTaskRequest(completed, id);
-
-      if (data.success) {
-        setTodoList(
-          todoList.map((task) => (task.id === id ? data.result : task))
-        );
-      } else {
-        console.log(data.message);
-      }
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        console.log(error.message);
-      } else {
-        console.log("An unexpected error occurred");
-      }
-    }
-  };
-
-  const deleteTask = async (id: number) => {
-    try {
-      const { data } = await deleteTaskRequest(id);
-
-      if (data.success) {
-        setTodoList(todoList.filter((task) => task.id !== id));
-        toast.success(data.message);
-      } else {
-        console.log(data.message);
-      }
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        console.log(error.message);
-      } else {
-        console.log("An unexpected error occurred");
-      }
-    }
-  };
-
-  if (filteredList.length === 0) {
+  if (!filteredList || filteredList?.length === 0) {
     return (
       <section className={styles.empty}>
         <p className={styles.emptyText}>No pending tasks</p>
@@ -125,10 +58,10 @@ export const Item = ({ todoList, setTodoList, filteredList }: IItemProps) => {
             type="checkbox"
             id={task.text}
             checked={task.completed}
-            onChange={() => completeTask(task.completed, task.id)}
+            onChange={() => handleCompleteTask(task.completed, task.id)}
           />
           {editMode && editId === task.id ? (
-            <form onSubmit={(e) => updateTask(e, task.id)}>
+            <form onSubmit={(e) => handleUpdateTask(e, task.id)}>
               <input
                 className={styles.edit}
                 type="text"
