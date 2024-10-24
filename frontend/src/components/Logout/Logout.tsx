@@ -1,11 +1,11 @@
-import { useAuthStore } from "../../store/authStore";
+import { useLogout } from "../../api/auth";
 import styles from "./logout.module.css";
 
 export const Logout = () => {
-  const { logoutAuth } = useAuthStore();
+  const { mutate: logout } = useLogout();
 
   return (
-    <button className={styles.logout} onClick={logoutAuth}>
+    <button className={styles.logout} onClick={() => logout()}>
       Logout
     </button>
   );

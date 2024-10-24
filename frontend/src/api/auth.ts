@@ -51,6 +51,20 @@ export const useRegister = () => {
   });
 };
 
+export const useLogout = () => {
+  const { logoutAuth } = useAuthStore();
+  const navigate = useNavigate();
+  return useMutation({
+    mutationFn: () => {
+      return customAxios.post("/auth/logout");
+    },
+    onSuccess: () => {
+      logoutAuth();
+      navigate("/");
+    },
+  });
+};
+
 export const useResetPassword = () => {
   const navigate = useNavigate();
 

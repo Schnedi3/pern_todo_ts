@@ -4,6 +4,7 @@ import {
   loginGoogle,
   loginUser,
   registerUser,
+  logout,
   resetPassword,
   tokenController,
 } from "../controllers/authController";
@@ -15,6 +16,7 @@ const router = Router();
 router.post("/google", loginGoogle);
 router.post("/login", validateSchema(userSchema), loginUser);
 router.post("/register", validateSchema(userSchema), registerUser);
+router.post("/logout", logout);
 router.put("/reset-password", validateSchema(userSchema), resetPassword);
 router.post("/refresh-token", tokenController);
 

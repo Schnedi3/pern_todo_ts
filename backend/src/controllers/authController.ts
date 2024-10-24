@@ -95,6 +95,15 @@ export const registerUser = async (req: Request, res: Response) => {
   }
 };
 
+export const logout = async (req: Request, res: Response) => {
+  clearAccessCookie(res);
+  clearRefreshCookie(res);
+  res.status(200).json({
+    success: true,
+    message: "Logged out succesfully",
+  });
+};
+
 export const resetPassword = async (req: Request, res: Response) => {
   const { password, email } = req.body;
 
@@ -152,6 +161,22 @@ const setAccessCookie = (res: Response, accessToken: string) => {
 
 const setRefreshCookie = (res: Response, refreshToken: string) => {
   res.cookie(REFRESH_TOKEN, refreshToken, {
+    httpOnly: true,
+    secure: true,
+    path: "/",
+  });
+};
+
+const clearAccessCookie = (res: Response) => {
+  res.clearCookie(ACCESS_TOKEN, {
+    httpOnly: true,
+    secure: true,
+    path: "/",
+  });
+};
+
+const clearRefreshCookie = (res: Response) => {
+  res.clearCookie(REFRESH_TOKEN, {
     httpOnly: true,
     secure: true,
     path: "/",
