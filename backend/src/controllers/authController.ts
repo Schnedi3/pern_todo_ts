@@ -47,6 +47,12 @@ export const loginUser = async (req: Request, res: Response) => {
   try {
     const result = await loginUserDB(email);
 
+    if (!result) {
+      return res
+        .status(400)
+        .json({ success: false, message: "User doesn't exist" });
+    }
+
     const isMatch = await bcrypt.compare(password, result.password);
     if (!isMatch) {
       return res

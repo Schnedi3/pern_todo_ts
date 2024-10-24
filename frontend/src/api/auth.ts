@@ -33,6 +33,10 @@ export const useLogin = () => {
       authData(data.result);
       navigate("/");
     },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    onError: (error: any) => {
+      toast.error(error.response.data.message);
+    },
   });
 };
 

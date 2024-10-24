@@ -36,7 +36,6 @@ export const App = () => {
   return (
     <main className="app">
       <ToastContainer
-        position="bottom-right"
         autoClose={1500}
         pauseOnHover={false}
         pauseOnFocusLoss={false}
