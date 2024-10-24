@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-import axios from "./axios";
+import customAxios from "./axios";
 import { useAuthStore } from "../store/authStore";
 import { IUser } from "../types/types";
 
@@ -12,7 +12,7 @@ export const useLoginGoogle = () => {
 
   return useMutation({
     mutationFn: (accessToken: string) => {
-      return axios.post("/auth/google", { accessToken });
+      return customAxios.post("/auth/google", { accessToken });
     },
     onSuccess: ({ data }) => {
       authData(data.result);
@@ -27,7 +27,7 @@ export const useLogin = () => {
 
   return useMutation({
     mutationFn: (user: IUser) => {
-      return axios.post("/auth/login", user);
+      return customAxios.post("/auth/login", user);
     },
     onSuccess: ({ data }) => {
       authData(data.result);
@@ -42,7 +42,7 @@ export const useRegister = () => {
 
   return useMutation({
     mutationFn: (user: IUser) => {
-      return axios.post("/auth/register", user);
+      return customAxios.post("/auth/register", user);
     },
     onSuccess: ({ data }) => {
       authData(data.result);
@@ -56,7 +56,7 @@ export const useResetPassword = () => {
 
   return useMutation({
     mutationFn: (user: IUser) => {
-      return axios.put("/auth/reset-password", user);
+      return customAxios.put("/auth/reset-password", user);
     },
     onSuccess: ({ data }) => {
       toast.success(data.message);
@@ -64,3 +64,27 @@ export const useResetPassword = () => {
     },
   });
 };
+
+export const generateRefreshToken = () => {
+  return customAxios.post("/auth/refresh-token");
+};
+
+customAxios.interceptors.response.use(
+  (response) => response,
+
+  async (error) => {
+    const originalRequest = error.config;
+
+    if (error.response.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+
+      try {
+        await generateRefreshToken();
+        return customAxios(originalRequest);
+      } catch (refreshError) {
+        console.log(`Token refresh error: ${refreshError}`);
+      }
+    }
+    return Promise.reject(error);
+  }
+);
